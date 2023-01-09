@@ -384,8 +384,6 @@
                             </div>
                         </div>   
                         @endforeach
-
-
                     </div>
                 </div>
             </div>
@@ -511,7 +509,7 @@
                     <div class="col-md-4">
                         <h2 class="text-center text-white mb-5 mt-4 fw-semibold">How It Works
                         <iframe width="420" height="315"
-                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                        src="https://youtu.be/akgq7hK2mgE">
                         </iframe>
                     </div>
                 </div>

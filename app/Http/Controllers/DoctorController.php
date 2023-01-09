@@ -125,12 +125,13 @@ class DoctorController extends Controller
     }
     public function sortPatients(Request $request)
     {
+
        if($request->status == 'all')
        {
-           $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', Auth::user()->id)->get();
+           $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->get();
         }else
         {
-            $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', Auth::user()->id)->where('status', $request->status)->get();
+            $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->where('status', $request->status)->get();
         }
 
         if( $data['doctors']->count() < 1)

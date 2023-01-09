@@ -97,7 +97,7 @@
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
                                             <img @if ($doctor['patient']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['patient']['picture'] }}" @endif
-                                                alt="" class="w-100" />
+                                                alt=""  />
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Info-->

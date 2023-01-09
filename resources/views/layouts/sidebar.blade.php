@@ -253,7 +253,7 @@ $route = Route::current()->getName();
                 @if($user == "doctor")
 
                 <div class="menu-item">
-                    <a class="menu-link" href="{{route('doctor.home')}}">
+                    <a class="menu-link {{($route=='doctor.home')?'active':''}}" href="{{route('doctor.home')}}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>

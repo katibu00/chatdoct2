@@ -75,7 +75,7 @@
                                                 <div class="symbol-label">
                                                     <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
                                                         alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                        class="w-100" />
+                                                       />
                                                 </div>
                                             </a>
                                         </div>
@@ -175,7 +175,7 @@
                                                                 <div class="symbol symbol-100px symbol-circle">
                                                                     <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
                                                                         alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                                        class="w-100" />
+                                                                         />
                                                                 </div>
                                                                 <!--end::Avatar-->
                                                                 <!--begin::Details-->
@@ -421,7 +421,7 @@
                                                                         target="_blank"><img
                                                                             src="/uploads/avatar/{{ $user->certificate }}"
                                                                             alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                                            class="w-100" /></a>
+                                                                             /></a>
                                                                     <!--end::Email-->
                                                                 </div>
                                                                 <!--end::Details-->

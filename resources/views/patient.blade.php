@@ -137,7 +137,7 @@
                         <div class="card">
                             <div class="card-body d-flex flex-center flex-column p-9">
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" class="w-100" />
+                                    <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" />
                                     <div class="bg-{{$availability == 'yes'?'success':'danger'}} position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-white h-15px w-15px ms-n3 mt-n3"></div>
                                 </div>
                                 <a href="{{route('doctors.details',$user->number)}}" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</a>

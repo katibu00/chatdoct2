@@ -34,7 +34,7 @@
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
                                             <img @if ($doctor['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['book']['picture'] }}" @endif
-                                                alt="" class="w-100" />
+                                                alt=""  />
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Info-->

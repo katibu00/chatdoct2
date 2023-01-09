@@ -43,7 +43,7 @@
                                     <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" />
                                 </div>
 
-                                <div class="w-100"></div>
+                                <div ></div>
 
                                 <div class="col-md-12 form-group">
                                     <label for="template-contactform-subject">Subject <small>*</small></label>
@@ -52,7 +52,7 @@
 
                      
 
-                                <div class="w-100"></div>
+                                <div ></div>
 
                                 <div class="col-12 form-group">
                                     <label for="template-contactform-message">Message <small>*</small></label>

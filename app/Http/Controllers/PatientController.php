@@ -58,15 +58,13 @@ class PatientController extends Controller
 
     public function BookDoctor(Request $request)
     {
-        // dd($request->all());
-        $id = Auth::user()->id;
-        $balance = Auth::user()->balance;
-        $doctor = User::findorFail($request->doctor_id);
+        $id = auth()->user()->id;
+        $balance = auth()->user()->balance;
+        $doctor = User::where('id', $request->doctor_id)->first();
         $chat = $doctor->chat_rate;
         $video = $doctor->video_rate;
 
         $day = strtolower(date('l')) . 's';
-        $doctor = User::where('id', $request->doctor_id)->first();
         $schedules = explode(',', $doctor->$day);
 
         if (!in_array($request->time_slot, $schedules)) {

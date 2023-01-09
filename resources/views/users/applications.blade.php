@@ -80,7 +80,7 @@
 									<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                         <a>
                                             <div class="symbol-label">
-                                                <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" class="w-100" />
+                                                <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" />
                                             </div>
                                         </a>
                                     </div>
@@ -179,7 +179,7 @@
 														<div class="d-flex align-items-center">
 															<!--begin::Avatar-->
 															<div class="symbol symbol-100px symbol-circle">
-																<img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" class="w-100" />
+																<img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" />
 															</div>
 															<!--end::Avatar-->
 															<!--begin::Details-->
@@ -457,7 +457,7 @@
 																	</span></a>
 																	<!--end::Name-->
 																	<!--begin::Email-->
-																	<a href="/uploads/{{$user->certificate}}" target="_blank"><img src="/uploads/certificates/{{$user->certificate}}" alt="{{$user->first_name}} {{$user->last_name}}" class="w-100" /></a>
+																	<a href="/uploads/{{$user->certificate}}" target="_blank"><img src="/uploads/certificates/{{$user->certificate}}" alt="{{$user->first_name}} {{$user->last_name}}" /></a>
 																	<!--end::Email-->
 																</div>
 																<!--end::Details-->
