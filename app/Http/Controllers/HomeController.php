@@ -43,10 +43,7 @@ class HomeController extends Controller
         $day = strtolower(date('l')) . 's';
         $data['today_schedules'] = User::select($day)->where('id',$user_id)->first()->$day;
 
-        // $data['mondays'] = User::select('mondays')->where('id',$user_id)->first()->mondays;
-        // $data['wednesdays'] = User::select('wednesdays')->where('id',$user_id)->first()->wednesdays;
-        // $data['fridays'] = User::select('fridays')->where('id',$user_id)->first()->fridays;
-
+       
         $chat_rate = auth()->user()->chat_rate;
         $video_rate = auth()->user()->video_rate;
         $data['today_total'] = 0;
@@ -73,7 +70,7 @@ class HomeController extends Controller
         };
        
      
-        $data['patients'] = Booking::with(['patient','book'])->where('doctor_id', $user_id)->where('status',0)->orWhere('status', 1)->orderBy('id','desc')->get();
+        $data['patients'] = Booking::with(['patient','book'])->where('doctor_id', $user_id)->whereIn('status',[0,1])->orderBy('id','desc')->get();
         return view('doctor',$data);
     }
     public function patient()
