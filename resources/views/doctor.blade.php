@@ -62,7 +62,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <i class="fa fa-bullet"></i>
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -89,14 +89,7 @@
                                     <span class="symbol-label bg-lighten">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                                    <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                </g>
-                                            </svg>
+                                            <i class="far fa-dot-circle"></i>
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
@@ -123,14 +116,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M15 19H7C5.9 19 5 18.1 5 17V7C5 5.9 5.9 5 7 5H15C16.1 5 17 5.9 17 7V17C17 18.1 16.1 19 15 19Z" fill="black" />
-                                                <path d="M8.5 2H13.4C14 2 14.5 2.4 14.6 3L14.9 5H6.89999L7.2 3C7.4 2.4 7.9 2 8.5 2ZM7.3 21C7.4 21.6 7.9 22 8.5 22H13.4C14 22 14.5 21.6 14.6 21L14.9 19H6.89999L7.3 21ZM18.3 10.2C18.5 9.39995 18.5 8.49995 18.3 7.69995C18.2 7.29995 17.8 6.90002 17.3 6.90002H17V10.9H17.3C17.8 11 18.2 10.7 18.3 10.2Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -143,7 +129,7 @@
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">12</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">{{ $completed }}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -155,14 +141,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black" />
-                                                <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -175,7 +154,7 @@
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">125</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">{{ $completed+$active+$pending }}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -246,14 +225,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="black" />
-                                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -261,12 +233,12 @@
                                 <div class="d-flex align-items-center flex-wrap w-100">
                                     <!--begin::Title-->
                                     <div class="mb-1 pe-3 flex-grow-1">
-                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Today's</a>
+                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Today</a>
                                     </div>
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">58</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format($today_total,0) }}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -280,14 +252,7 @@
                                     <span class="symbol-label bg-lighten">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                                    <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                </g>
-                                            </svg>
+                                            <i class="far fa-dot-circle"></i>
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
@@ -297,12 +262,12 @@
                                 <div class="d-flex align-items-center flex-wrap w-100">
                                     <!--begin::Title-->
                                     <div class="mb-1 pe-3 flex-grow-1">
-                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">This Month's</a>
+                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">This Month</a>
                                     </div>
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">458</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format($month_total,0) }}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -314,14 +279,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/electronics/elc005.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M15 19H7C5.9 19 5 18.1 5 17V7C5 5.9 5.9 5 7 5H15C16.1 5 17 5.9 17 7V17C17 18.1 16.1 19 15 19Z" fill="black" />
-                                                <path d="M8.5 2H13.4C14 2 14.5 2.4 14.6 3L14.9 5H6.89999L7.2 3C7.4 2.4 7.9 2 8.5 2ZM7.3 21C7.4 21.6 7.9 22 8.5 22H13.4C14 22 14.5 21.6 14.6 21L14.9 19H6.89999L7.3 21ZM18.3 10.2C18.5 9.39995 18.5 8.49995 18.3 7.69995C18.2 7.29995 17.8 6.90002 17.3 6.90002H17V10.9H17.3C17.8 11 18.2 10.7 18.3 10.2Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -334,7 +292,7 @@
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">585</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">-</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -346,14 +304,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black" />
-                                                <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -366,7 +317,7 @@
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">70m</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format(auth()->user()->balance )}}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -426,10 +377,14 @@
                                 <span class="fw-bolder fs-2x fs-7">Today</span>
                                 @php
                                     $blocks = explode(',', $today_schedules); 
+                                    $mons = explode(',', auth()->user()->mondays); 
+                                    $weds = explode(',', auth()->user()->wednesdays); 
+                                    $fris = explode(',', auth()->user()->fridays); 
+                                    $suns = explode(',', auth()->user()->sundays); 
                                 @endphp
                                 <span class=" pt-1 fw-bold fs-7">
                                     @foreach ($blocks as $block)
-                                        {{$block}},
+                                        {{$block}}@if(!$loop->last),@endif
                                     @endforeach
                                 </span>
                             </div>
@@ -443,14 +398,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/maps/map004.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="black" />
-                                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="black" />
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -463,7 +411,11 @@
                                     <!--end::Title-->
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="text-gray-400 fw-bold fs-7 pe-1">Evening, Noon, Night, Morning</div>
+                                        <div class="text-gray-400 fw-bold fs-7 pe-1">
+                                            @foreach ($mons as $mon)
+                                                {{$mon}}@if(!$loop->last),@endif
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -473,14 +425,7 @@
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                                    <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                    <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                                </g>
-                                            </svg>
+                                            <i class="far fa-dot-circle"></i>
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
@@ -491,19 +436,18 @@
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Wed</a>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <div class="text-gray-400 fw-bold fs-7 pe-1">Evening, Noon, Night, Morning</div>
+                                        <div class="text-gray-400 fw-bold fs-7 pe-1">
+                                            @foreach ($weds as $wed)
+                                                {{$wed}}@if(!$loop->last),@endif
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-6">
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M15 19H7C5.9 19 5 18.1 5 17V7C5 5.9 5.9 5 7 5H15C16.1 5 17 5.9 17 7V17C17 18.1 16.1 19 15 19Z" fill="black" />
-                                                <path d="M8.5 2H13.4C14 2 14.5 2.4 14.6 3L14.9 5H6.89999L7.2 3C7.4 2.4 7.9 2 8.5 2ZM7.3 21C7.4 21.6 7.9 22 8.5 22H13.4C14 22 14.5 21.6 14.6 21L14.9 19H6.89999L7.3 21ZM18.3 10.2C18.5 9.39995 18.5 8.49995 18.3 7.69995C18.2 7.29995 17.8 6.90002 17.3 6.90002H17V10.9H17.3C17.8 11 18.2 10.7 18.3 10.2Z" fill="black" />
-                                            </svg>
-                                        </span>
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <div class="d-flex align-items-center flex-wrap w-100">
@@ -511,19 +455,18 @@
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Fri</a>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <div class="text-gray-400 fw-bold fs-7 pe-1">Evening, Noon, Night, Morning</div>
+                                        <div class="text-gray-400 fw-bold fs-7 pe-1">
+                                            @foreach ($fris as $fri)
+                                                {{$fri}}@if(!$loop->last),@endif
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black" />
-                                                <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
-                                            </svg>
-                                        </span>
+                                        <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
                                 <div class="d-flex align-items-center flex-wrap w-100">
@@ -531,7 +474,11 @@
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Sun</a>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <div class="text-gray-400 fw-bold fs-7 pe-1">Evening, Noon, Night, Morning</div>
+                                        <div class="text-gray-400 fw-bold fs-7 pe-1">
+                                            @foreach ($suns as $sun)
+                                                {{$sun}}@if(!$loop->last),@endif
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -580,11 +527,11 @@
                     <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                         <thead>
                             <tr class="border-0">
-                                <th class="p-0">Patient</th>
-                                <th class="p-0">Book Type</th>
-                                <th class="p-0">Pre-Con. Form</th>
-                                <th class="p-0">Prescription</th>
-                                <th class="p-0">Appointed Time</th>
+                                <th class="p-0"></th>
+                                <th class="p-0"></th>
+                                <th class="p-0"></th>
+                                <th class="p-0"></th>
+                                <th class="p-0"></th>
                                 {{-- <th class="p-0 text-end"></th> --}}
                             </tr>
                         </thead>

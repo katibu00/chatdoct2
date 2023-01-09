@@ -255,7 +255,7 @@ $route = Route::current()->getName();
                 <div class="menu-item">
                     <a class="menu-link {{($route=='doctor.home')?'active':''}}" href="{{route('doctor.home')}}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <i class="fa fa-home"></i>
                         </span>
                         <span class="menu-title">Home</span>
                     </a>
@@ -264,7 +264,7 @@ $route = Route::current()->getName();
                 <div class="menu-item">
                     <a class="menu-link {{($route=='doctor.patients')?'active':''}}" href="{{route('doctor.patients')}}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <i class="fa fa-users"></i>
                         </span>
                         <span class="menu-title">My Patients</span>
                     </a>
@@ -273,7 +273,7 @@ $route = Route::current()->getName();
                 <div class="menu-item">
                     <a class="menu-link {{($route=='doctors.schedules')?'active':''}}" href="{{route('doctors.schedules') }}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <i class="fa fa-calendar"></i>
                         </span>
                         <span class="menu-title">My Schedules</span>
                     </a>
@@ -282,7 +282,7 @@ $route = Route::current()->getName();
                 <div class="menu-item">
                     <a class="menu-link" href="#">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <i class="fa fa-wallet"></i>
                         </span>
                         <span class="menu-title">My Wallet</span>
                     </a>
@@ -291,7 +291,7 @@ $route = Route::current()->getName();
                 <div class="menu-item">
                     <a class="menu-link {{ ($route=='doctors.profile.settings')?'active':'' }}" href="{{ route('doctors.profile.settings') }}">
                         <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
+                            <i class="fa fa-user"></i>
                         </span>
                         <span class="menu-title">My Profile</span>
                     </a>
