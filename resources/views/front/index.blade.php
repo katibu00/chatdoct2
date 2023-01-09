@@ -508,9 +508,7 @@
                     </div>
                     <div class="col-md-4">
                         <h2 class="text-center text-white mb-5 mt-4 fw-semibold">How It Works
-                        <iframe width="420" height="315"
-                        src="https://youtu.be/akgq7hK2mgE">
-                        </iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/akgq7hK2mgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
