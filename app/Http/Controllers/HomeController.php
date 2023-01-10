@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -75,12 +76,11 @@ class HomeController extends Controller
     }
     public function patient()
     {
-
-
-        $data['recent'] = Booking::where('patient_id', Auth::user()->id)->get();
+        $user_id = auth()->user()->id;
+        $data['recent'] = Booking::where('patient_id', $user_id)->get();
         $data['users'] = User::where('role','doctor')->where('status',1)->where('featured',1)->get();
         $data['user'] = User::where('id',Auth::user()->id)->first();
-        // $data['balance'] = User::sum('balance');
+        $data['payments'] = Payment::where('user_id',$user_id)->latest()->get()->take(4);
         return view('patient',$data);
     }
 }

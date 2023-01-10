@@ -22,23 +22,15 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
-		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 		
 		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<link href='/notify/toastr.min.css' rel='stylesheet' />
-		<!--end::Global Stylesheets Bundle-->
 		@yield('css')
-
-
-
 	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed">
 		<div class="d-flex flex-column flex-root" id="app2">
-			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
 					<!--begin::Brand-->
@@ -47,17 +39,13 @@
 						<a href="#">
 							<img alt="Logo" src="/uploads/logo.jpg" class="h-25px logo" />
 						</a>
-						<!--end::Logo-->
-						<!--begin::Aside toggler-->
 						<div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
-							<!--begin::Svg Icon | path: icons/duotune/arrows/arr079.svg-->
 							<span class="svg-icon svg-icon-1 rotate-180">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<path opacity="0.5" d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z" fill="black" />
 									<path d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z" fill="black" />
 								</svg>
 							</span>
-							<!--end::Svg Icon-->
 						</div>
 						<!--end::Aside toggler-->
 					</div>
@@ -83,7 +71,6 @@
 							
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 								<a href="#" class="d-lg-none">
-									{{-- <img alt="Logo" src="/assets/media/logos/logo-2.svg" class="h-30px" /> --}}
 								</a>
 							</div>
 							
@@ -97,7 +84,6 @@
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 												<img  @if(@$user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="user" />
 											</div>
-											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
@@ -106,42 +92,30 @@
 														<div class="symbol symbol-50px me-5">
 															<img  @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif />
 														</div>
-														<!--end::Avatar-->
-														<!--begin::Username-->
 														<div class="d-flex flex-column">
 															<div class="fw-bolder d-flex align-items-center fs-5">{{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}
 															<span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">&#x20A6;{{$user->balance}}</span></div>
 															<a href="#" class="fw-bold text-muted text-hover-primary fs-7">@if($user->role == 'doctor')D{{""}}@elseif($user->role == 'patient')P{{""}}@elseif($user->role == 'pending')X{{""}}@elseif($user->role == 'admin')A{{""}}@endif{{$user->number}}</a>
 														</div>
-														<!--end::Username-->
 													</div>
 												</div>
-												<!--end::Menu item-->
-												<!--begin::Menu separator-->
 												<div class="separator my-2"></div>
 												
 												@if($user->role == 'patient')
-												<!--begin::Menu item-->
 												<div class="menu-item px-5">
 													<a href="{{route('doctor.apply')}}" class="menu-link px-5">
 														<span class="menu-text">Apply As Doctor</span>
 														<span class="menu-badge">
-															{{-- <span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span> --}}
 														</span>
 													</a>
 												</div>
-												<!--end::Menu item-->
-											
-												<!--begin::Menu item-->
 												<div class="menu-item px-5">
 													<a href="{{route('wallet')}}" class="menu-link px-5">Fund Account</a>
 												</div>
-
 												<div class="menu-item px-5 my-1">
 													<a href="{{route('profile.settings',$user->id)}}" class="menu-link px-5">Account Settings</a>
 												</div>
 												@endif
-												
 												@if($user->role == 'doctor')
 												<div class="menu-item px-5">
 													<a href="{{route('doctors.schedules') }}" class="menu-link px-5">My Schedules</a>
@@ -149,20 +123,14 @@
 												<div class="menu-item px-5 my-1">
 													<a href="{{route('doctors.profile.settings')}}" class="menu-link px-5">Account Settings</a>
 												</div>
-												
 												@endif
-												<!--begin::Menu separator-->
-												<div class="separator my-2"></div>
-												<!--end::Menu separator-->
-											
+												<div class="separator my-2"></div>											
 												<div class="menu-item px-5">
-
                                                     <a class="menu-link px-5" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
                                                                   document.getElementById('logout-form').submit();">
                                                      Sign Out
                                                  </a>
-
                                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                     @csrf
                                                 </form>
@@ -181,15 +149,11 @@
                         @yield('content')
 					</div>
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-						<!--begin::Container-->
 						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted fw-bold me-1">2021©</span>
 								<a href="#" target="_blank" class="text-gray-800 text-hover-primary">ChatDoc Nig Limited</a>
 							</div>
-							<!--end::Copyright-->
-							<!--begin::Menu-->
 							<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
 								<li class="menu-item">
 									<a href="https://chatdoct.com/about-us" target="_blank" class="menu-link px-2">About</a>

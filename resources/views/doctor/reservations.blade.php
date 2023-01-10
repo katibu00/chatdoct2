@@ -10,15 +10,11 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-
-            <!--begin::Card toolbar-->
             <div class="card-toolbar">
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                    <!--begin::Filter-->
                     <button type="button" class="btn btn-primary me-3 mb-3" data-kt-menu-trigger="click"
                         data-kt-menu-placement="bottom-end">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
@@ -27,7 +23,7 @@
                                     fill="black" />
                             </svg>
                         </span>
-                        <!--end::Svg Icon-->Filter
+                        Filter
                     </button>
                     <!--begin::Menu 1-->
                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true"
@@ -36,19 +32,14 @@
                         <div class="px-7 py-5">
                             <div class="fs-4 text-dark fw-bolder">Filter Options</div>
                         </div>
-                        <!--end::Header-->
-                        <!--begin::Separator-->
                         <div class="separator border-gray-200"></div>
                         <!--end::Separator-->
                         <form action="{{ route('doctor.patients') }}" method="post">
                             @csrf
                             <div class="px-7 py-5">
-                                <!--begin::Input group-->
                                 <div class="mb-10">
                                     <!--begin::Label-->
                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="false"
                                         data-placeholder="Select option" data-allow-clear="true"
                                         data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter" name="status">
@@ -56,13 +47,8 @@
                                         <option value="1">Initiated</option>
                                         <option value="0">Uninitiated</option>
                                         <option value="2">Completed</option>
-
                                     </select>
-                                    <!--end::Input-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Actions-->
                                 <div class="d-flex justify-content-end">
                                     <button type="reset" class="btn btn-light btn-active-light-primary me-2"
                                         data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
@@ -73,19 +59,11 @@
                             </div>
                         </form>
                     </div>
-                    <!--end::Menu 1-->
-
-
-
                 </div>
-                <!--end::Toolbar-->
-
             </div>
-            <!--end::Card toolbar-->
-
             <div class="row g-6 g-xl-9">
 
-                @foreach ($doctors as $key => $doctor)
+                @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
                             <!--begin::Body-->
@@ -348,11 +326,8 @@
                         </div>
                     </div>
 
-
-
-                    <!--begin::Modal - View preconsulsation form-->
                     <div class="modal fade" id="form{{ $key }}" tabindex="-1" aria-hidden="true">
-                        <!--begin::Modal dialog-->
+                      
                         <div class="modal-dialog mw-650px">
                             <!--begin::Modal content-->
                             <div class="modal-content">
@@ -717,11 +692,9 @@
                         </div>
                         <!--end::Modal dialog-->
                     </div>
-                    <!--end::Modal - View Details-->
-
-                    <!--begin::Modal -Link -->
+                   
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">
-                        <!--begin::Modal dialog-->
+                      
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <!--begin::Modal content-->
                             <div class="modal-content">
@@ -729,16 +702,12 @@
                                 <form class="form" action="{{ route('link') }}" id="kt_modal_new_address_form"
                                     method="post">
                                     @csrf
-                                    <!--begin::Modal header-->
                                     <div class="modal-header" id="kt_modal_new_address_header">
                                         <!--begin::Modal title-->
                                         <h2>Send Video Chat Link to {{ @$doctor['patient']['first_name'] }}
                                             {{ @$doctor['patient']['middle_name'] }}
                                             {{ @$doctor['patient']['last_name'] }}</h2>
-                                        <!--end::Modal title-->
-                                        <!--begin::Close-->
                                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                             <span class="svg-icon svg-icon-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none">
@@ -749,12 +718,8 @@
                                                         rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->
                                         </div>
-                                        <!--end::Close-->
                                     </div>
-                                    <!--end::Modal header-->
-                                    <!--begin::Modal body-->
                                     <div class="modal-body py-10 px-lg-17">
                                         <!--begin::Scroll-->
                                         <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll"
@@ -763,62 +728,38 @@
                                             data-kt-scroll-dependencies="#kt_modal_new_address_header"
                                             data-kt-scroll-wrappers="#kt_modal_new_address_scroll"
                                             data-kt-scroll-offset="300px">
-
-                                            <!--begin::Input group-->
                                             <div class="row mb-5">
                                                 <!--begin::Col-->
                                                 <div class="col-md-12 fv-row">
-                                                    <!--begin::Label-->
                                                     <label class="required fs-5 fw-bold mb-2">Link</label>
-                                                    <!--end::Label-->
-                                                    <!--begin::Input-->
                                                     <textarea name="link" class="form-control form-control-lg form-control-solid">{{ $doctor->link }}</textarea>
                                                     <input type="hidden" name="get_id" value="{{ $doctor->id }}" />
-                                                    <!--end::Input-->
                                                 </div>
-                                                <!--end::Col-->
                                             </div>
-                                            <!--end::Input group-->
-
-
-
-
                                         </div>
-                                        <!--end::Scroll-->
                                     </div>
-                                    <!--end::Modal body-->
-                                    <!--begin::Modal footer-->
                                     <div class="modal-footer flex-center">
-                                        <!--begin::Button-->
                                         <button type="reset" data-bs-dismiss="modal"
                                             class="btn btn-light me-3">Cancel</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
                                         <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                             <span class="indicator-label">Submit</span>
                                         </button>
-                                        <!--end::Button-->
                                     </div>
-                                    <!--end::Modal footer-->
+                                    
                                 </form>
                                 <!--end::Form-->
                             </div>
                         </div>
                     </div>
-                    <!--end::Modal - New Faculty-->
-                @endforeach
+                @empty
+                    <div class="alert alert-warning" role="alert">You don't have any patients yet. When you do, they will be listed here.</div>
+                @endforelse
 
             </div>
-            <!--end::Row-->
         </div>
-        <!--end::Container-->
-
-
-
-
-        <!--begin::Modal - appoint time -->
+    
         <div class="modal fade" id="appoint_time" tabindex="-1" aria-hidden="true">
-            <!--begin::Modal dialog-->
+          
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <!--begin::Modal content-->
                 <div class="modal-content">
@@ -846,10 +787,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </div>
-                            <!--end::Close-->
                         </div>
-                        <!--end::Modal header-->
-                        <!--begin::Modal body-->
                         <div class="modal-body py-10 px-lg-17">
                             <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true"
@@ -857,59 +795,40 @@
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
                                 data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
                                 <input type="hidden" name="get_id" id="get_id_time" />
-                                <!--begin::Input group-->
                                 <div class="row mb-5 add_item">
-                                    <!--begin::Col-->
                                     <div class="col-md-12 fv-row my-2">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Time</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="time" class="form-control form-control-solid"
                                             placeholder="Medicine" name="time" required>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
                             </div>
-                            <!--end::Scroll-->
                         </div>
-                        <!--end::Modal body-->
-                        <!--begin::Modal footer-->
                         <div class="modal-footer flex-center">
-                            <!--begin::Button-->
                             <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Cancel</button>
-                            <!--end::Button-->
-                            <!--begin::Button-->
                             <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                             </button>
                             <!--end::Button-->
                         </div>
-                        <!--end::Modal footer-->
+                        
                     </form>
     
                 </div>
             </div>
         </div>
-        
-        <!--begin::Modal - prescription-->
         <div class="modal fade" id="subscription" tabindex="-1" aria-hidden="true">
-            <!--begin::Modal dialog-->
             <div class="modal-dialog modal-dialog-centered mw-650px">
-                <!--begin::Modal content-->
                 <div class="modal-content">
                     <!--begin::Form-->
                     <form class="form" action="{{ route('prescription') }}" id="kt_modal_new_address_form"
                         method="post">
                         @csrf
-                        <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_new_address_header">
                             <!--begin::Modal title-->
                             <h2>Send prescription to <span id="pname"></span></h2>
-                            <!--end::Modal title-->
-                            <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
@@ -926,8 +845,6 @@
                             </div>
                             <!--end::Close-->
                         </div>
-                        <!--end::Modal header-->
-                        <!--begin::Modal body-->
                         <div class="modal-body py-10 px-lg-17">
                             <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true"
@@ -956,21 +873,16 @@
                                 </div>
                                 <!--end::Input group-->
                             </div>
-                            <!--end::Scroll-->
                         </div>
-                        <!--end::Modal body-->
-                        <!--begin::Modal footer-->
                         <div class="modal-footer flex-center">
                             <!--begin::Button-->
                             <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Cancel</button>
-                            <!--end::Button-->
-                            <!--begin::Button-->
                             <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                             </button>
                             <!--end::Button-->
                         </div>
-                        <!--end::Modal footer-->
+                        
                     </form>
                     <!--end::Form-->
 

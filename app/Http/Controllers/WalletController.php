@@ -67,7 +67,7 @@ class WalletController extends Controller
             $user->update();
 
             Toastr::success('Payment made Successfully', 'Done');
-            return redirect()->route('wallet');
+            return redirect()->route('patient.home');
 
 
         }

@@ -4,8 +4,27 @@
 
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl">
-      	<!--begin::Row-->
-          <div class="row g-5 g-xl-8">
+
+        @if(auth()->user()->chat_rate == null || auth()->user()->video_rate  == null || auth()->user()->about  == null || auth()->user()->phone == null || auth()->user()->address == null)
+        <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-12 p-6">
+            <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
+                    <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
+                    <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
+                </svg>
+            </span>
+            <div class="d-flex flex-stack flex-grow-1">
+                <div class="fw-bold">
+                    <h4 class="text-gray-900 fw-bolder">We need your attention!</h4>
+                    <div class="fs-6 text-gray-700">Your profile is not complete. 
+                    <a href="{{ route('doctors.profile.settings')}}" class="fw-bolder" >Update Profile</a>.</div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <div class="row g-5 g-xl-8">
            
             <!--begin::Col-->
             <div class="col-xl-4">
@@ -412,9 +431,13 @@
                                     <!--begin::Label-->
                                     <div class="d-flex align-items-center">
                                         <div class="text-gray-400 fw-bold fs-7 pe-1">
-                                            @foreach ($mons as $mon)
-                                                {{$mon}}@if(!$loop->last),@endif
-                                            @endforeach
+                                            @if($mons[0] == "")
+                                                <i class="fa fa-times text-danger"></i>
+                                            @else
+                                                @foreach ($mons as $mon)
+                                                    {{$mon}}@if(!$loop->last),@endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                     <!--end::Label-->
@@ -437,9 +460,13 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-gray-400 fw-bold fs-7 pe-1">
-                                            @foreach ($weds as $wed)
-                                                {{$wed}}@if(!$loop->last),@endif
-                                            @endforeach
+                                            @if($weds[0] == "")
+                                                <i class="fa fa-times text-danger"></i>
+                                            @else
+                                                @foreach ($weds as $wed)
+                                                    {{$wed}}@if(!$loop->last),@endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -456,9 +483,13 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-gray-400 fw-bold fs-7 pe-1">
-                                            @foreach ($fris as $fri)
-                                                {{$fri}}@if(!$loop->last),@endif
-                                            @endforeach
+                                            @if($fris[0] == "")
+                                                <i class="fa fa-times text-danger"></i>
+                                            @else
+                                                @foreach ($fris as $fri)
+                                                    {{$fri}}@if(!$loop->last),@endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -475,9 +506,13 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-gray-400 fw-bold fs-7 pe-1">
-                                            @foreach ($suns as $sun)
-                                                {{$sun}}@if(!$loop->last),@endif
-                                            @endforeach
+                                            @if($suns[0] == "")
+                                                <i class="fa fa-times text-danger"></i>
+                                            @else
+                                                @foreach ($suns as $sun)
+                                                    {{$sun}}@if(!$loop->last),@endif
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                     <!--end::Label-->
@@ -549,7 +584,6 @@
                                             <a href="#" class="text-muted text-hover-primary fw-bold text-muted d-block fs-7">
                                             <span class="text-dark">Phone</span>: {{ $patient['patient']['phone'] }}</a>
                                         </div>
-                                        <!--end::Name-->
                                     </div>
                                 </td>
                                 <td>
@@ -598,11 +632,9 @@
                             </tr> 
                           @empty
                              <tr>
-                                
+                                <td colspan="5">  <div class="alert alert-warning" role="alert">You don't have any patients yet. When you do, they will be listed here for quick reference.</div></td>
                             </tr> 
                           @endforelse
-                          
-                
                         </tbody>
                     </table>
                 </div>
