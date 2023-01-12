@@ -8,36 +8,64 @@
 
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
-        <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
 
-            <!--begin::Toolbar-->
-            <div class="d-flex flex-wrap flex-stack mb-6">
-                <!--begin::Heading-->
-                <h3 class="fw-bolder my-2">My Bookings
-                </h3>
-                <!--end::Heading-->
+            <div class="card-toolbar">
+                <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                    <button type="button" class="btn btn-primary me-3 mb-3" data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-end">
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path
+                                    d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z"
+                                    fill="black" />
+                            </svg>
+                        </span>
+                        Filter
+                    </button>
+                    <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true"
+                        id="kt-toolbar-filter">
+                        <div class="px-7 py-5">
+                            <div class="fs-4 text-dark fw-bolder">Filter Options</div>
+                        </div>
+                        <div class="separator border-gray-200"></div>
+                        <form action="{{ route('doctors.index') }}" method="post">
+                            @csrf
+                            <div class="px-7 py-5">
+                                <div class="mb-10">
+                                    <label class="form-label fs-5 fw-bold mb-3">Status:</label>
+                                    <select class="form-select form-select-solid fw-bolder" data-kt-select2="false"
+                                        data-placeholder="Select option" data-allow-clear="true"
+                                        data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter" name="status">
+                                        <option value="all">All</option>
+                                        <option value="1">Initiated</option>
+                                        <option value="0">Uninitiated</option>
+                                        <option value="2">Completed</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-light btn-active-light-primary me-2"
+                                        data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
+                                    <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true"
+                                        data-kt-customer-table-filter="filter">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!--end::Toolbar-->
-            <!--begin::Row-->
             <div class="row g-6 g-xl-9">
-
                 @foreach ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
-                            <!--begin::Body-->
                             <div class="card-body pb-0">
-                                <!--begin::Header-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <!--begin::User-->
                                     <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
                                             <img @if ($doctor['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['book']['picture'] }}" @endif
                                                 alt=""  />
                                         </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::Info-->
                                         <div class="d-flex flex-column">
                                             <a href="{{ route('doctors.details', $doctor['book']['number']) }}" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Dr.
                                                 {{ $doctor['book']['first_name'] }} {{ $doctor['book']['middle_name'] }}
@@ -45,15 +73,11 @@
                                             <span class="text-gray-400 fw-bold">Booked
                                                 {{ $doctor->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <!--end::Info-->
                                     </div>
-                                    <!--end::User-->
-                                    <!--begin::Menu-->
                                     <div class="my-0">
                                         <button type="button"
                                             class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
                                             data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                             <span class="svg-icon svg-icon-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
                                                     viewBox="0 0 24 24">
@@ -69,9 +93,7 @@
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->
                                         </button>
-                                        <!--begin::Menu 2-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
                                             data-kt-menu="true">
                                             <div class="separator mb-3 opacity-75"></div>
@@ -97,17 +119,12 @@
                                             </div>
                                            
                                         </div>
-                                        <!--end::Menu 2-->
                                     </div>
-                                    <!--end::Menu-->
                                 </div>
-                                <!--end::Header-->
 
                                 <div class="d-flex flex-wrap mb-5">
                                     <div class="row">
                                        
-
-                                     <!--begin::Due-->
                                      <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                          <div class="d-flex align-items-center mb-">
                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Pre-consultation Form</span>
@@ -119,7 +136,7 @@
                                                  </svg>
                                                 </span>
                                                  @else
-                                                 <span class="svg-icon svg-icon-1">
+                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
                                                         <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black" />
@@ -127,12 +144,9 @@
                                                     </svg>
                                                 </span>
                                                 @endif
-                                             <!--end::Svg Icon-->
                                          </div>
                                      </div>
-                                     <!--end::Due-->
-
-                                    <!--begin::Due-->
+                                
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                          <div class="d-flex align-items-center mb-">
                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Prescription</span>
@@ -145,7 +159,7 @@
                                                  </svg>
                                                 </span>
                                                  @else
-                                                 <span class="svg-icon svg-icon-1">
+                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
                                                         <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black" />
@@ -153,12 +167,9 @@
                                                     </svg>
                                                 </span>
                                                 @endif
-                                             <!--end::Svg Icon-->
                                          </div>
                                      </div>
-                                     <!--end::Due-->
-
-                                    <!--begin::Due-->
+                            
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                          <div class="d-flex align-items-center mb-">
                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Booking Type</span>
@@ -169,11 +180,9 @@
                                                  <span class="badge badge-light fw-bolder me-auto px-4 py-3">Video</span>
                                                 @endif
                                              </span>
-                                             <!--end::Svg Icon-->
                                          </div>
                                      </div>
-                                     <!--end::Due-->
-                                    <!--begin::Due-->
+                                    
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                          <div class="d-flex align-items-center mb-">
                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Block</span>
@@ -182,10 +191,25 @@
                                                  <span class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->time_slot }}</span>
                                                 
                                              </span>
-                                             <!--end::Svg Icon-->
                                          </div>
                                      </div>
-                                     <!--end::Due-->
+
+                                     <div
+                                        class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                        <div class="d-flex align-items-center mb-">
+                                            <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
+                                                @if($doctor->status == 0)
+                                                <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting Time Appointment</span>
+                                                @elseif($doctor->status == 1)
+                                                <span class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
+                                                @elseif($doctor->status == 2)
+                                                <span class="badge badge-info fw-bolder me-auto px-4 py-3">completed</span>
+                                                @endif
+                                            
+                                        </div>
+                                    </div>
+
+
                                      @if($doctor->time !== null)
                                     <!--begin::Due-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
@@ -201,27 +225,21 @@
                                     @endif
                                     </div>
                                 </div>
-
-                                <!--begin::Separator-->
                                 <div class="separator mb-4"></div>
                                 <!--end::Separator-->
 
                                 <div class="symbol-group symbol-hover mb-3">
-                                    <!--begin::User-->
                                     <div class="" data-bs-toggle="tooltip" title="Fill out the pre-consultation">
                                         <a class="btn btn-sm  btn-bg-info btn-active-color-info text-white doctor"
                                             data-bs-toggle="modal" data-bs-target="#form"
                                             data-id="{{ $doctor->id }}">Fill Form</a>
                                     </div>
-                                    <!--begin::User-->
                                     @if ($doctor->book_type == 'chat')
                                      @if($doctor->time !== null)
-                                        <!--begin::User-->
                                         <div class="ml-1" data-bs-toggle="tooltip" title="Open chat with the doctor">
                                             <a href="{{ route('chats') }}"
                                                 class="btn btn-sm  btn-bg-light btn-active-color-primary">Chat</a>
                                         </div>
-                                        <!--begin::User-->
                                         @endif
                                     @else
                                         <div class="ml-1" data-bs-toggle="tooltip"
@@ -246,9 +264,6 @@
                         </div>
                     </div>
 
-
-
-                    <!--begin::Modal -Link -->
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -327,33 +342,21 @@
                             </div>
                         </div>
                     </div>
-                    <!--end::Modal - New Faculty-->
                 @endforeach
 
             </div>
-            <!--end::Row-->
         </div>
-        <!--end::Container-->
-
 
         <!--begin::Modal - -->
         <div class="modal fade" id="form" tabindex="-1" aria-hidden="true">
-            <!--begin::Modal dialog-->
             <div class="modal-dialog modal-dialog-centered mw-650px">
-                <!--begin::Modal content-->
                 <div class="modal-content">
-                    <!--begin::Form-->
                     <form class="form" action="{{ route('reservations') }}" id="kt_modal_new_address_form"
                         method="post">
                         @csrf
-                        <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_new_address_header">
-                            <!--begin::Modal title-->
                             <h2>Pre-Consultation Form</h2>
-                            <!--end::Modal title-->
-                            <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -364,88 +367,52 @@
                                             rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                             </div>
-                            <!--end::Close-->
                         </div>
-                        <!--end::Modal header-->
-                        <!--begin::Modal body-->
                         <div class="modal-body py-10 px-lg-17">
                             <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
                                 data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
-
-                                <!--begin::Input group-->
                                 <div class="mb-15 fv-row">
-                                    <!--begin::Wrapper-->
                                     <div class="d-flex flex-stack">
-                                        <!--begin::Label-->
                                         <div class="fw-bold me-5">
                                             <label class="fs-6">Patient</label>
-                                            {{-- <div class="fs-7 text-muted">Who's </div> --}}
                                         </div>
-                                        <!--end::Label-->
-                                        <!--begin::Checkboxes-->
                                         <div class="d-flex align-items-center">
-                                            <!--begin::Checkbox-->
                                             <label class="form-check form-check-custom form-check-solid me-10">
                                                 <input class="h-20px w-20px mx-2" type="radio"
                                                     onclick="javascript:personCheck();" name="person" value="self"
                                                     id="myself" checked="checked" />
                                                 <span class="form-check-label fw-bold">Myself</span>
                                             </label>
-                                            <!--end::Checkbox-->
-                                            <!--begin::Checkbox-->
                                             <label class="form-check form-check-custom form-check-solid">
                                                 <input class="h-20px w-20px ml-1" type="radio"
                                                     onclick="javascript:personCheck();" name="person" value="someone"
                                                     id="someone" />
                                                 <span class="form-check-label fw-bold mx-2">Someone</span>
                                             </label>
-                                            <!--end::Checkbox-->
                                         </div>
-                                        <!--end::Checkboxes-->
                                     </div>
-                                    <!--end::Wrapper-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
+                               
                                 <div class="row mb-5" id="issomeone1" style="display: none;">
-                                    <!--begin::Col-->
                                     <div class="col-md-12 fv-row">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Person Name</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" placeholder=""
                                             name="name" id="name" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
+                               
                                 <div class="row mb-5" id="issomeone2" style="display: none;">
-                                    <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Person Age</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" placeholder=""
                                             name="age" id="age" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Person Sex</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <select class="form-select form-select-solid" data-control="select2"
                                             data-hide-search="true" id="se" data-placeholder="Select gender"
                                             name="sex">
@@ -453,133 +420,70 @@
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
-                                        <!--end::Input-->
                                     </div>
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
+                                
                                 <div class="row mb-5">
-                                    <!--begin::Col-->
                                     <div class="col-md-12 fv-row">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Complains</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <textarea name="complain" id="complain" class="form-control form-control-lg form-control-solid"></textarea>
                                         <input type="hidden" name="get_id" id="get_id" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
+                               
                                 <div class="row mb-5">
-                                    <!--begin::Col-->
                                     <label class="fs-5 fw-bold mb-2">Vital Signs (if available)</label>
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Body Temperature (&deg;C)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="number" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="temperature" id="temperature" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Pulse rate (B/min)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="number" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="pulse" id="pulse" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Blood Pressure (mmHg)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
+                                        <input type="text" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="bp" id="bp" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Respiratory rate (C/min)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="number" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="respiratory" id="respiratory" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Blood Sugar (mmol/L)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="number" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="sugar" id="sugar" />
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                     <div class="col-md-4 fv-row">
-                                        <!--begin::Label-->
                                         <label class="fw-bold mb-2">Weight (Kg)</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="number" step="0.01" class="form-control form-control-solid"
                                             placeholder="" name="weight" id="weight" />
-                                        <!--end::Input-->
                                     </div>
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
+                              
                                 <div class="row mb-5">
-                                    <!--begin::Col-->
                                     <div class="col-md-12 fv-row">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Medical History</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <textarea name="history" id="history" class="form-control form-control-lg form-control-solid"></textarea>
-                                        <!--end::Input-->
                                     </div>
-                                    <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
-
-
                             </div>
-                            <!--end::Scroll-->
                         </div>
-                        <!--end::Modal body-->
-                        <!--begin::Modal footer-->
                         <div class="modal-footer flex-center">
-                            <!--begin::Button-->
                             <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Cancel</button>
-                            <!--end::Button-->
-                            <!--begin::Button-->
                             <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                             </button>
-                            <!--end::Button-->
                         </div>
-                        <!--end::Modal footer-->
                     </form>
-                    <!--end::Form-->
                 </div>
             </div>
         </div>
         <!--end::Modal - New Faculty-->
-
-
 
         <!--begin::change booking type Modal -->
         <div class="modal fade" id="change_booking_modal" tabindex="-1" aria-hidden="true">
@@ -643,7 +547,7 @@
                                 data-hide-search="true" data-placeholder="Time Slot...">
                                 <option></option>
                                 <option value="Morning">Morning (6AM - 11:59PM)</option>
-                                <option value="Afternoon">Afternoon (12PM - 5:59PM)</option>
+                                <option value="Noon">Afternoon (12PM - 5:59PM)</option>
                                 <option value="Evening">Evening (6PM - 11:59PM)</option>
                                 <option value="Night">Night (12AM - 5:59AM)</option>
                             </select>
@@ -686,8 +590,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
     <!--end::Post-->
@@ -1032,9 +934,7 @@
                     dataType: "json",
                     success: function(response) {
 
-
                         if (response.status == 200) {
-
                             $('.cancel_btn').text("Continue");
                             $('.cancel_btn').attr("disabled", false);
                             $('.cancel_booking_modal').modal('hide');
@@ -1056,12 +956,30 @@
                                 "showMethod": "fadeIn",
                                 "hideMethod": "fadeOut"
                             }
-
-
                             window.location.replace('{{ route('reservations') }}');
-
-
-
+                        }
+                        if (response.status == 400) {
+                            $('.cancel_btn').text("Continue");
+                            $('.cancel_btn').attr("disabled", false);
+                            $('.cancel_booking_modal').modal('hide');
+                            Command: toastr["error"](response.message)
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {

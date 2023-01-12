@@ -68,17 +68,12 @@
                         <div class="card d-n4one" id="kt_widget_5">
                             <!--begin::Body-->
                             <div class="card-body pb-0">
-                                <!--begin::Header-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <!--begin::User-->
                                     <div class="d-flex align-items-center flex-grow-1">
-                                        <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
                                             <img @if ($doctor['patient']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['patient']['picture'] }}" @endif
                                                 alt=""  />
                                         </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::Info-->
                                         <div class="d-flex flex-column">
                                             <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">
                                                 {{ $doctor['patient']['first_name'] }}
@@ -87,15 +82,11 @@
                                             <span class="text-gray-400 fw-bold">Booked
                                                 {{ $doctor->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <!--end::Info-->
                                     </div>
-                                    <!--end::User-->
-                                    <!--begin::Menu-->
                                     <div class="my-0">
                                         <button type="button"
                                             class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
                                             data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                             <span class="svg-icon svg-icon-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
                                                     viewBox="0 0 24 24">
@@ -112,9 +103,7 @@
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->
                                         </button>
-                                        <!--begin::Menu 2-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
                                             data-kt-menu="true">
                                             <div class="separator mb-3 opacity-75"></div>
@@ -128,7 +117,7 @@
 
                                             @if ($doctor->book_type == 'chat')
                                                 <div class="menu-item px-3">
-                                                    <a href="{{ route('doctor.chat') }}" class="menu-link">Go to Chat</a>
+                                                    <a href="{{ route('doctor.chat') }}" class="menu-link" style="pointer-events: {{ $doctor->status == 1? '':'none'}}">Go to Chat</a>
                                                 </div>
                                             @else
                                                 <div class="menu-item px-3">
@@ -166,7 +155,6 @@
                                 <div class="d-flex flex-wrap mb-5">
                                     <div class="row">
 
-                                        <!--begin::Due-->
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
@@ -180,9 +168,6 @@
                                                 <!--end::Svg Icon-->
                                             </div>
                                         </div>
-                                        <!--end::Due-->
-
-                                        <!--begin::Due-->
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
@@ -201,7 +186,7 @@
                                                         </svg>
                                                     </span>
                                                 @else
-                                                    <span class="svg-icon svg-icon-1">
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none">
                                                             <rect opacity="0.3" x="2" y="2"
@@ -219,43 +204,37 @@
                                                 <!--end::Svg Icon-->
                                             </div>
                                         </div>
-                                        <!--end::Due-->
-
-
-                                        <!--begin::Due-->
+                    
                                         <div
-                                          class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                          <div class="d-flex align-items-center mb-">
-                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
-                                                @if($doctor->status == 0)
-                                                <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting Time Appointment</span>
-                                                @elseif($doctor->status == 1)
-                                                <span class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
-                                                @elseif($doctor->status == 2)
-                                                <span class="badge badge-info fw-bolder me-auto px-4 py-3">completed</span>
-                                                @endif
-                                              
-                                          </div>
-                                      </div>
-                                      <!--end::Due-->
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
+                                                    @if($doctor->status == 0)
+                                                    <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting Time Appointment</span>
+                                                    @elseif($doctor->status == 1)
+                                                    <span class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
+                                                    @elseif($doctor->status == 2)
+                                                    <span class="badge badge-info fw-bolder me-auto px-4 py-3">completed</span>
+                                                    @endif
+                                                
+                                            </div>
+                                        </div>
+                      
                                       @if($doctor->status == 1)
-                                       @if(@$doctor->time)
-                                        <!--begin::Due-->
-                                        <div
-                                          class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                          <div class="d-flex align-items-center mb-">
-                                              <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact Time</span>
-                                               
-                                               <span class="badge badge-light-info fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', @$doctor->time)->format('h:i A') }}</span>
-                                               
-                                              
-                                          </div>
-                                      </div>
-                                      <!--end::Due-->
-                                      @endif
+                                        @if(@$doctor->time)
+                                            <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact Time</span>
+                                                
+                                                <span class="badge badge-light-info fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', @$doctor->time)->format('h:i A') }}</span>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        @endif
                                       @endif
 
-                                        <!--begin::Due-->
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
@@ -275,7 +254,7 @@
                                                         </svg>
                                                     </span>
                                                 @else
-                                                    <span class="svg-icon svg-icon-1">
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none">
                                                             <rect opacity="0.3" x="2" y="2"
@@ -643,7 +622,7 @@
                                                         <!--begin::Details-->
                                                         <div class="ms-6">
                                                             <!--begin::Name-->
-                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Family
+                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Medical
                                                                 History:&nbsp; &nbsp;
 
                                                                 <span class="text-dark text-hover-primary">
@@ -696,14 +675,11 @@
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">
                       
                         <div class="modal-dialog modal-dialog-centered mw-650px">
-                            <!--begin::Modal content-->
                             <div class="modal-content">
-                                <!--begin::Form-->
                                 <form class="form" action="{{ route('link') }}" id="kt_modal_new_address_form"
                                     method="post">
                                     @csrf
                                     <div class="modal-header" id="kt_modal_new_address_header">
-                                        <!--begin::Modal title-->
                                         <h2>Send Video Chat Link to {{ @$doctor['patient']['first_name'] }}
                                             {{ @$doctor['patient']['middle_name'] }}
                                             {{ @$doctor['patient']['last_name'] }}</h2>
@@ -767,14 +743,9 @@
                     <form class="form" action="{{ route('doctor.patients.time') }}" id=""
                         method="post">
                         @csrf
-                        <!--begin::Modal header-->
                         <div class="modal-header" id="">
-                            <!--begin::Modal title-->
                             <h2>Appoint Time to <span class="pname"></span></h2>
-                            <!--end::Modal title-->
-                            <!--begin::Close-->
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
@@ -852,35 +823,25 @@
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
                                 data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
                                 <input type="hidden" name="get_id" id="get_id" />
-                                <!--begin::Input group-->
                                 <div class="row mb-5 add_item">
-                                    <!--begin::Col-->
                                     <div class="col-md-9 fv-row my-2">
-                                        <!--begin::Label-->
                                         <label class="required fs-5 fw-bold mb-2">Medicine</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid"
                                             placeholder="Medicine" name="name[]" required>
-                                        <!--end::Input-->
                                     </div>
 
                                     <div class="form-group col-md-1 mx-1" style="padding-top: 35px;">
                                         <span class="btn btn-success btn-sm addeventmore"><i
                                                 class="fa fa-plus-circle"></i></span>
                                     </div>
-                                    <!--end::Col-->
                                 </div>
-                                <!--end::Input group-->
                             </div>
                         </div>
                         <div class="modal-footer flex-center">
-                            <!--begin::Button-->
                             <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Cancel</button>
                             <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                             </button>
-                            <!--end::Button-->
                         </div>
                         
                     </form>

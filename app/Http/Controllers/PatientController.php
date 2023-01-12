@@ -14,7 +14,7 @@ class PatientController extends Controller
 {
     public function DoctorsIndex()
     {
-        $data['users'] = User::where('role', 'doctor')->where('status', 1)->get();
+        $data['users'] = User::where('role', 'doctor')->where('status', 1)->paginate(10);
         return view('patient.doctors', $data);
     }
 
@@ -161,14 +161,14 @@ class PatientController extends Controller
 
     public function changeBooking(Request $request)
     {
-        // return $request->all();
+ 
         $booking = Booking::find($request->booking_id);
         if ($booking->book_type == $request->book_type) {
             return response()->json([
                 'status' => 400,
                 'message' => 'No change Made. You are already on this book type.',
             ]);
-        }
+        };
         $doctor = User::select('chat_rate', 'video_rate')->where('id', $booking->doctor_id)->first();
         $change = $doctor->video_rate - $doctor->chat_rate;
 
@@ -225,6 +225,13 @@ class PatientController extends Controller
     public function cancelBooking(Request $request)
     {
         $booking = Booking::find($request->booking_id);
+
+        if ($booking->status == 1 || $booking->status == 2) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Time period in which you can cancel booking has been elapsed.',
+            ]);
+        };
         $doctor = User::select('chat_rate', 'video_rate')->where('id', $booking->doctor_id)->first();
 
         if ($booking->book_type == 'video') {
@@ -244,6 +251,27 @@ class PatientController extends Controller
             'message' => 'Booking Cancelled Successfully',
         ]);
 
+    }
+
+
+    public function sortBookings(Request $request)
+    {
+        $user_id = auth()->user()->id;
+       if($request->status == 'all')
+       {
+           $data['doctors'] = Booking::with(['patient','book'])->where('patient_id', $user_id)->get();
+        }else
+        {
+            $data['doctors'] = Booking::with(['patient','book'])->where('patient_id', $user_id)->where('status', $request->status)->get();
+        }
+
+        if( $data['doctors']->count() < 1)
+        {
+            Toastr::warning('No data Found.', 'Not Found');
+            return redirect()->back();
+        }
+
+        return view('patient.reservations', $data);
     }
 
 }

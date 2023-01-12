@@ -74,6 +74,7 @@ class HomeController extends Controller
         $data['patients'] = Booking::with(['patient','book'])->where('doctor_id', $user_id)->whereIn('status',[0,1])->orderBy('id','desc')->get();
         return view('doctor',$data);
     }
+    
     public function patient()
     {
         $user_id = auth()->user()->id;
