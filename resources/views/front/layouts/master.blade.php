@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="/front/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="/front/style.css" type="text/css" />
     <link rel="stylesheet" href="/front/css/swiper.css" type="text/css" />
-
+    <link rel="stylesheet" href="/front/css/animate.css" type="text/css" />
     <!-- Construction Demo Specific Stylesheet -->
     <link rel="stylesheet" href="/front/demos/construction/construction.css" type="text/css" />
     <!-- / -->

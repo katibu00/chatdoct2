@@ -47,6 +47,9 @@ Route::get('/contact-us', [PagesController::class, 'contact'])->name('contact');
 
 Route::get('/speciality', [PagesController::class, 'speciality'])->name('speciality');
 
+Route::get('/terms', function(){
+    return view('front.terms');
+})->name('terms');
 
 Route::get('/chats', function () {
     return view('test');

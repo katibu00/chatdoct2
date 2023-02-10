@@ -1,51 +1,47 @@
-<section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-75" data-loop="true" autoplay="true">
-
+<section id="slider" class="slider-element swiper_wrapper" data-autoplay="4500" data-speed="800" data-loop="true"
+    data-grab="true" data-effect="fade" data-arrow="false" style="height: 400px;">
     <div class="swiper-container swiper-parent">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
+            <div class="swiper-slide dark">
                 <div class="container">
-                    <div class="slider-caption">
+                    {{-- <div class="slider-caption slider-caption-center">
                         <div>
-                            <h3>WE PROVIDE SOLUTIONS TO YOUR HEALTHCARE NEEDS</h3>
-                            <p class="d-none d-sm-block">Speak with qualified medical doctors remotely using your phone, tablet or computer from anywhere at anytime
-                            </p>
+                            <div class="h5 mb-2 font-secondary">Fresh Arrivals</div>
+                            <h2 class="bottommargin-sm text-white">Winter / 2021</h2>
+                            <a href="#" class="button bg-white text-dark button-light">Shop Menswear</a>
                         </div>
-                    </div>
+                    </div> --}}
+                </div>
+                <div class="swiper-slide-bg" style="background-image: url('/front/banner1.jpg');"></div>
+            </div>
+            <div class="swiper-slide dark">
+                <div class="container">
+                    {{-- <div class="slider-caption slider-caption-center">
+                        <div>
+                            <div class="h5 mb-2 font-secondary">Summer Collections</div>
+                            <h2 class="bottommargin-sm text-white">Sale 40% Off</h2>
+                            <a href="#" class="button bg-white text-dark button-light">Shop Beachwear</a>
+                        </div>
+                    </div> --}}
                 </div>
                 <div class="swiper-slide-bg"
-                    style="background-image: url('/uploads/banner/2.jpg'); background-position: center top;">
+                    style="background-image: url('/front/banner2.jpg'); background-position: center 20%;">
                 </div>
             </div>
-
-            <div class="swiper-slide">
+            <div class="swiper-slide dark">
                 <div class="container">
-                    <div class="slider-caption">
+                    {{-- <div class="slider-caption slider-caption-center">
                         <div>
-                            <h3>Introducing Private Doctor Visit</h3>
-                            <p class="d-none d-sm-block">Request for private doctor consultation at home starting from NGN10,000 and the doctor will come home and follow up the case</p>
+                            <h2 class="bottommargin-sm text-white">New Arrivals / 18</h2>
+                            <a href="#" class="button bg-white text-dark button-light">Shop Womenswear</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="swiper-slide-bg"
-                    style="background-image: url('/uploads/banner/3.jpg'); background-position: center bottom;">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="container">
-                    <div class="slider-caption">
-                        <div>
-                            <h3>Visit Our Telehealth Centres</h3>
-                            <p class="d-none d-sm-block">Enjoy Vital Signs recording such as blood pressure, Test for Malaria,Diabetes & HIV and 	Data-Free Doctor consultation.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide-bg"
-                    style="background-image: url('/uploads/banner/4.jpg'); background-position: center bottom;">
+                    style="background-image: url('/front/banner3.jpg'); background-position: center 40%;">
                 </div>
             </div>
         </div>
-        <div class="slider-arrow-left"><i class="icon-angle-left"></i></div>
-        <div class="slider-arrow-right"><i class="icon-angle-right"></i></div>
+        <div class="swiper-pagination"></div>
     </div>
-
 </section>

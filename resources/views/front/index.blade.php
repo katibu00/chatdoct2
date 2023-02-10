@@ -35,7 +35,7 @@
 
                 <div class="w-100 mt-4"></div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=covid-19') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -47,7 +47,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=general_practitioner') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -60,7 +60,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=internal_medicine') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -72,7 +72,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=family_medicine') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -84,7 +84,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=paediatrics') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -96,7 +96,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=gynecology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -108,7 +108,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=obstetrics') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -120,7 +120,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=orthopaedics') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -132,7 +132,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=urology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -144,7 +144,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=psychiatry') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -156,7 +156,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=endocrinology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -168,7 +168,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=cardiology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -180,7 +180,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=ophthalmology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -192,7 +192,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=neurology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -204,7 +204,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=nephrology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -216,7 +216,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=oncology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -228,7 +228,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=dermatology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -240,7 +240,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=immunology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -252,7 +252,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=radiology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -264,7 +264,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=haematology') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -276,7 +276,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=general_surgery') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -288,7 +288,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=plastic_surgery') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -300,7 +300,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=ent') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -312,7 +312,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <a href="{{ route('speciality','speciality=maxillofacial_surgery') }}">
                         <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
                             <div class="fbox-icon mb-2">
@@ -327,8 +327,6 @@
 
             </div>
         </div>
-
-
 
         <section id="content clearfix">
             <div class="content-wrap pb-0">

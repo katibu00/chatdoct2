@@ -89,8 +89,8 @@
           <div class="row justify-content-between col-mb-30">
               <div class="col-12 col-md-auto text-center text-md-start">
                   Copyrights &copy; 2022 All Rights Reserved by Chatdoc Ltd.<br>
-                  {{-- <div class="copyright-links"><a href="#">Terms of Use</a> / <a
-                          href="#">Privacy Policy</a></div> --}}
+                  <div class="copyright-links"><a href="{{ route('terms') }}">Terms and Conditions</a>
+                     {{-- / <a href="#">Privacy Policy</a></div> --}}
               </div>
 
            
