@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('PageTitle', 'Doctors')
+@section('PageTitle', 'Patients')
 
 @section('css')
     <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
@@ -42,13 +42,13 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
+                                {{-- <th class="w-10px pe-2">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_subscriptions_table .form-check-input"
                                             value="1" />
                                     </div>
-                                </th>
+                                </th> --}}
                                 <th class="min-w-25px">S/N</th>
                                 <th class="min-w-50px">PHOTO</th>
                                 <th class="min-w-125px">NAME</th>
@@ -64,11 +64,11 @@
 
                             @foreach ($users as $key => $user)
                                 <tr>
-                                    <td>
+                                    {{-- <td>
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                             <input class="form-check-input" type="checkbox" value="1" />
                                         </div>
-                                    </td>
+                                    </td> --}}
 
                                     <td>
                                         {{ $key + 1 }}
@@ -437,10 +437,10 @@
 @section('js')
 
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
+    {{-- <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/export.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
-    <script src="/assets/js/custom/widgets.js"></script>
+    <script src="/assets/js/custom/widgets.js"></script> --}}
 
 
 @endsection
