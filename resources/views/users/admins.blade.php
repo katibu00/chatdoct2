@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body pt-0">
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
@@ -56,7 +56,7 @@
                             </tr>
                             <!--end::Table row-->
                         </thead>
-                      
+
                         <tbody class="text-gray-600 fw-bold">
 
                             @foreach ($users as $key => $user)
@@ -74,13 +74,12 @@
                                             <a>
                                                 <div class="symbol-label">
                                                     <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
-                                                        alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                       />
+                                                        alt="{{ $user->first_name }} {{ $user->last_name }}" />
                                                 </div>
                                             </a>
                                         </div>
                                     </td>
-                                   
+
                                     <td>
                                         <div class="d-flex flex-column">
                                             <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }}
@@ -89,7 +88,7 @@
                                         </div>
                                     </td>
                                     <td> {{ @$user->rank }}</td>
-                                   
+
                                     <td> {{ @$user->created_at->diffForHumans() }}</td>
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
@@ -113,11 +112,12 @@
                                                 <a class="menu-link px-3" data-bs-toggle="modal"
                                                     data-bs-target="#details{{ $key }}">Details</a>
                                             </div>
+                                            <div class="menu-item px-3">
+                                                <a class="menu-link px-3 deleteItem"  data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">Delete</a>
+                                            </div>
 
                                         </div>
-                                        <!--end::Menu-->
                                     </td>
-                                    <!--end::Action=-->
                                 </tr>
 
                                 <!--begin::Modal - View Details-->
@@ -145,28 +145,20 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </div>
-                                                <!--end::Close-->
                                             </div>
-                                            <!--begin::Modal header-->
-                                            <!--begin::Modal body-->
+
                                             <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                                                 <!--begin::Heading-->
                                                 <div class="text-center mb-13">
                                                     <!--begin::Title-->
                                                     <h1 class="mb-3">{{ $user->first_name }} {{ $user->middle_name }}
                                                         {{ $user->last_name }}</h1>
-                                                    <!--end::Title-->
-                                                    <!--begin::Description-->
                                                     <div class="text-muted fw-bold fs-5">{{ $user->number }}</div>
-                                                    <!--end::Description-->
                                                 </div>
-                                                <!--end::Heading-->
-                                                <!--begin::Users-->
+
                                                 <div class="mb-15">
                                                     <!--begin::List-->
                                                     <div class="mh-375px scroll-y me-n7 pe-7">
-
-                                                        <!--begin::User-->
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                             <!--begin::Details-->
@@ -174,8 +166,7 @@
                                                                 <!--begin::Avatar-->
                                                                 <div class="symbol symbol-100px symbol-circle">
                                                                     <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
-                                                                        alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                                         />
+                                                                        alt="{{ $user->first_name }} {{ $user->last_name }}" />
                                                                 </div>
                                                                 <!--end::Avatar-->
                                                                 <!--begin::Details-->
@@ -186,13 +177,11 @@
                                                                         {{ $user->middle_name }} {{ $user->last_name }}
                                                                         <span
                                                                             class="badge badge-info fs-8 fw-bold ms-2">{{ $user->rank }}</span></a>
-                                                                    <!--end::Name-->
-                                                                    <!--begin::Email-->
+                                                                  
                                                                     <div class="fw-bold text-muted">{{ $user->email }}
                                                                     </div>
                                                                     <!--end::Email-->
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
 
                                                             <div class="d-flex">
@@ -227,16 +216,13 @@
                                                                     </a>
 
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
 
                                                             <div class="d-flex">
-                                                                <!--begin::Sales-->
                                                                 <div class="text-end">
 
                                                                 </div>
                                                             </div>
-                                                            <!--end::Stats-->
                                                         </div>
                                                         <!--end::User-->
 
@@ -247,10 +233,7 @@
                                                             <div class="d-flex align-items-center">
                                                                 <!--begin::Avatar-->
                                                                 <div class="symbol symbol-35px symbol-circle">
-                                                                    {{-- <span class="symbol-label bg-light-danger text-danger fw-bold">M</span> --}}
                                                                 </div>
-                                                                <!--end::Avatar-->
-                                                                <!--begin::Details-->
                                                                 <div class="ms-6">
                                                                     <!--begin::Name-->
                                                                     <a class="d-flex align-items-center fs-5 fw-bolder ">Languages:
@@ -264,39 +247,26 @@
                                                                                     class="badge badge-light fs-8 fw-bold ms-2">{{ $dat }}</span>
                                                                             @endforeach
                                                                         </span></a>
-                                                                    <!--end::Name-->
-                                                                    <!--begin::Email-->
-                                                                    {{-- <div class="fw-bold text-muted">melody@altbox.com</div> --}}
-                                                                    <!--end::Email-->
+
                                                                 </div>
                                                                 <!--end::Details-->
                                                             </div>
-                                                            <!--end::Details-->
-                                                            <!--begin::Stats-->
+
                                                             <div class="d-flex">
-                                                                <!--begin::Sales-->
                                                                 <div class="text-end">
-                                                                    {{-- <div class="fs-5 fw-bolder text-dark">$50,500</div>
-																<div class="fs-7 text-muted">Sales</div> --}}
                                                                 </div>
-                                                                <!--end::Sales-->
                                                             </div>
                                                             <!--end::Stats-->
                                                         </div>
-                                                        <!--end::User-->
 
-
-                                                        <!--begin::User-->
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                             <!--begin::Details-->
                                                             <div class="d-flex align-items-center">
                                                                 <!--begin::Avatar-->
                                                                 <div class="symbol symbol-35px symbol-circle">
-                                                                    {{-- <span class="symbol-label bg-light-danger text-danger fw-bold">M</span> --}}
                                                                 </div>
-                                                                <!--end::Avatar-->
-                                                                <!--begin::Details-->
+
                                                                 <div class="ms-6">
                                                                     <!--begin::Name-->
                                                                     <a class="d-flex align-items-center fs-5 fw-bolder ">Gender:
@@ -314,9 +284,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--end::User-->
 
-                                                        <!--begin::User-->
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                             <!--begin::Details-->
@@ -406,8 +374,7 @@
                                                                 <!--begin::Avatar-->
                                                                 <div class="symbol symbol-35px symbol-circle">
                                                                 </div>
-                                                                <!--end::Avatar-->
-                                                                <!--begin::Details-->
+
                                                                 <div class="ms-6">
                                                                     <!--begin::Name-->
                                                                     <a class="d-flex align-items-center fs-5 fw-bolder ">Practice
@@ -420,41 +387,19 @@
                                                                     <a href="/uploads/avatar/{{ $user->certificate }}"
                                                                         target="_blank"><img
                                                                             src="/uploads/avatar/{{ $user->certificate }}"
-                                                                            alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                                             /></a>
+                                                                            alt="{{ $user->first_name }} {{ $user->last_name }}" /></a>
                                                                     <!--end::Email-->
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
-
-                                                            <div class="d-flex">
-                                                                <div class="text-end">
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Stats-->
                                                         </div>
-                                                        <!--end::User-->
                                                     </div>
-                                                    <!--end::List-->
                                                 </div>
-
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="fw-bold">
-                                                        <label class="fs-6">Carefully Review and Verify all
-                                                            Records</label>
-                                                        <div class="fs-7 text-muted">Verify the records before approving
-                                                            the 'Become a Doctor' request</div>
-                                                    </div>
-
-                                                    <label
-                                                        class="form-check form-switch form-check-custom form-check-solid">
-                                                    </label>
+                                                <div class="d-flex flex-center flex-row-fluid pt-5">
+                                                    <button type="reset" class="btn btn-light me-3"
+                                                        data-bs-dismiss="modal">Dismiss</button>
                                                 </div>
-                                                <!--end::Notice-->
                                             </div>
-                                            <!--end::Modal body-->
                                         </div>
-                                        <!--end::Modal content-->
                                     </div>
                                 </div>
 
@@ -492,7 +437,7 @@
                                                 </div>
 
                                                 <div class="mb-15">
-                                                    = <div class="mh-375px scroll-y me-n7 pe-7">
+                                                    <div class="mh-375px scroll-y me-n7 pe-7">
 
                                                         <div class="text-muted fw-bold fs-5 text-center">Are you sure you
                                                             want make {{ $user->first_name }} {{ $user->middle_name }}
@@ -546,6 +491,50 @@
     <script src="/assets/js/custom/apps/subscriptions/list/export.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
     <script src="/assets/js/custom/widgets.js"></script>
+    <script src="/sweetalert.min.js"></script>
+    <script>
+        //delete item
+        $(document).on('click', '.deleteItem', function(e) {
+            e.preventDefault();
 
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            swal({
+                    title: "Delete " + name + "?",
+                    text: "Once deleted, you will not be able to recover it!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+
+                        $.ajax({
+                            url: "{{ route('doctors.delete') }}",
+                            method: 'POST',
+                            data: {
+                                id: id,
+                            },
+
+                            success: function(res) {
+
+                                if (res.status == 200) {
+                                    swal('Deleted', res.message, "success");
+                                    $('.table').load(location.href + ' .table');
+                                }
+
+                            }
+                        });
+                    }
+                });
+
+        });
+    </script>
 
 @endsection

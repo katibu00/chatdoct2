@@ -1,11 +1,10 @@
 @extends('layouts.master')
-@section('PageTitle', 'Patients')
+@section('PageTitle', 'Doctors')
 
 @section('css')
     <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -42,15 +41,7 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                {{-- <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_subscriptions_table .form-check-input"
-                                            value="1" />
-                                    </div>
-                                </th> --}}
                                 <th class="min-w-25px">S/N</th>
-                                <th class="min-w-50px">PHOTO</th>
                                 <th class="min-w-125px">NAME</th>
                                 <th class="min-w-125px">BAL. (&#8358;)</th>
                                 <th class="min-w-125px">ADDRESS</th>
@@ -64,28 +55,9 @@
 
                             @foreach ($users as $key => $user)
                                 <tr>
-                                    {{-- <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td> --}}
-
                                     <td>
                                         {{ $key + 1 }}
                                     </td>
-
-                                    <td>
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a>
-                                                <div class="symbol-label">
-                                                    <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
-                                                        alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                         />
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </td>
-
                                     <td>
                                         <div class="d-flex flex-column">
                                             <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }}
@@ -94,7 +66,7 @@
                                         </div>
                                     </td>
 
-                                    <td> {{ number_format($user->balance,0) }}</td>
+                                    <td> &#8358;{{ number_format($user->balance,0) }}</td>
 
                                     <td> {{ $user->address }}</td>
                                     <td> {{ $user->sex .' - '.$user->age }}</td>
@@ -113,24 +85,16 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                             data-kt-menu="true">
-                                            <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a class="menu-link px-3" data-bs-toggle="modal"
-                                                    data-bs-target="#details{{ $key }}">Details</a>
+                                                <a class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#details{{ $key }}">Details</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a class="menu-link px-3"
-                                                    href="{{ route('feature', $user->id) }}">{{ $user->featured == 0 ? 'Feature' : 'Unfeature' }}</a>
+                                                <a class="menu-link px-3 deleteItem"  data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">Delete</a>
                                             </div>
-                                            <!--end::Menu item-->
-
                                         </div>
-                                        <!--end::Menu-->
                                     </td>
-                                    <!--end::Action=-->
                                 </tr>
 
 
@@ -138,9 +102,7 @@
                                 <div class="modal fade" id="details{{ $key }}" tabindex="-1" aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog mw-650px">
-                                        <!--begin::Modal content-->
                                         <div class="modal-content">
-                                            <!--begin::Modal header-->
                                             <div class="modal-header pb-0 border-0 justify-content-end">
                                                 <!--begin::Close-->
                                                 <div class="btn btn-sm btn-icon btn-active-color-primary"
@@ -190,7 +152,6 @@
                                                                 </div>
 
                                                                 <div class="ms-6">
-                                                                    <!--begin::Name-->
                                                                     <a
                                                                         class="d-flex align-items-center fs-5 fw-bolder text-dark text-hover-primary">{{ $user->first_name }}
                                                                         {{ $user->middle_name }} {{ $user->last_name }}
@@ -200,87 +161,15 @@
                                                                     <div class="fw-bold text-muted">{{ $user->email }}
                                                                     </div>
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
 
                                                             <div class="d-flex">
                                                             </div>
-                                                            <!--end::Stats-->
                                                         </div>
 
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                             <div class="d-flex align-items-center">
-                                                                <div class="symbol symbol-35px symbol-circle">
-                                                                </div>
-                                                                <div class="ms-6">
-                                                                    <!--begin::Name-->
-                                                                    <a class="d-flex align-items-center fs-5 fw-bolder ">Speciality:
-                                                                        @php
-                                                                            $datas = $user->speciality;
-                                                                            $data = explode(',', $datas);
-                                                                        @endphp
-                                                                        <span class="text-dark text-hover-primary"> &nbsp;
-                                                                            @foreach ($data as $dat)
-                                                                                <span
-                                                                                    class="badge badge-light fs-8 fw-bold ms-2">{{ $dat }}</span>
-                                                                            @endforeach
-                                                                        </span>
-                                                                    </a>
-
-                                                                </div>
-                                                                <!--end::Details-->
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end::User-->
-
-                                                        <!--begin::User-->
-                                                        <div
-                                                            class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <!--begin::Details-->
-                                                            <div class="d-flex align-items-center">
-                                                                <!--begin::Avatar-->
-                                                                <div class="symbol symbol-35px symbol-circle">
-                                                                </div>
-
-                                                                <div class="ms-6">
-                                                                    <!--begin::Name-->
-                                                                    <a class="d-flex align-items-center fs-5 fw-bolder ">Languages:
-                                                                        @php
-                                                                            $datas = $user->languages;
-                                                                            $data = explode(',', $datas);
-                                                                        @endphp
-                                                                        <span class="text-dark text-hover-primary"> &nbsp;
-                                                                            @foreach ($data as $dat)
-                                                                                <span
-                                                                                    class="badge badge-light fs-8 fw-bold ms-2">{{ $dat }}</span>
-                                                                            @endforeach
-                                                                        </span></a>
-
-                                                                </div>
-                                                                <!--end::Details-->
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div
-                                                            class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <!--begin::Details-->
-                                                            <div class="d-flex align-items-center">
-                                                                <!--begin::Avatar-->
                                                                 <div class="symbol symbol-35px symbol-circle">
                                                                 </div>
 
@@ -289,62 +178,11 @@
                                                                         <span class="text-dark text-hover-primary"> &nbsp;
                                                                             {{ $user->sex }}</span></a>
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
                                                             <div class="d-flex">
                                                                 <div class="text-end">
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <!--begin::Details-->
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="symbol symbol-35px symbol-circle">
-                                                                </div>
-
-                                                                <div class="ms-6">
-                                                                    <a class="d-flex align-items-center fs-5 fw-bolder ">Experience:
-                                                                        <span class="text-dark text-hover-primary"> &nbsp;
-                                                                            {{ $user->experience }} years</a>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Stats-->
-                                                        </div>
-
-                                                        <div
-                                                            class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <div class="d-flex align-items-center">
-                                                                <!--begin::Avatar-->
-                                                                <div class="symbol symbol-35px symbol-circle">
-                                                                </div>
-
-                                                                <div class="ms-6">
-                                                                    <!--begin::Name-->
-                                                                    <a class="d-flex align-items-center fs-5 fw-bolder ">Folio
-                                                                        Number:
-
-                                                                        <span class="text-dark text-hover-primary"> &nbsp;
-                                                                            {{ $user->folio }}</span></a>
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-
-                                                                </div>
-                                                            </div>
-                                                            <!--end::Stats-->
                                                         </div>
 
                                                         <div
@@ -370,53 +208,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div
-                                                            class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <div class="d-flex align-items-center">
-                                                                <!--begin::Avatar-->
-                                                                <div class="symbol symbol-35px symbol-circle">
-                                                                </div>
-
-                                                                <div class="ms-6">
-                                                                    <a class="d-flex align-items-center fs-5 fw-bolder ">Practice
-                                                                        License:
-
-                                                                        <span class="text-dark text-hover-primary"> &nbsp;
-                                                                        </span></a>
-
-                                                                    <a href="/uploads/avatar/{{ $user->certificate }}"
-                                                                        target="_blank"><img
-                                                                            src="/uploads/certificates/{{ $user->certificate }}"
-                                                                            alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                                             /></a>
-                                                                </div>
-                                                                <!--end::Details-->
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-
-                                                                </div>
-                                                                <!--end::Sales-->
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <!--begin::Label-->
-                                                    <div class="fw-bold">
-                                                        <label class="fs-6">Carefully Review and Verify all
-                                                            Records</label>
-                                                        <div class="fs-7 text-muted">Verify the records before approving
-                                                            the 'Become a Doctor' request</div>
-                                                    </div>
-
-                                                    <label
-                                                        class="form-check form-switch form-check-custom form-check-solid">
-
-                                                    </label>
+                                                <div class="d-flex flex-center flex-row-fluid pt-5">
+                                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Dismiss</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -437,10 +232,56 @@
 @section('js')
 
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    {{-- <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
+    <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/export.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
-    <script src="/assets/js/custom/widgets.js"></script> --}}
+    <script src="/assets/js/custom/widgets.js"></script>
+
+    <script src="/sweetalert.min.js"></script>
 
 
+    <script>
+        //delete item
+        $(document).on('click', '.deleteItem', function(e) {
+            e.preventDefault();
+    
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            swal({
+                    title: "Delete " + name + "?",
+                    text: "Once deleted, you will not be able to recover it!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+    
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+    
+                        $.ajax({
+                            url: "{{ route('doctors.delete') }}",
+                            method: 'POST',
+                            data: {
+                                id: id,
+                            },
+    
+                            success: function(res) {
+    
+                                if (res.status == 200) {
+                                    swal('Deleted', res.message, "success");
+                                    $('.table').load(location.href + ' .table');
+                                }
+    
+                            }
+                        });
+                    }
+                });
+    
+        });
+    </script>
 @endsection

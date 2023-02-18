@@ -35,13 +35,13 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
                         <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                {{-- <th class="w-10px pe-2">
+                                <th class="w-10px pe-2">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                         <input class="form-check-input" type="checkbox" data-kt-check="true"
                                             data-kt-check-target="#kt_subscriptions_table .form-check-input"
                                             value="1" />
                                     </div>
-                                </th> --}}
+                                </th>
                                 <th class="min-w-25px">S/N</th>
                                 <th class="min-w-50px">PHOTO</th>
                                 <th class="min-w-125px">NAME</th>
@@ -57,13 +57,11 @@
 
                             @foreach ($users as $key => $user)
                                 <tr>
-
-                                    <!--begin::Checkbox-->
-                                    {{-- <td>
+                                    <td>
                                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                                             <input class="form-check-input" type="checkbox" value="1" />
                                         </div>
-                                    </td> --}}
+                                    </td>
 
                                     <td>
                                         {{ $key + 1 }}
@@ -91,7 +89,7 @@
 
                                     <td> {{ $user->rank }}</td>
 
-                                    <td> {!! $user->featured == 1 ? '<div class="badge badge-light-info fw-bolder">Featured</div>' : '<div class="badge badge-light-warning fw-bolder">Not Featured</div>' !!}</td>
+                                    <td> {!! $user->featured == 1 ? '<span class="badge badge-success">Featured</span>' : '<span class="badge badge-info">Not Featured</span>' !!}</td>
                                     <td> {{ $user->created_at->diffForHumans() }}</td>
 
                                     <td class="text-end">
@@ -120,14 +118,12 @@
                                                 <a class="menu-link px-3"
                                                     href="{{ route('feature', $user->id) }}">{{ $user->featured == 0 ? 'Feature' : 'Unfeature' }}</a>
                                             </div>
-                                            <!--end::Menu item-->
-
+                                            <div class="menu-item px-3">
+                                                <a class="menu-link px-3 deleteItem"  data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">Delete</a>
+                                            </div>
                                         </div>
-                                        <!--end::Menu-->
                                     </td>
-                                    <!--end::Action=-->
                                 </tr>
-
 
                                 <!--begin::Modal - View Details-->
                                 <div class="modal fade" id="details{{ $key }}" tabindex="-1" aria-hidden="true">
@@ -171,11 +167,8 @@
                                                 <div class="mb-15">
                                                     <!--begin::List-->
                                                     <div class="mh-375px scroll-y me-n7 pe-7">
-
-                                                        <!--begin::User-->
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                            <!--begin::Details-->
                                                             <div class="d-flex align-items-center">
                                                                 <!--begin::Avatar-->
                                                                 <div class="symbol symbol-100px symbol-circle">
@@ -185,7 +178,6 @@
                                                                 </div>
 
                                                                 <div class="ms-6">
-                                                                    <!--begin::Name-->
                                                                     <a
                                                                         class="d-flex align-items-center fs-5 fw-bolder text-dark text-hover-primary">{{ $user->first_name }}
                                                                         {{ $user->middle_name }} {{ $user->last_name }}
@@ -222,9 +214,7 @@
                                                                             @endforeach
                                                                         </span>
                                                                     </a>
-
                                                                 </div>
-                                                                <!--end::Details-->
                                                             </div>
 
                                                             <div class="d-flex">
@@ -269,7 +259,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
 
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
@@ -329,7 +318,6 @@
 
                                                                         <span class="text-dark text-hover-primary"> &nbsp;
                                                                             {{ $user->folio }}</span></a>
-
                                                                 </div>
                                                             </div>
 
@@ -387,31 +375,12 @@
                                                                              /></a>
                                                                 </div>
                                                                 <!--end::Details-->
-                                                            </div>
-
-                                                            <div class="d-flex">
-                                                                <!--begin::Sales-->
-                                                                <div class="text-end">
-
-                                                                </div>
-                                                                <!--end::Sales-->
-                                                            </div>
+                                                            </div>                                                          
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <!--begin::Label-->
-                                                    <div class="fw-bold">
-                                                        <label class="fs-6">Carefully Review and Verify all
-                                                            Records</label>
-                                                        <div class="fs-7 text-muted">Verify the records before approving
-                                                            the 'Become a Doctor' request</div>
-                                                    </div>
-
-                                                    <label
-                                                        class="form-check form-switch form-check-custom form-check-solid">
-
-                                                    </label>
+                                                <div class="d-flex flex-center flex-row-fluid pt-5">
+                                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Dismiss</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -495,10 +464,55 @@
 @section('js')
 
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    {{-- <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
+    <script src="/assets/js/custom/apps/user-management/users/list/table.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/export.js"></script>
     <script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
-    <script src="/assets/js/custom/widgets.js"></script> --}}
+    <script src="/assets/js/custom/widgets.js"></script>
+    <script src="/sweetalert.min.js"></script>
 
 
+<script>
+    //delete item
+    $(document).on('click', '.deleteItem', function(e) {
+        e.preventDefault();
+
+        let id = $(this).data('id');
+        let name = $(this).data('name');
+        swal({
+                title: "Delete " + name + "?",
+                text: "Once deleted, you will not be able to recover it!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: "{{ route('doctors.delete') }}",
+                        method: 'POST',
+                        data: {
+                            id: id,
+                        },
+
+                        success: function(res) {
+
+                            if (res.status == 200) {
+                                swal('Deleted', res.message, "success");
+                                $('.table').load(location.href + ' .table');
+                            }
+
+                        }
+                    });
+                }
+            });
+
+    });
+</script>
 @endsection

@@ -52,4 +52,15 @@ class UsersController extends Controller
         Toastr::success('The Doctor has been Featured sucessfully', 'Done');
         return redirect()->back();
     }
+
+    public function doctorsDelete(Request $request){
+        $data = User::find($request->id);
+        if($data->delete()){
+            return response()->json([
+                'status' => 200,
+                'message' => 'User Deleted Successfully'
+            ]);
+        };
+    }
+
 }
