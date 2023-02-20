@@ -62,7 +62,7 @@
                                         <div class="d-flex flex-column">
                                             <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }}
                                                 {{ $user->middle_name }} {{ $user->last_name }}</a>
-                                            <span>{{ $user->email }}</span>
+                                            <span>{{ $user->phone }}</span>
                                         </div>
                                     </td>
 

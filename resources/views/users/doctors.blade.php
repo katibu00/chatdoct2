@@ -35,22 +35,14 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
                         <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_subscriptions_table .form-check-input"
-                                            value="1" />
-                                    </div>
-                                </th>
                                 <th class="min-w-25px">S/N</th>
-                                <th class="min-w-50px">PHOTO</th>
                                 <th class="min-w-125px">NAME</th>
+                                <th class="min-w-125px">Phone</th>
                                 <th class="min-w-125px">RANK</th>
                                 <th class="min-w-125px">FEATURED</th>
                                 <th class="min-w-125px">JOINED</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
-                            <!--end::Table row-->
                         </thead>
 
                         <tbody class="text-gray-600 fw-bold">
@@ -58,27 +50,8 @@
                             @foreach ($users as $key => $user)
                                 <tr>
                                     <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" value="1" />
-                                        </div>
-                                    </td>
-
-                                    <td>
                                         {{ $key + 1 }}
                                     </td>
-
-                                    <td>
-                                        <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                            <a>
-                                                <div class="symbol-label">
-                                                    <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
-                                                        alt="{{ $user->first_name }} {{ $user->last_name }}"
-                                                         />
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </td>
-
                                     <td>
                                         <div class="d-flex flex-column">
                                             <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }}
@@ -86,12 +59,10 @@
                                             <span>{{ $user->email }}</span>
                                         </div>
                                     </td>
-
+                                    <td> {{ $user->phone }}</td>
                                     <td> {{ $user->rank }}</td>
-
-                                    <td> {!! $user->featured == 1 ? '<span class="badge badge-success">Featured</span>' : '<span class="badge badge-info">Not Featured</span>' !!}</td>
+                                    <td>@if($user->status == 5) <span class="badge badge-danger">Suspended</span> @else {!! $user->featured == 1 ? '<span class="badge badge-success">Featured</span>' : '<span class="badge badge-info">Not Featured</span>' !!} @endif</td>
                                     <td> {{ $user->created_at->diffForHumans() }}</td>
-
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
                                             data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
@@ -104,9 +75,7 @@
                                                         fill="black" />
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->
                                         </a>
-                                        <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
@@ -119,7 +88,10 @@
                                                     href="{{ route('feature', $user->id) }}">{{ $user->featured == 0 ? 'Feature' : 'Unfeature' }}</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a class="menu-link px-3 deleteItem"  data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">Delete</a>
+                                                <a class="menu-link px-3 suspendItem" data-status="{{ $user->status }}" data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">{{ $user->status == 5 ? 'Unsuspend' : 'Suspend' }}</a>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <a class="menu-link px-3 deleteItem" data-id="{{ $user->id }}" data-name="{{ $user->first_name.' '.$user->last_name }}">Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -505,6 +477,57 @@
 
                             if (res.status == 200) {
                                 swal('Deleted', res.message, "success");
+                                $('.table').load(location.href + ' .table');
+                            }
+
+                        }
+                    });
+                }
+            });
+
+    });
+    //susoen item
+    $(document).on('click', '.suspendItem', function(e) {
+        e.preventDefault();
+
+        let id = $(this).data('id');
+        let name = $(this).data('name');
+        let status = $(this).data('status');
+        console.log(status)
+        var message = '';
+        if(status == 5)
+        {
+            message = "Unsuspend"
+        }else{
+            message = "Suspend" 
+        }
+        swal({
+                title: message+' '+name + "?",
+                text: "Suspended Doctors won't be able to login!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: "{{ route('doctors.suspend') }}",
+                        method: 'POST',
+                        data: {
+                            id: id,
+                        },
+
+                        success: function(res) {
+
+                            if (res.status == 200) {
+                                swal(message, res.message, "success");
                                 $('.table').load(location.href + ' .table');
                             }
 

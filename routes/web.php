@@ -113,6 +113,8 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth','admin']], function()
     Route::get('/feature/{id}', [App\Http\Controllers\UsersController::class, 'featureDoctors'])->name('feature');
 
     Route::post('/doctors/delete', [App\Http\Controllers\UsersController::class, 'doctorsDelete'])->name('doctors.delete');
+    Route::post('/doctors/suspend', [App\Http\Controllers\UsersController::class, 'doctorsSuspend'])->name('doctors.suspend');
+    Route::post('/doctors/reject', [App\Http\Controllers\UsersController::class, 'doctorsReject'])->name('doctors.reject');
 
 
 
