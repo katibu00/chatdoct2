@@ -86,7 +86,6 @@ Route::group(['prefix' => 'home', 'middleware' => ['auth']], function(){
 
 Route::group(['prefix' => '', 'middleware' => ['auth']], function(){
 
-    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/userList', [App\Http\Controllers\MessageController::class, 'userlist'])->name('userList');
     Route::get('/usermessage/{id}', [App\Http\Controllers\MessageController::class, 'user_message'])->name('usermessage');
     Route::post('sendmessage', [App\Http\Controllers\MessageController::class, 'send_message'])->name('user.message.send');
@@ -97,7 +96,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function(){
     Route::post('/profile', [App\Http\Controllers\PatientProfileController::class, 'update'])->name('profile');
 
     Route::get('/doctor/application', [App\Http\Controllers\DoctorApplicationController::class, 'index'])->name('doctor.apply');
-Route::post('/doctor/application', [App\Http\Controllers\DoctorApplicationController::class, 'save']);
+    Route::post('/doctor/application', [App\Http\Controllers\DoctorApplicationController::class, 'save']);
 
 });
 
@@ -116,13 +115,15 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth','admin']], function()
     Route::post('/doctors/suspend', [App\Http\Controllers\UsersController::class, 'doctorsSuspend'])->name('doctors.suspend');
     Route::post('/doctors/reject', [App\Http\Controllers\UsersController::class, 'doctorsReject'])->name('doctors.reject');
 
-
-
 });
 
+Route::group(['prefix' => 'bookings', 'middleware' => ['auth','admin']], function(){
 
+    Route::get('/booking/index', [App\Http\Controllers\AdminBookingController::class, 'index'])->name('admin.booking.index');
+    Route::get('/booking/delete/{id}', [App\Http\Controllers\AdminBookingController::class, 'delete'])->name('admin.booking.delete');
+    Route::post('/booking/sort', [App\Http\Controllers\AdminBookingController::class, 'sortBookings'])->name('admin.booking.sort');
 
-// Route::get('/doctor/profile/{number}', [App\Http\Controllers\PatientController::class, 'DoctorsDetails'])->name('doctors.details');
+});
 
 //patient routes
 Route::group(['prefix' => 'patient', 'middleware' => ['auth']], function(){
@@ -166,8 +167,6 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
 
 });
 
-
 //get routes
 Route::get('/get-data', [App\Http\Controllers\PatientController::class, 'GetData'])->name('get-data');
-
 Route::get('/logs/index', [LoginController::class, 'logs'])->name('logs.index')->middleware(['auth','admin']);

@@ -149,11 +149,15 @@ class DoctorController extends Controller
    
        $booking = Booking::where('id',$id)->first();
 
-       if($booking->doctor_id != auth()->user()->id)
+       if(auth()->user()->role != 'admin')
        {
-        Toastr::error('Booking Not for you.', 'Error');
-        return redirect()->back();
+            if($booking->doctor_id != auth()->user()->id)
+            {
+            Toastr::error('Booking Not for you.', 'Error');
+            return redirect()->back();
+            }
        }
+       
        if($booking){
         $booking->status = 2;
         $booking->update();

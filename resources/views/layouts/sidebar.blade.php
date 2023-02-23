@@ -106,6 +106,17 @@ $route = Route::current()->getName();
                     </div>
                 </div>
 
+                <div class="menu-item">
+                    <a class="menu-link {{($route=='admin.booking.index')?'active':''}}" href="{{route('admin.booking.index')}}">
+                        <span class="menu-icon">
+                            <span class="menu-bullet">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </span>
+                        <span class="menu-title">Bookings</span>
+                    </a>
+                </div>
+
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
