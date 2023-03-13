@@ -397,6 +397,7 @@
                         <h2 class="text-center text-white mb-5 mt-4 fw-semibold">Frequently Asked Questions
                         </h2>
                         <div class="toggle-wrap">
+                           
                             <div class="toggle">
                                 <div class="toggle-header">
                                     <div class="toggle-icon">
@@ -404,102 +405,112 @@
                                         <i class="toggle-open icon-angle-down1"></i>
                                     </div>
                                     <div class="toggle-title">
-                                        HOW DO I SPEAK WITH MEDICAL DOCTOR?
+                                        What is Chatdoc?
                                     </div>
                                 </div>
-                                <div class="toggle-content">Simply signup, set up your profile, fund your wallet, choose a doctor, Select type of service (chat or video) and book available time slot. When it is time, your doctor will be available for chatting or send you a video link for video consultation as the case may be. </div>
+                                <div class="toggle-content"> Chatdoc is a telemedicine platform that connects patients with qualified medical doctors through chat, phone call, and video call. Patients can also have their vital signs checked at a triage center and the data can be transmitted directly to the doctor for better diagnosis and care.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Is Chatdoc a substitute for in-person doctor visits?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">While Chatdoc can provide convenient and efficient medical consultations, it is not meant to replace in-person visits completely. In certain cases, your doctor may advise an in-person visit for a physical examination.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Is Chatdoc secure and private?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Yes, Chatdoc takes patient privacy and security very seriously. All medical consultations and transmissions of data are encrypted and secure to protect patient information.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        How do I book a doctor appointment through Chatdoc?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Patients can book doctor appointments through the Chatdoc website or mobile app by selecting their preferred doctor and filling out the pre-consultation form.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        What types of payment does Chatdoc accept?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Chatdoc accepts a variety of payment methods, including credit cards and digital wallets, through its secure payment portal.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Can I have a video call or phone call with a doctor through Chatdoc?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Yes, in addition to chat, Chatdoc also offers video call and phone call consultations with medical doctors.</div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Is there a fee for using Chatdoc's services?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Yes, there is a fee for medical consultations through Chatdoc. The fee varies based on the type of consultation and the doctor selected.
+                                </div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        Are the medical doctors on Chatdoc licensed and qualified? 
+                                    </div>
+                                </div>
+                                <div class="toggle-content">Yes, all medical doctors on Chatdoc are licensed and qualified to provide medical care. Chatdoc carefully screens and verifies the credentials of all its doctors to ensure patient safety.
+                                </div>
+                            </div>
+                            <div class="toggle">
+                                <div class="toggle-header">
+                                    <div class="toggle-icon">
+                                        <i class="toggle-closed icon-angle-right1"></i>
+                                        <i class="toggle-open icon-angle-down1"></i>
+                                    </div>
+                                    <div class="toggle-title">
+                                        What types of medical doctors can I consult through Chatdoc?
+                                    </div>
+                                </div>
+                                <div class="toggle-content">You can consult with a variety of medical doctors including general practitioners, specialists, and others, based on your medical needs.
+                                </div>
                             </div>
 
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        ARE YOUR DOCTORS REAL?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Yes, our doctors are MDCN (Medical and Dental Council of Nigeria) certified, And are verified by our management team.</div>
-                            </div>
 
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        I DON’T HAVE A SMARTPHONE, HOW CAN I SPAEK A DOCTOR?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Kindly visit ChatDoc Telehealth Centre, Our partner clinics or pharmaceutical stores nearest to you.</div>
-                            </div>
-
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        I FIND IT DIFFICULT TO EXPLAIN MY SYMPTOMS IN ENGLISH, WHAT SHOULD I DO?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Chatdoc provides care beyond language barrier. Local languages of our doctors are indicated, kindly go through the platform and search for doctor who can speak your language.</div>
-                            </div>
-
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        HOW MUCH IS THE CONSULTATION FEE?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">It varies, depending on the specialty and experience of the doctor. But generally ranges between 500 to 5000 Naira</div>
-                            </div>
-
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        WHAT WILL HAPPEN IF THE DOCTOR I BOOKED IS NOT AVAILABLE AS SCHEDULED?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Patiently wait for about 30 minutes after which booking will be cancelled and you will be refunded.</div>
-                            </div>
-
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        WHAT IF THE DOCTOR I BOOKED DID NOT SEND ME PRESCRIPTON, CAN I GET REFUND?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">No, please note that our doctors charge you for consultation not prescription. He may refer you appropriately or give you some medical advice.</div>
-                            </div>
-
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        CAN OTHER PATIENTS READ OUR CHATS WITH THE DOCTOR?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">No, we respect your confidentiality as a patient. Our chat system is end-to-end encrypted. Admins can read your chats to ensure great delivery. Your doctor can write clinical note about your health condition which will be visible to the next doctor you are going to see, to serve as a guide.</div>
-                            </div>
                         </div>
                         <h5 class="mt-4 text-center fw-normal text-white-50 mb-0">Didn't find what you were
                             after? <a href="#" class="text-white"><u>Visit the FAQ Page</u></a></h5>

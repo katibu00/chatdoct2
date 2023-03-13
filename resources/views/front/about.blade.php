@@ -58,14 +58,12 @@
                     <div class="row col-mb-50">
 
                         <div class="col-lg-12">
-                            <p>Chatdoc is digital health social enterprise that connect Nigerian patients with certified medical doctors via chat, video or audio call  using smartphones or computers. We increase healthcare access to  Nigerians especially those living in underseviced communities using triple approach.</p>
-                            <ul>
-                                <li>Telemedicine: Through Chatdoc application patient can speak with medical doctors 24/7.</li>
-                                <li>Telehealth centres: Triage patients and offers screening test for common illness such as Malaria</li>
-                                <li>Private Doctor visit: Patient get physical doctor consultation at home</li>
-                            </ul>
-.	                    <p>We have sworn to uphold the principles of professionalism, Collaboration and healthcare innovation to improve the quality of life of our users.  We are proud to serve patients from all over the country, we will continue to build high quality product and services to treat patients across Nigeria and beyond.  </p>
-
+                            <p>Chatdoc is a cutting-edge telemedicine platform that offers patients an easy and convenient way to connect with qualified medical doctors through chat, phone call, and video call. With a focus on patient care and privacy, Chatdoc provides a secure and encrypted platform for medical consultations.
+                                The Chatdoc website is designed to be user-friendly and intuitive, allowing patients to easily book appointments with their preferred doctor, fill out the pre-consultation form, and upload any relevant test results or images. The website also provides a secure payment portal for patients to pay for their consultation fees.
+                                In addition to online consultations, Chatdoc also provides patients with access to its triage centers where they can have their vital signs checked for free using digital devices. This data can be transmitted directly to the medical doctor through the Chatdoc website, improving the quality of care and enabling more accurate diagnoses.
+                                The Chatdoc website also features a notification system, which informs both doctors and patients whenever an appointment is booked or confirmed. This helps to ensure that everyone is on the same page and that appointments run smoothly.
+                                Overall, the Chatdoc website is an innovative platform that provides patients with the ability to access quality medical care from the comfort of their own homes. With its user-friendly interface, secure payment options, and state-of-the-art triage centers, Chatdoc is poised to revolutionize the way people access healthcare services.
+                                </p>
                           
                         </div>
 
