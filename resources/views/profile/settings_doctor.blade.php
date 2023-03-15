@@ -81,22 +81,28 @@
                                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
                                 </label>
                                 <div class="col-lg-8 fv-row">
-                                    <input type="number" name="chat_rate" class="form-control form-control-lg form-control-solid" placeholder="Chat Rate" value="{{$user->chat_rate}}" />
+                                    <input type="number" name="chat_rate" class="form-control form-control-lg form-control-solid" placeholder="Chat Rate" value="{{ $user->chat_rate }}" />
                                 </div>
                                
                             </div>
                             
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
                                     <span class="required">Video Call Rate</span>
                                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
                                 </label>
-                               
                                 <div class="col-lg-8 fv-row">
-                                    <input type="number" name="video_rate" class="form-control form-control-lg form-control-solid" placeholder="Video Call rate" value="{{$user->video_rate}}" />
+                                    <input type="number" name="video_rate" class="form-control form-control-lg form-control-solid" placeholder="Video Call rate" value="{{ $user->video_rate }}" />
                                 </div>
-                               
+                            </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                    <span class="required">Phone Call Rate</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
+                                </label>
+                                <div class="col-lg-8 fv-row">
+                                    <input type="number" name="phone_rate" class="form-control form-control-lg form-control-solid" placeholder="Phone Call rate" value="{{ $user->phone_rate }}" />
+                                </div>
                             </div>
 
                             <div class="row mb-6">

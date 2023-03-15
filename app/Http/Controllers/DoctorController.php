@@ -37,6 +37,7 @@ class DoctorController extends Controller
         $user->phone = $request->phone;
         $user->chat_rate = $request->chat_rate;
         $user->video_rate = $request->video_rate;
+        $user->phone_rate = $request->phone_rate;
         $user->age = $request->age;
         $user->sex = $request->sex;
         $user->address = $request->address;

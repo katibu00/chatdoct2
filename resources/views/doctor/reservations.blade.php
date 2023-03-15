@@ -8,10 +8,8 @@
 
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
-        <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <div class="card-toolbar">
-                <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                     <button type="button" class="btn btn-primary me-3 mb-3" data-kt-menu-trigger="click"
                         data-kt-menu-placement="bottom-end">
@@ -25,20 +23,16 @@
                         </span>
                         Filter
                     </button>
-                    <!--begin::Menu 1-->
                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true"
                         id="kt-toolbar-filter">
-                        <!--begin::Header-->
                         <div class="px-7 py-5">
                             <div class="fs-4 text-dark fw-bolder">Filter Options</div>
                         </div>
                         <div class="separator border-gray-200"></div>
-                        <!--end::Separator-->
                         <form action="{{ route('doctor.patients') }}" method="post">
                             @csrf
                             <div class="px-7 py-5">
                                 <div class="mb-10">
-                                    <!--begin::Label-->
                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="false"
                                         data-placeholder="Select option" data-allow-clear="true"
@@ -66,7 +60,6 @@
                 @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
-                            <!--begin::Body-->
                             <div class="card-body pb-0">
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="d-flex align-items-center flex-grow-1">
@@ -141,6 +134,9 @@
                                                     data-name="{{ $doctor['patient']['first_name'] }} {{ $doctor['patient']['middle_name'] }} {{ $doctor['patient']['last_name'] }}">Send Prescription</a>
                                             </div>
                                             <div class="menu-item px-3">
+                                                <a href="tel:{{ @$doctor['patient']['phone'] }}" class="menu-link px-3 ">Call Patient</a>
+                                            </div>
+                                            <div class="menu-item px-3">
                                                 <a href="{{ route('doctor.patients.complete',$doctor->id)}}" class="menu-link px-3 ">Mark Completed</a>
                                             </div>
 
@@ -159,13 +155,8 @@
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
                                                 <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Slot</span>
-                                               
-
                                                     <span
                                                         class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->time_slot }}</span>
-
-                                              
-                                                <!--end::Svg Icon-->
                                             </div>
                                         </div>
                                         <div
@@ -201,7 +192,6 @@
                                                         </svg>
                                                     </span>
                                                 @endif
-                                                <!--end::Svg Icon-->
                                             </div>
                                         </div>
                     
@@ -226,10 +216,7 @@
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
                                                 <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact Time</span>
-                                                
                                                 <span class="badge badge-light-info fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', @$doctor->time)->format('h:i A') }}</span>
-                                                
-                                                
                                             </div>
                                         </div>
                                         @endif
@@ -269,12 +256,9 @@
                                                         </svg>
                                                     </span>
                                                 @endif
-                                                <!--end::Svg Icon-->
                                             </div>
                                         </div>
-                                        <!--end::Due-->
-
-                                        <!--begin::Due-->
+                                       
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
@@ -284,37 +268,43 @@
                                                     @if ($doctor->book_type == 'chat')
                                                         <span
                                                             class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
+                                                    @elseif ($doctor->book_type == 'phone')
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Phone Call</span>
                                                     @else
                                                         <span
                                                             class="badge badge-light fw-bolder me-auto px-4 py-3">Video</span>
                                                     @endif
                                                 </span>
-                                                <!--end::Svg Icon-->
                                             </div>
                                         </div>
-                                        <!--end::Due-->
-                                        
 
+                                        @if ($doctor->book_type == 'phone')
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Contact Number</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">{{ @$doctor['patient']['phone'] }}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @endif
+                                     
                                     </div>
                                 </div>
 
-
-
                             </div>
-                            <!--end::Body-->
                         </div>
                     </div>
 
                     <div class="modal fade" id="form{{ $key }}" tabindex="-1" aria-hidden="true">
                       
                         <div class="modal-dialog mw-650px">
-                            <!--begin::Modal content-->
                             <div class="modal-content">
-                                <!--begin::Modal header-->
                                 <div class="modal-header pb-0 border-0 justify-content-end">
-                                    <!--begin::Close-->
                                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
@@ -325,56 +315,33 @@
                                                     rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->
                                     </div>
-                                    <!--end::Close-->
                                 </div>
-                                <!--begin::Modal header-->
-                                <!--begin::Modal body-->
+                               
                                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
-                                    <!--begin::Heading-->
                                     <div class="text-center mb-13">
-                                        <!--begin::Title-->
                                         <h1 class="mb-3">Pre-consultation Form</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Description-->
                                         <div class="text-muted fw-bold fs-5">
                                             {{ @$doctor['patient']['first_name'] }}
                                             {{ @$doctor['patient']['middle_name'] }}
                                             {{ @$doctor['patient']['last_name'] }}
                                         </div>
-                                        <!--end::Description-->
                                     </div>
-                                    <!--end::Heading-->
-                                    <!--begin::Users-->
+                                   
                                     <div class="mb-15">
-                                        <!--begin::List-->
                                         <div class="mh-375px scroll-y me-n7 pe-7">
 
-
-
-
-
-                                            <!--begin::User-->
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                <!--begin::Details-->
                                                 <div class="d-flex align-items-center">
-                                                    <!--begin::Details-->
                                                     <div class="ms-6">
-                                                        <!--begin::Name-->
                                                         <img @if (@$doctor['patient']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor['patient']['picture'] }}" @endif
                                                             alt="" class="w-25" />
 
-
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::Details-->
                                             </div>
-                                            <!--end::User-->
-
-                                            <!--begin::User-->
+                                          
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                 <!--begin::Details-->
@@ -392,21 +359,14 @@
                                                                     {{ $doctor->name }}
                                                                 @endif
                                                             </span></a>
-                                                        <!--end::Name-->
 
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::Details-->
                                             </div>
-                                            <!--begin::User-->
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                <!--begin::Details-->
                                                 <div class="d-flex align-items-center">
-                                                    <!--begin::Details-->
                                                     <div class="ms-6">
-                                                        <!--begin::Name-->
                                                         <a class="d-flex align-items-center fs-5 fw-bolder ">Age:&nbsp;
                                                             &nbsp;
 
@@ -417,22 +377,15 @@
                                                                     {{ $doctor->age }}
                                                                 @endif
                                                             </span></a>
-                                                        <!--end::Name-->
 
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::Details-->
                                             </div>
-                                            <!--end::User-->
-                                            <!--begin::User-->
+                                          
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                <!--begin::Details-->
                                                 <div class="d-flex align-items-center">
-                                                    <!--begin::Details-->
                                                     <div class="ms-6">
-                                                        <!--begin::Name-->
                                                         <a class="d-flex align-items-center fs-5 fw-bolder ">Sex:&nbsp;
                                                             &nbsp;
 
@@ -443,18 +396,12 @@
                                                                     {{ $doctor->sex }}
                                                                 @endif
                                                             </span></a>
-                                                        <!--end::Name-->
-
+                                                      
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
                                                 <!--end::Details-->
                                             </div>
-                                            <!--end::User-->
-
-
-
-                                            <!--begin::User-->
+                                          
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                 <!--begin::Details-->
@@ -476,7 +423,6 @@
                                             </div>
                                             <!--end::User-->
                                             @if ($doctor->temperature != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                     <!--begin::Details-->
@@ -489,14 +435,9 @@
 
                                                                 <span class="text-dark text-hover-primary">
                                                                     {{ $doctor->temperature }}&deg;C</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->pulse != null)
                                                 <!--begin::User-->

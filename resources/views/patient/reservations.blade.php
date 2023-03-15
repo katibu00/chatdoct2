@@ -176,8 +176,10 @@
                                              <span class="svg-icon svg-icon-1 svg-icon-success">
                                                 @if ($doctor->book_type == 'chat')                                             
                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
-                                                 @else
-                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Video</span>
+                                                 @elseif($doctor->book_type == 'video')
+                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Video Chat</span>
+                                                 @elseif($doctor->book_type == 'phone')
+                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Phone Call</span>
                                                 @endif
                                              </span>
                                          </div>
@@ -235,13 +237,14 @@
                                             data-id="{{ $doctor->id }}">Fill Form</a>
                                     </div>
                                     @if ($doctor->book_type == 'chat')
-                                     @if($doctor->time !== null)
-                                        <div class="ml-1" data-bs-toggle="tooltip" title="Open chat with the doctor">
-                                            <a href="{{ route('chats') }}"
-                                                class="btn btn-sm  btn-bg-light btn-active-color-primary">Chat</a>
-                                        </div>
+                                        @if($doctor->time !== null)
+                                            <div class="ml-1" data-bs-toggle="tooltip" title="Open chat with the doctor">
+                                                <a href="{{ route('chats') }}"
+                                                    class="btn btn-sm  btn-bg-light btn-active-color-primary">Chat</a>
+                                            </div>
                                         @endif
-                                    @else
+                                    @endif
+                                    @if ($doctor->book_type == 'video')
                                         <div class="ml-1" data-bs-toggle="tooltip"
                                             title="View and copy the video conference link sent by the doctor">
                                             <a class="btn btn-sm  btn-bg-primary mx-1 btn-active-color-secondary text-white doctor"
@@ -509,8 +512,9 @@
                             <select id="book_type" class="form-select form-select-solid mb-3" data-control="select2"
                                 data-hide-search="true" data-placeholder="Book Type...">
                                 <option></option>
-                                <option value="video">Video</option>
                                 <option value="chat">Chat</option>
+                                <option value="video">Video Chat</option>
+                                <option value="phone">Phone Call</option>
                                
                             </select>
                         </div>
