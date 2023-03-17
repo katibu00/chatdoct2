@@ -365,9 +365,11 @@
                                                  {{$dat}}@if(!$loop->last),@endif
                                                 @endforeach
                                             </div>
-                                            <div class="col-6 mb-2"><i class="icon-chat-2 mx-1"></i>&#x20A6;{{number_format($user->chat_rate,0)}}
+                                            <div class="col-4 mb-2"><i class="icon-chat-2 mx-1"></i>&#x20A6;{{number_format($user->chat_rate,0)}}
                                             </div>
-                                            <div class="col-6"><i class="icon-video1 mx-1"></i>&#x20A6;{{number_format($user->video_rate,0)}}
+                                            <div class="col-4"><i class="icon-video1 mx-1"></i>&#x20A6;{{number_format($user->video_rate,0)}}
+                                            </div>
+                                            <div class="col-4"><i class="icon-phone mx-1"></i>&#x20A6;{{number_format($user->phone_rate,0)}}
                                             </div>
                                             <div class="col-6"><i class="icon-business-time"></i>{{$user->experience}}+
                                             </div>
