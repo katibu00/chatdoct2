@@ -6,12 +6,10 @@
     <div id="kt_content_container" class="container-xxl">
         <div class="row g-5 g-xl-8 mb-5">
             <div class="col-xl-4">
-                <!--begin::List Widget 6-->
                 <div class="card card-xl-stretch mb-5 mb-xl-8">
                     <div class="card-header border-0">
                         <h3 class="card-title fw-bolder text-dark">User Info</h3>
                         <div class="card-toolbar">
-                            <!--begin::Menu-->
                             <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                 <span class="svg-icon svg-icon-2">
@@ -24,9 +22,7 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                             </button>
-                            <!--begin::Menu 3-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                 <div class="menu-item px-3">
                                     <a href="{{ route('wallet')}}" class="menu-link px-3">Add Funds</a>
@@ -71,9 +67,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <!--end::Icon-->
-
-                            <!--begin::Title-->
+                            
                             <div class="flex-grow-1 me-2">
                                 <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Active Bookings</a>
                             </div>
@@ -88,27 +82,22 @@
                                     </svg>
                                 </span>
                             </span>
-                            <!--end::Icon-->
-
-                            <!--begin::Title-->
+                            
                             <div class="flex-grow-1 me-2">
                                 <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Completed Bookings</a>
                             </div>
                             <span class="fw-bolder text-info py-1">-</span>
-                            <!--end::Lable-->
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-xl-4">
-                <!--begin::List Widget 2-->
                 <div class="card card-xl-stretch mb-xl-8">
                     <div class="card-header border-0">
                         <h3 class="card-title fw-bolder text-dark">Recent Bookings</h3>
                         <div class="card-toolbar">
                             <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -121,17 +110,14 @@
                                 </span>
                             </button>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px" data-kt-menu="true">
-                               
                                 <div class="menu-item px-3">
                                     <a href="{{ route('reservations') }}" class="menu-link px-3">Go to Bookings</a>
                                 </div>
-                    
                             </div>
                         </div>
                     </div>
                     <div class="card-body pt-2">
                         @forelse ($recent as $key => $booking)
-                        <!--begin::Item-->
                         <div class="d-flex align-items-center mb-7">
                             <div class="symbol symbol-50px me-5">
                                 <img @if ($booking['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $booking['book']['picture'] }}" @endif class="" alt="" />
@@ -142,7 +128,6 @@
                                     <span class="badge badge-light-info fs-7 fw-bolder">{{$booking->book_type}}</span>
                                     {!! $booking->pre_consultation == 1? '<span class="badge badge-light-success mb-1">form filled</span>' : '<span class="badge badge-light-danger mb-1">Form not filled</span>' !!}
                                     {!! $booking->prescription == 1? '<span class="badge badge-light-success mb-1">Prescribed</span>' : '<span class="badge badge-light-danger mb-1">Not Prescribed</span>' !!}
-
                                 </span>
                             </div>
                         </div>
@@ -151,13 +136,10 @@
                         @endforelse
                     </div>
                 </div>
-                <!--end::List Widget 2-->
             </div>
 
             <div class="col-xl-4">
-                <!--begin::List Widget 1-->
                 <div class="card card-xl-stretch mb-xl-8">
-                    <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="card-label fw-bolder text-dark">Recent Transactions</span>
@@ -174,9 +156,7 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                             </button>
-                            <!--begin::Menu 1-->
                             <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61484c4077f05">
                                 <div class="menu-item px-3">
                                     <a href="{{ route('wallet')}}" class="menu-link px-3">Add Funds</a>
@@ -200,15 +180,11 @@
                                     <span class="badge badge-light fw-bolder my-2">+&#8358;{{ number_format($payment->amount,0) }}</span>
                                 </div>
                             </div>
-                            <!--end::Item--> 
                         @empty
                             <div class="alert alert-warning" role="alert">No recent Transaction.</div>
                         @endforelse
-                       
                     </div>
-                    <!--end::Body-->
                 </div>
-                <!--end::List Widget 1-->
             </div>
         </div>
         <!--end::Row-->

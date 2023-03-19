@@ -144,6 +144,9 @@
                                                     data-name="{{ @$booking['patient']['first_name'] }} {{ @$booking['patient']['middle_name'] }} {{ @$booking['patient']['last_name'] }}">Send Prescription</a>
                                             </div>
                                             <div class="menu-item px-3">
+                                                <a href="tel:{{ @$doctor['patient']['phone'] }}" class="menu-link px-3 ">Call Patient</a>
+                                            </div>
+                                            <div class="menu-item px-3">
                                                 <a href="{{ route('doctor.patients.complete',$booking->id)}}" class="menu-link px-3 ">Mark Completed</a>
                                             </div>
                                             <div class="menu-item px-3">
@@ -290,9 +293,14 @@
                                                     @if ($booking->book_type == 'chat')
                                                         <span
                                                             class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
-                                                    @else
+                                                    @endif
+                                                    @if($booking->book_type == 'video')
                                                         <span
-                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Video</span>
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Video Call</span>
+                                                    @endif
+                                                    @if($booking->book_type == 'phone')
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Phone Call</span>
                                                     @endif
                                                 </span>
                                                 <!--end::Svg Icon-->

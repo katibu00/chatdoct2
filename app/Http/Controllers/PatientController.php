@@ -169,21 +169,47 @@ class PatientController extends Controller
                 'message' => 'No change Made. You are already on this book type.',
             ]);
         };
-        $doctor = User::select('chat_rate', 'video_rate')->where('id', $booking->doctor_id)->first();
-        $change = $doctor->video_rate - $doctor->chat_rate;
-
-        //    $user = User::select('balance')->where('id', auth()->user()->id)->first();
+        $doctor = User::select('chat_rate', 'video_rate','phone_rate')->where('id', $booking->doctor_id)->first();
+        $initial = 0;
+        $topay = 0;
+        if($booking->book_type == 'chat')
+        {
+            $initial = $doctor->chat_rate;
+        }
+        if($booking->book_type == 'video')
+        {
+            $initial = $doctor->video_rate;
+        }
+        if($booking->book_type == 'phone')
+        {
+            $initial = $doctor->phone_rate;
+        }
+        if($request->book_type == 'chat')
+        {
+            $topay = $doctor->chat_rate;
+        }
+        if($request->book_type == 'video')
+        {
+            $topay = $doctor->video_rate;
+        }
+        if($request->book_type == 'phone')
+        {
+            $topay = $doctor->phone_rate;
+        }
+        
         $user = User::find(auth()->user()->id);
 
-        if ($request->book_type == 'chat') {
-            // return 'chat';
-            $user->balance = $user->balance + $change;
-            $user->update();
+        if($user->balance+$initial < $topay)
+        {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Low Balance To perform this operation',
+            ]);
         }
-        if ($request->book_type == 'video') {
-            $user->balance = $user->balance - $change;
-            $user->update();
-        }
+
+        $user->balance -= $topay-$initial;
+        $user->update();
+      
 
         $booking->book_type = $request->book_type;
         $booking->update();

@@ -119,9 +119,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth','admin']], function()
 
 Route::group(['prefix' => 'bookings', 'middleware' => ['auth','admin']], function(){
 
-    Route::get('/booking/index', [App\Http\Controllers\AdminBookingController::class, 'index'])->name('admin.booking.index');
-    Route::get('/booking/delete/{id}', [App\Http\Controllers\AdminBookingController::class, 'delete'])->name('admin.booking.delete');
-    Route::post('/booking/sort', [App\Http\Controllers\AdminBookingController::class, 'sortBookings'])->name('admin.booking.sort');
+    Route::get('/index', [App\Http\Controllers\AdminBookingController::class, 'index'])->name('admin.booking.index');
+    Route::get('/delete/{id}', [App\Http\Controllers\AdminBookingController::class, 'delete'])->name('admin.booking.delete');
+    Route::post('/sort', [App\Http\Controllers\AdminBookingController::class, 'sortBookings'])->name('admin.booking.sort');
 
 });
 
