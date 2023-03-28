@@ -233,4 +233,11 @@ class DoctorController extends Controller
         return redirect()->back();
     }
 
+    
+    public function WalletIndex()
+    {
+        $data['mondays'] = explode(',', Auth::user()->mondays);
+        return view('doctor.wallet', $data);
+    }
+
 }

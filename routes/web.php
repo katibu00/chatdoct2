@@ -165,6 +165,10 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
     Route::post('/link', [App\Http\Controllers\DoctorController::class, 'link'])->name('link');
     Route::post('/prescription', [App\Http\Controllers\DoctorController::class, 'prescription'])->name('prescription');
 
+    Route::get('/wallet', [App\Http\Controllers\DoctorController::class, 'WalletIndex'])->name('doctors.wallet');
+
+
+
 });
 
 //get routes

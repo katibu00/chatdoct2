@@ -264,7 +264,7 @@ $route = Route::current()->getName();
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link {{ ($route=='doctors.wallet')?'active':'' }}" href="{{ route('doctors.wallet') }}">
                         <span class="menu-bullet">
                             <i class="fa fa-wallet"></i>
                         </span>

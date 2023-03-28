@@ -69,7 +69,6 @@ class WalletController extends Controller
             Toastr::success('Payment made Successfully', 'Done');
             return redirect()->route('patient.home');
 
-
         }
     }
 }
