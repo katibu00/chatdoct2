@@ -166,6 +166,7 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
     Route::post('/prescription', [App\Http\Controllers\DoctorController::class, 'prescription'])->name('prescription');
 
     Route::get('/wallet', [App\Http\Controllers\DoctorController::class, 'WalletIndex'])->name('doctors.wallet');
+    Route::post('/withdrawal/request', [App\Http\Controllers\DoctorController::class, 'withdrawalRequest'])->name('doctors.wallet.request');
 
 
 

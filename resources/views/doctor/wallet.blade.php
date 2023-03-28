@@ -34,21 +34,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse($payments as $key => $payment)
                                     <tr>
                                         <td class="ps-0">
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Insurance</a>
+                                            <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $key+1 }}</a>
                                         </td>
                                         <td>
-                                            <span class="text-dark fw-bolder d-block fs-6">BTC Wallet</span>
+                                            <span class="text-dark fw-bolder d-block fs-6">{{ $payment->created_at->diffForHumans() }}</span>
                                         </td>
                                         <td>
-                                            <span class="text-dark fw-bolder d-block fs-6">23 Jan, 22</span>
+                                            <span class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($payment->amount,0) }}</span>
                                         </td>
                                         <td>
-                                            <span class="text-dark fw-bolder d-block fs-6">-0.0024 BTC</span>
+                                            <span class="text-dark fw-bolder d-block fs-6">{{ ucfirst($payment->status) }}</span>
                                         </td>
                                        
                                     </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="4">No Recent Requests</td>
+                                    </tr>
+                                    @endforelse
                                     
                                 </tbody>
                             </table>
@@ -157,13 +163,13 @@
                     </div>
                    
                     <div id="kt_modal_users_search_handler" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="inline">
-                        <form data-kt-search-element="form" class="w-100 position-relative mb-5" autocomplete="off">
-                           
-                            <input type="number" class="form-control form-control-lg form-control-solid px-15" name="search" value="" placeholder="Withdrawal Amount" data-kt-search-element="input" />
+                        <form class="w-100 position-relative mb-5" action="{{ route('doctors.wallet.request') }}" method="post">
+                           @csrf
+                            <input type="number" class="form-control form-control-lg form-control-solid px-15" name="amount" placeholder="Withdrawal Amount" />
                            
                             <div class="modal-footer flex-center">
                                 <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Cancel</button>
-                                <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     <span class="indicator-label">Submit</span>
                                 </button>
                             </div>

@@ -94,7 +94,7 @@
 														</div>
 														<div class="d-flex flex-column">
 															<div class="fw-bolder d-flex align-items-center fs-5">{{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}
-															<span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">&#x20A6;{{$user->balance}}</span></div>
+															<span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">&#x20A6;{{ number_format($user->balance,0) }}</span></div>
 															<a href="#" class="fw-bold text-muted text-hover-primary fs-7">@if($user->role == 'doctor')D{{""}}@elseif($user->role == 'patient')P{{""}}@elseif($user->role == 'pending')X{{""}}@elseif($user->role == 'admin')A{{""}}@endif{{$user->number}}</a>
 														</div>
 													</div>

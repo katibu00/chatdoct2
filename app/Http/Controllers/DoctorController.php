@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
@@ -236,8 +237,32 @@ class DoctorController extends Controller
     
     public function WalletIndex()
     {
-        $data['mondays'] = explode(',', Auth::user()->mondays);
+        $data['payments'] = Payment::where('user_id', auth()->user()->id)->get();
         return view('doctor.wallet', $data);
+    }
+    
+    public function withdrawalRequest(Request $request)
+    {
+        $check = Payment::where('user_id', auth()->user()->id)->where('status','!=','paid')->first();
+        if ($check) {
+            Toastr::error('Wait until Previous Request has been resolved before submitting a new one.', 'Not Allowed');
+            return redirect()->back();
+        }
+
+       if($request->amount > auth()->user()->balance)
+       {
+        Toastr::error('The amount Requested has Exceeded your Available Balance', 'Balance Exceeded');
+        return redirect()->back();
+       }
+       $payment = new Payment();
+       $payment->amount = $request->amount;
+       $payment->user_id = auth()->user()->id;
+       $payment->ref = 'request';
+       $payment->status = 'pending';
+       $payment->save();
+
+       Toastr::success('Your Withdrawal Request has been Submiteed Successfully');
+       return redirect()->back();
     }
 
 }

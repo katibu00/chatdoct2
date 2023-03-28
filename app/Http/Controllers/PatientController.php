@@ -63,6 +63,7 @@ class PatientController extends Controller
         $doctor = User::where('id', $request->doctor_id)->first();
         $chat = $doctor->chat_rate;
         $video = $doctor->video_rate;
+        $phone = $doctor->phone_rate;
 
         $day = strtolower(date('l')) . 's';
         $schedules = explode(',', $doctor->$day);
@@ -103,14 +104,19 @@ class PatientController extends Controller
         $patient = User::findorFail($id);
         if ($request->book_type == 'chat') {
             $patient->balance = $patient->balance - $chat;
+            $doctor->balance += $chat;
         }
         if ($request->book_type == 'video') {
             $patient->balance = $patient->balance - $video;
+            $doctor->balance += $video;
+        }
+        if ($request->book_type == 'phone') {
+            $patient->balance = $patient->balance - $phone;
+            $doctor->balance += $phone;
         }
         $patient->update();
-
+        $doctor->update();
         Toastr::success('Your Booking has been made sucessfully', 'Done');
-
         $data['users'] = User::where('role', 'doctor')->where('status', 1)->get();
         return redirect()->route('reservations');
     }
