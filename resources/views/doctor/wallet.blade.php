@@ -75,54 +75,16 @@
                         <div class="d-flex flex-stack">
                             <div class="d-flex align-items-center me-5">
                                 <div class="me-5">
-                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">Total Earnings</a>
+                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">Available Balance</a>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="d-flex flex-center">
-                                  <span class="fw-bold fs-7 d-block text-start text-gray-400 ps-0">$48.02</span>
+                                  <span class="fw-bold fs-7 d-block text-start text-gray-400 ps-0">&#8358;{{ number_format(auth()->user()->balance,0) }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="separator separator-dashed my-4"></div>
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex align-items-center me-5">
-                                <div class="me-5">
-                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">Total Earnings</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex flex-center">
-                                  <span class="fw-bold fs-7 d-block text-start text-gray-400 ps-0">$48.02</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-4"></div>
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex align-items-center me-5">
-                                <div class="me-5">
-                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">Total Earnings</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex flex-center">
-                                  <span class="fw-bold fs-7 d-block text-start text-gray-400 ps-0">$48.02</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-4"></div>
-                        <div class="d-flex flex-stack">
-                            <div class="d-flex align-items-center me-5">
-                                <div class="me-5">
-                                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">Total Earnings</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex flex-center">
-                                  <span class="fw-bold fs-7 d-block text-start text-gray-400 ps-0">$48.02</span>
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <!--begin::Separator-->
                         <div class="separator separator-dashed my-4"></div>

@@ -97,12 +97,10 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function(){
 
     Route::get('/doctor/application', [App\Http\Controllers\DoctorApplicationController::class, 'index'])->name('doctor.apply');
     Route::post('/doctor/application', [App\Http\Controllers\DoctorApplicationController::class, 'save']);
-
 });
 
 
 Route::group(['prefix' => 'users', 'middleware' => ['auth','admin']], function(){
-
     Route::get('/applications', [App\Http\Controllers\UsersController::class, 'applicationsIndex'])->name('doctors.applications');
     Route::get('/doctors', [App\Http\Controllers\UsersController::class, 'doctorsIndex'])->name('users.doctors.index');
     Route::get('/patients', [App\Http\Controllers\UsersController::class, 'patientsIndex'])->name('users.patients.index');
@@ -118,7 +116,6 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth','admin']], function()
 });
 
 Route::group(['prefix' => 'bookings', 'middleware' => ['auth','admin']], function(){
-
     Route::get('/index', [App\Http\Controllers\AdminBookingController::class, 'index'])->name('admin.booking.index');
     Route::get('/delete/{id}', [App\Http\Controllers\AdminBookingController::class, 'delete'])->name('admin.booking.delete');
     Route::post('/sort', [App\Http\Controllers\AdminBookingController::class, 'sortBookings'])->name('admin.booking.sort');
@@ -167,7 +164,6 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
 
     Route::get('/wallet', [App\Http\Controllers\DoctorController::class, 'WalletIndex'])->name('doctors.wallet');
     Route::post('/withdrawal/request', [App\Http\Controllers\DoctorController::class, 'withdrawalRequest'])->name('doctors.wallet.request');
-
 
 
 });
