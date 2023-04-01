@@ -254,8 +254,7 @@
                                     <div class="mb-1 pe-3 flex-grow-1">
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Today</a>
                                     </div>
-                                    <!--end::Title-->
-                                    <!--begin::Label-->
+                                 
                                     <div class="d-flex align-items-center">
                                         <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format($today_total,0) }}</div>
                                     </div>
@@ -263,37 +262,28 @@
                                 </div>
                                 <!--end::Description-->
                             </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
+                          
                             <div class="d-flex align-items-center mb-6">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
                                         <span class="svg-icon svg-icon-1">
                                             <i class="far fa-dot-circle"></i>
                                         </span>
-                                        <!--end::Svg Icon-->
                                     </span>
                                 </div>
-                                <!--end::Symbol-->
-                                <!--begin::Description-->
+                               
                                 <div class="d-flex align-items-center flex-wrap w-100">
                                     <!--begin::Title-->
                                     <div class="mb-1 pe-3 flex-grow-1">
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">This Month</a>
                                     </div>
-                                    <!--end::Title-->
-                                    <!--begin::Label-->
+                                  
                                     <div class="d-flex align-items-center">
                                         <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format($month_total,0) }}</div>
                                     </div>
-                                    <!--end::Label-->
                                 </div>
-                                <!--end::Description-->
                             </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
                             <div class="d-flex align-items-center mb-6">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
@@ -301,58 +291,40 @@
                                         <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
-                                <!--end::Symbol-->
-                                <!--begin::Description-->
                                 <div class="d-flex align-items-center flex-wrap w-100">
                                     <!--begin::Title-->
                                     <div class="mb-1 pe-3 flex-grow-1">
-                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Total Withdrawals</a>
+                                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Total Earning</a>
                                     </div>
-                                    <!--end::Title-->
-                                    <!--begin::Label-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">-</div>
+                                        <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format(auth()->user()->total_earning,0) }}</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Description-->
                             </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
                             <div class="d-flex align-items-center">
-                                <!--begin::Symbol-->
                                 <div class="symbol symbol-45px w-40px me-5">
                                     <span class="symbol-label bg-lighten">
                                         <i class="far fa-dot-circle"></i>
                                     </span>
                                 </div>
-                                <!--end::Symbol-->
-                                <!--begin::Description-->
                                 <div class="d-flex align-items-center flex-wrap w-100">
                                     <!--begin::Title-->
                                     <div class="mb-1 pe-3 flex-grow-1">
                                         <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-bolder">Balance</a>
                                     </div>
-                                    <!--end::Title-->
-                                    <!--begin::Label-->
                                     <div class="d-flex align-items-center">
                                         <div class="fw-bolder fs-5 text-gray-800 pe-1">&#8358;{{ number_format(auth()->user()->balance )}}</div>
                                     </div>
-                                    <!--end::Label-->
                                 </div>
-                                <!--end::Description-->
                             </div>
-                            <!--end::Item-->
                         </div>
                     </div>
                 </div>
-                <!--end::Mixed Widget 1-->
             </div>
-            <!--end::Col-->
            
-            <!--begin::Col-->
             <div class="col-xl-4">
-                <!--begin::Mixed Widget 1-->
                 <div class="card card-xl-stretch mb-5 mb-xl-8">
                     <!--begin::Body-->
                     <div class="card-body p-0">

@@ -71,7 +71,6 @@
                         </h3>
                     </div>
                     <div class="card-body">
-        
                         <div class="d-flex flex-stack">
                             <div class="d-flex align-items-center me-5">
                                 <div class="me-5">
@@ -84,14 +83,10 @@
                                 </div>
                             </div>
                         </div>
-                       
-
                         <!--begin::Separator-->
                         <div class="separator separator-dashed my-4"></div>
                         <!--end::Separator-->
-                       
                     </div>
-                   
                     <div class="card-footer mx-auto pt-0">
                         <a href="#" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Request New Withdrawal</a>
                     </div>

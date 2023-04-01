@@ -105,14 +105,17 @@ class PatientController extends Controller
         if ($request->book_type == 'chat') {
             $patient->balance = $patient->balance - $chat;
             $doctor->balance += $chat;
+            $doctor->total_earning += $chat;
         }
         if ($request->book_type == 'video') {
             $patient->balance = $patient->balance - $video;
             $doctor->balance += $video;
+            $doctor->total_earning += $video;
         }
         if ($request->book_type == 'phone') {
             $patient->balance = $patient->balance - $phone;
             $doctor->balance += $phone;
+            $doctor->total_earning += $phone;
         }
         $patient->update();
         $doctor->update();
@@ -214,6 +217,7 @@ class PatientController extends Controller
         }
 
         $user->balance -= $topay-$initial;
+        $user->total_earning -= $topay-$initial;
         $user->update();
       
 

@@ -47,6 +47,7 @@ class HomeController extends Controller
        
         $chat_rate = auth()->user()->chat_rate;
         $video_rate = auth()->user()->video_rate;
+        $phone_rate = auth()->user()->phone_rate;
         $data['today_total'] = 0;
         $data['month_total'] = 0;
 
@@ -59,6 +60,9 @@ class HomeController extends Controller
                 if($today->book_type == 'video'){
                     $data['today_total']+=$video_rate;
                 };
+                if($today->book_type == 'phone'){
+                    $data['today_total']+=$phone_rate;
+                };
         };
         $months = Booking::select('book_type')->where('doctor_id',$user_id)->whereMonth('created_at',  Carbon::now()->month)->get();
         foreach($months as $month){
@@ -67,6 +71,9 @@ class HomeController extends Controller
                 };
                 if($month->book_type == 'video'){
                     $data['month_total']+=$video_rate;
+                };
+                if($month->book_type == 'phone'){
+                    $data['month_total']+=$phone_rate;
                 };
         };
        
