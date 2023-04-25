@@ -64,14 +64,14 @@
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <div class="symbol symbol-45px me-5">
-                                            <img @if ($doctor['patient']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['patient']['picture'] }}" @endif
+                                            <img @if ( @$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif
                                                 alt=""  />
                                         </div>
                                         <div class="d-flex flex-column">
                                             <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">
-                                                {{ $doctor['patient']['first_name'] }}
-                                                {{ $doctor['patient']['middle_name'] }}
-                                                {{ $doctor['patient']['last_name'] }}</a>
+                                                {{ @$doctor->patient->first_name }}
+                                                {{  @$doctor->patient->middle_name }}
+                                                {{  @$doctor->patient->last_name }}</a>
                                             <span class="text-gray-400 fw-bold">Booked
                                                 {{ $doctor->created_at->diffForHumans() }}</span>
                                         </div>
@@ -125,16 +125,16 @@
                                                 <a href="#" class="menu-link px-3 appoint_time"
                                                     data-bs-toggle="modal" data-bs-target="#appoint_time"
                                                     data-id="{{ $doctor->id }}"
-                                                    data-name="{{ $doctor['patient']['first_name'] }} {{ $doctor['patient']['middle_name'] }} {{ $doctor['patient']['last_name'] }}">Appoint Time</a>
+                                                    data-name="{{  @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">Appoint Time</a>
                                             </div>
                                             <div class="menu-item px-3">
                                                 <a href="#" class="menu-link px-3 subs"
                                                     data-bs-toggle="modal" data-bs-target="#subscription"
                                                     data-id="{{ $doctor->id }}"
-                                                    data-name="{{ $doctor['patient']['first_name'] }} {{ $doctor['patient']['middle_name'] }} {{ $doctor['patient']['last_name'] }}">Send Prescription</a>
+                                                    data-name="{{  @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">Send Prescription</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a href="tel:{{ @$doctor['patient']['phone'] }}" class="menu-link px-3 ">Call Patient</a>
+                                                <a href="tel:{{ @$doctor->patient->phone }}" class="menu-link px-3 ">Call Patient</a>
                                             </div>
                                             <div class="menu-item px-3">
                                                 <a href="{{ route('doctor.patients.complete',$doctor->id)}}" class="menu-link px-3 ">Mark Completed</a>
@@ -335,7 +335,7 @@
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                 <div class="d-flex align-items-center">
                                                     <div class="ms-6">
-                                                        <img @if (@$doctor['patient']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor['patient']['picture'] }}" @endif
+                                                        <img @if (@$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif
                                                             alt="" class="w-25" />
 
                                                     </div>
@@ -372,7 +372,7 @@
 
                                                             <span class="text-dark text-hover-primary">
                                                                 @if ($doctor->person == 'self')
-                                                                    {{ $doctor['patient']['age'] }}
+                                                                    {{ @$doctor->patient->age }}
                                                                 @else
                                                                     {{ $doctor->age }}
                                                                 @endif
@@ -391,7 +391,7 @@
 
                                                             <span class="text-dark text-hover-primary">
                                                                 @if ($doctor->person == 'self')
-                                                                    {{ $doctor['patient']['sex'] }}
+                                                                    {{ @$doctor->patient->sex }}
                                                                 @else
                                                                     {{ $doctor->sex }}
                                                                 @endif
