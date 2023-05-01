@@ -31,6 +31,20 @@ class DoctorController extends Controller
 
     public function SettingsStore(Request $request)
     {
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
+            'last_name' => 'required|string|max:255',
+            'chat_rate' => 'required|integer',
+            'video_rate' => 'required|integer',
+            'phone_rate' => 'required|integer',
+            'about' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (str_word_count($value) > 30) {
+                    $fail('The '.$attribute.' must not be more than 30 words.');
+                }
+            }],
+        ]);
+
         $user = User::FindorFail(auth()->user()->id);
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;

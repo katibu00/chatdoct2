@@ -127,7 +127,7 @@ class PatientController extends Controller
     public function MyReservations()
     {
 
-        $data['doctors'] = Booking::where('patient_id', Auth::user()->id)->whereIn('status',[0,1])->orderBy('id', 'desc')->get();
+        $data['doctors'] = Booking::where('patient_id', Auth::user()->id)->whereIn('status',[0,1])->orderBy('created_at', 'desc')->get();
         return view('patient.reservations', $data);
     }
 

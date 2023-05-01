@@ -59,6 +59,9 @@
                                        
                                         <div class="col-lg-4 fv-row">
                                             <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{$user->first_name}}" />
+                                            @error('first_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         
                                         <div class="col-lg-4 fv-row">
@@ -67,6 +70,9 @@
                                        
                                         <div class="col-lg-4 fv-row">
                                             <input type="text" name="last_name" class="form-control form-control-lg form-control-solid mb-3" placeholder="Last name" value="{{$user->last_name}}" />
+                                            @error('last_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                        
                                     </div>
@@ -82,6 +88,9 @@
                                 </label>
                                 <div class="col-lg-8 fv-row">
                                     <input type="number" name="chat_rate" class="form-control form-control-lg form-control-solid" placeholder="Chat Rate" value="{{ $user->chat_rate }}" />
+                                    @error('chat_rate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                
                             </div>
@@ -93,6 +102,9 @@
                                 </label>
                                 <div class="col-lg-8 fv-row">
                                     <input type="number" name="video_rate" class="form-control form-control-lg form-control-solid" placeholder="Video Call rate" value="{{ $user->video_rate }}" />
+                                    @error('video_rate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row mb-6">
@@ -102,13 +114,19 @@
                                 </label>
                                 <div class="col-lg-8 fv-row">
                                     <input type="number" name="phone_rate" class="form-control form-control-lg form-control-solid" placeholder="Phone Call rate" value="{{ $user->phone_rate }}" />
+                                    @error('phone_rate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">About</label>
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">About (50 words max)</label>
                                 <div class="col-lg-8 fv-row">
                                  <textarea name="about" class="form-control form-control-lg form-control-solid">{{$user->about}}</textarea>
+                                 @error('about')
+                                 <span class="text-danger">{{ $message }}</span>
+                                 @enderror
                                 </div>
                             </div>
 
@@ -121,6 +139,9 @@
                                 </label>
                                 <div class="col-lg-8 fv-row">
                                     <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="{{$user->phone}}" />
+                                    @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                
                             </div>
@@ -131,6 +152,7 @@
                                
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="age" class="form-control form-control-lg form-control-solid" placeholder="Enter your Age" value="{{$user->age}}" />
+                                    
                                 </div>
                                
                             </div> 
@@ -150,6 +172,9 @@
                                 <label class="col-lg-4 col-form-label required fw-bold fs-6">Address</label>
                                 <div class="col-lg-8 fv-row">
                                  <textarea name="address" class="form-control form-control-lg form-control-solid">{{$user->address}}</textarea>
+                                 @error('address')
+                                 <span class="text-danger">{{ $message }}</span>
+                                 @enderror
                                 </div>
                             </div>
                         </div>
