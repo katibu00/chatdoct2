@@ -70,7 +70,7 @@ $route = Route::current()->getName();
                     </div>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion  {{($route=='withdrawal.index')?'show':''}}">
                     <span class="menu-link">
                         <span class="menu-bullet">
                             <span class="fa fa-money-bill"></span>
@@ -88,7 +88,7 @@ $route = Route::current()->getName();
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="">
+                            <a class="menu-link {{($route=='withdrawal.index')?'active':''}}" href="{{ route('withdrawal.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -108,28 +108,24 @@ $route = Route::current()->getName();
 
                 <div class="menu-item">
                     <a class="menu-link {{($route=='admin.booking.index')?'active':''}}" href="{{route('admin.booking.index')}}">
-                        <span class="menu-icon">
                             <span class="menu-bullet">
                                 <span class="fa fa-calendar"></span>
                             </span>
-                        </span>
                         <span class="menu-title">Bookings</span>
                     </a>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{($route=='preferences.index')?'show':''}}">
                     <span class="menu-link">
-                        <span class="menu-icon">
                             <span class="menu-bullet">
                                 <span class="fa fa-cog"></span>
                             </span>
-                        </span>
                         <span class="menu-title">Settings</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link" href="">
+                            <a class="menu-link {{($route=='preferences.index')?'active':''}}" href="{{ route('preferences.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -142,11 +138,9 @@ $route = Route::current()->getName();
 
                 <div class="menu-item">
                     <a class="menu-link {{($route=='logs.index')?'active':''}}" href="{{route('logs.index')}}">
-                        <span class="menu-icon">
                             <span class="menu-bullet">
                                 <span class="fa fa-list"></span>
                             </span>
-                        </span>
                         <span class="menu-title">Login Logs</span>
                     </a>
                 </div>

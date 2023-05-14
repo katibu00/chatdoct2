@@ -64,7 +64,7 @@ class PatientProfileController extends Controller
 
     return response()->json([
         'status'=>200,
-        'message'=>'rofile has been Updated sucessfully'
+        'message'=>'Profile has been Updated sucessfully'
     ]);
 
     }

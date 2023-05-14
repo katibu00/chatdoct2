@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\User;
+use App\Models\WithdrawalRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,9 @@ class DoctorController extends Controller
             'last_name' => 'required|string|max:255',
             'chat_rate' => 'required|integer',
             'video_rate' => 'required|integer',
+            'account_number' => 'required|integer',
+            'account_name' => 'required|string|max:255',
+            'bank_name' => 'required|string|max:255',
             'phone_rate' => 'required|integer',
             'about' => ['required', 'string', function ($attribute, $value, $fail) {
                 if (str_word_count($value) > 30) {
@@ -57,6 +61,9 @@ class DoctorController extends Controller
         $user->sex = $request->sex;
         $user->address = $request->address;
         $user->about = $request->about;
+        $user->account_name = $request->account_name;
+        $user->bank_name = $request->bank_name;
+        $user->account_number = $request->account_number;
 
         if ($request->file('image') != null) {
 
@@ -251,13 +258,13 @@ class DoctorController extends Controller
     
     public function WalletIndex()
     {
-        $data['payments'] = Payment::where('user_id', auth()->user()->id)->get();
+        $data['payments'] = WithdrawalRequest::where('doctor_id', auth()->user()->id)->get();
         return view('doctor.wallet', $data);
     }
     
     public function withdrawalRequest(Request $request)
     {
-        $check = Payment::where('user_id', auth()->user()->id)->where('status','!=','paid')->first();
+        $check = WithdrawalRequest::where('doctor_id', auth()->user()->id)->where('status','!=','paid')->first();
         if ($check) {
             Toastr::error('Wait until Previous Request has been resolved before submitting a new one.', 'Not Allowed');
             return redirect()->back();
@@ -268,10 +275,9 @@ class DoctorController extends Controller
         Toastr::error('The amount Requested has Exceeded your Available Balance', 'Balance Exceeded');
         return redirect()->back();
        }
-       $payment = new Payment();
+       $payment = new WithdrawalRequest();
        $payment->amount = $request->amount;
-       $payment->user_id = auth()->user()->id;
-       $payment->ref = 'request';
+       $payment->doctor_id = auth()->user()->id;
        $payment->status = 'pending';
        $payment->save();
 

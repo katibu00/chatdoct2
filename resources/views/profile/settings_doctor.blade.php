@@ -148,17 +148,12 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">Age</label>
-                               
-                               
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="age" class="form-control form-control-lg form-control-solid" placeholder="Enter your Age" value="{{$user->age}}" />
-                                    
                                 </div>
-                               
                             </div> 
                        
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">Sex</label>
                                 <div class="col-lg-8 fv-row">
                                     <select name="sex" aria-label="Select Sex" data-control="select2" data-placeholder="Select sex.." class="form-select form-select-solid form-select-lg">
@@ -177,6 +172,58 @@
                                  @enderror
                                 </div>
                             </div>
+
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Account Name</label>
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="account_name" class="form-control form-control-lg form-control-solid" placeholder="Enter your Account Name" value="{{$user->account_name}}" />
+                                    @error('account_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div> 
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Bank</label>
+                                <div class="col-lg-8 fv-row">
+                                    <select name="bank_name" aria-label="Select Bank" data-control="select2" data-placeholder="Select your bank.." class="form-select form-select-solid form-select-lg">
+                                        <option value=""></option>
+                                        <option data-bs-offset="-39600" value="Access Bank" {{$user->bank_name == 'Access Bank'?"Selected":""}}>Access Bank</option>
+                                        <option data-bs-offset="-39600" value="Citibank Nigeria" {{$user->bank_name == 'Citibank Nigeria'?"Selected":""}}>Citibank Nigeria</option>
+                                        <option data-bs-offset="-39600" value="Diamond Bank" {{$user->bank_name == 'Diamond Bank'?"Selected":""}}>Diamond Bank</option>
+                                        <option data-bs-offset="-39600" value="Ecobank Nigeria" {{$user->bank_name == 'Ecobank Nigeria'?"Selected":""}}>Ecobank Nigeria</option>
+                                        <option data-bs-offset="-39600" value="Fidelity Bank" {{$user->bank_name == 'Fidelity Bank'?"Selected":""}}>Fidelity Bank</option>
+                                        <option data-bs-offset="-39600" value="First Bank of Nigeria" {{$user->bank_name == 'First Bank of Nigeria'?"Selected":""}}>First Bank of Nigeria</option>
+                                        <option data-bs-offset="-39600" value="First City Monument Bank (FCMB)" {{$user->bank_name == 'First City Monument Bank (FCMB)'?"Selected":""}}>First City Monument Bank (FCMB)</option>
+                                        <option data-bs-offset="-39600" value="Guaranty Trust Bank" {{$user->bank_name == 'Guaranty Trust Bank'?"Selected":""}}>Guaranty Trust Bank</option>
+                                        <option data-bs-offset="-39600" value="Heritage Bank" {{$user->bank_name == 'Heritage Bank'?"Selected":""}}>Heritage Bank</option>
+                                        <option data-bs-offset="-39600" value="Keystone Bank" {{$user->bank_name == 'Keystone Bank'?"Selected":""}}>Keystone Bank</option>
+                                        <option data-bs-offset="-39600" value="Kuda Microfinance Bank" {{$user->bank_name == 'Kuda Microfinance Bank'?"Selected":""}}>Kuda Microfinance Bank</option>
+                                        <option data-bs-offset="-39600" value="Opay Digital Services" {{$user->bank_name == 'Opay Digital Services'?"Selected":""}}>Opay Digital Services</option>
+                                        <option data-bs-offset="-39600" value="Polaris Bank" {{$user->bank_name == 'Polaris Bank'?"Selected":""}}>Polaris Bank</option>
+                                        <option data-bs-offset="-39600" value="Stanbic IBTC Bank" {{$user->bank_name == 'Stanbic IBTC Bank'?"Selected":""}}>Stanbic IBTC Bank</option>
+                                        <option data-bs-offset="-39600" value="Standard Chartered Bank" {{$user->bank_name == 'Standard Chartered Bank'?"Selected":""}}>Standard Chartered Bank</option>
+                                        <option data-bs-offset="-39600" value="Sterling Bank" {{$user->bank_name == 'Sterling Bank'?"Selected":""}}>Sterling Bank</option>
+                                        <option data-bs-offset="-39600" value="Union Bank of Nigeria" {{$user->bank_name == 'Union Bank of Nigeria'?"Selected":""}}>Union Bank of Nigeria</option>
+                                        <option data-bs-offset="-39600" value="United Bank for Africa (UBA)" {{$user->bank_name == 'United Bank for Africa (UBA)'?"Selected":""}}>United Bank for Africa (UBA)</option>
+                                        <option data-bs-offset="-39600" value="Unity Bank" {{$user->bank_name == 'Unity Bank'?"Selected":""}}>Unity Bank</option>
+                                        <option data-bs-offset="-39600" value="Wema Bank" {{$user->bank_name == 'Wema Bank'?"Selected":""}}>Wema Bank</option>
+                                    </select>
+                                    @error('bank_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                                               
+                                </div>
+                            </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Account Number</label>
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="account_number" class="form-control form-control-lg form-control-solid" placeholder="Enter your Account Number" value="{{$user->account_number}}" />
+                                    @error('account_number')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div> 
+
                         </div>
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                             <button type="submit" class="btn btn-primary">Update Profile</button>

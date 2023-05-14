@@ -73,7 +73,7 @@ Route::post('/password/reset/reset', [ForgotPasswordController::class, 'resetPas
 // Route::post('/change/password', [ChangepasswordController::class, 'change']);
 
 Route::group(['middleware' => ['auth', 'admin']], function(){
-    Route::get('/home', [HomeController::class, 'admin'])->name('admin.home');
+    Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home');
 });
 
 Route::group(['prefix' => 'home', 'middleware' => ['auth']], function(){
@@ -171,3 +171,15 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
 //get routes
 Route::get('/get-data', [App\Http\Controllers\PatientController::class, 'GetData'])->name('get-data');
 Route::get('/logs/index', [LoginController::class, 'logs'])->name('logs.index')->middleware(['auth','admin']);
+
+
+//admin routes
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function(){
+
+    Route::get('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'index'])->name('preferences.index');
+    Route::post('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'store']);
+    Route::get('/withdrawal_requests/index', [App\Http\Controllers\AminWithdrawalRequestController::class, 'index'])->name('withdrawal.index');
+
+    
+
+});
