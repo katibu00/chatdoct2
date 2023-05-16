@@ -179,6 +179,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
     Route::get('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'index'])->name('preferences.index');
     Route::post('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'store']);
     Route::get('/withdrawal_requests/index', [App\Http\Controllers\AminWithdrawalRequestController::class, 'index'])->name('withdrawal.index');
+    Route::post('/withdrawal_requests/approve', [App\Http\Controllers\AminWithdrawalRequestController::class, 'approve'])->name('withdrawal.approve');
+    Route::post('/withdrawal_requests/reject', [App\Http\Controllers\AminWithdrawalRequestController::class, 'reject'])->name('withdrawal.reject');
+
+    Route::get('/deposit_alerts/index', [App\Http\Controllers\DepositAlertController::class, 'index'])->name('deposit_alert.index');
+
 
     
 

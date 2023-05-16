@@ -70,7 +70,7 @@ $route = Route::current()->getName();
                     </div>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion  {{($route=='withdrawal.index')?'show':''}}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion  {{($route=='withdrawal.index')?'show':''}} {{($route=='deposit_alert.index')?'show':''}}">
                     <span class="menu-link">
                         <span class="menu-bullet">
                             <span class="fa fa-money-bill"></span>
@@ -80,7 +80,7 @@ $route = Route::current()->getName();
                     </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link" href="">
+                            <a class="menu-link {{($route=='deposit_alert.index')?'active':''}}" href="{{ route('deposit_alert.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
