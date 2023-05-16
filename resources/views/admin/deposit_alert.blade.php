@@ -36,7 +36,7 @@
                                                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $key + 1 }}</a>
                                                 </td>
                                                 <td>
-                                                    <span class="text-dark fw-bolder d-block fs-6">Dr.
+                                                    <span class="text-dark fw-bolder d-block fs-6">
                                                         {{ @$payment->user->first_name . ' ' . @$payment->user->middle_name . ' ' . @$payment->user->last_name }}</span>
                                                 </td>
                                                

@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             @php
-                                $query = App\models\Preferences::find(1);
+                                $query = App\Models\Preferences::find(1);
                                 $commision = @$query->commission;
                             @endphp
                             <div class="separator separator-dashed my-4"></div>
