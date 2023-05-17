@@ -28,7 +28,7 @@
                                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Commission Charged in percentage"></i>
                                 </label>
                                 <div class="col-lg-8 fv-row">
-                                    <input type="number" name="commission" class="form-control form-control-lg form-control-solid" max="100" placeholder="Commission Charged" value="{{ $preferences->commission }}" />
+                                    <input type="number" name="commission" class="form-control form-control-lg form-control-solid" max="100" placeholder="Commission Charged" value="{{ @$preferences->commission }}" />
                                     @error('chat_rate')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -41,7 +41,7 @@
                                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Put zero if there is no any promotion"></i>
                                 </label>
                                 <div class="col-lg-8 fv-row">
-                                    <input type="number" name="welcome_bonus" class="form-control form-control-lg form-control-solid" placeholder="Welcome Bonus" value="{{ $preferences->welcome_bonus }}" />
+                                    <input type="number" name="welcome_bonus" class="form-control form-control-lg form-control-solid" placeholder="Welcome Bonus" value="{{ @$preferences->welcome_bonus }}" />
                                     @error('chat_rate')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
