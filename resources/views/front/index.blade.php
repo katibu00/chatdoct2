@@ -328,66 +328,69 @@
             </div>
         </div>
 
-        <section id="content clearfix">
-            <div class="content-wrap pb-0">
-                <div class="container clearfix">
-                    <div class="heading-block center border-bottom-0">
-                        <h3>Meet our Team of Specialists<span>.</span></h3>
-                        <span>We make sure that your Life is in Good Hands.</span>
-                    </div>
+        <div id="oc-products" class="owl-carousel products-carousel carousel-widget"
+        data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3"
+        data-items-lg="4">
+    
+        <!-- Doctors loop -->
+        @foreach ($doctors as $user)
+        <div class="oc-item">
+            <div class="product">
+                <!-- Card -->
+                <div class="card shadow-sm">
+                    <a href="{{route('doctors.details',$user->number)}}"> <img  @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif
+                        class="card-img-top" alt="Doctor Image" ></a>
+                    <div class="card-body">
+                        <span
+                            class="badge bg-info text-dark mb-2 fw-normal px-2 py-1">{{$user->rank}}</span>
+                        <a href="{{route('doctors.details',$user->number)}}"><h4 class="mb-2">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</h4></a>
+                        
+                        <div class="row g-0 mb-2 clearfix car-features">
 
-                    <div id="oc-products" class="owl-carousel products-carousel carousel-widget"
-                        data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3"
-                        data-items-lg="4">
-
-
-                        @foreach ($doctors as $user)
-                        <div class="oc-item">
-                            <div class="product">
-                                <!-- Card -->
-                                <div class="card shadow-sm">
-                                    <a href="{{route('doctors.details',$user->number)}}"> <img  @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif
-                                        class="card-img-top" alt="Doctor Image" ></a>
-                                    <div class="card-body">
-                                        <span
-                                            class="badge bg-info text-dark mb-2 fw-normal px-2 py-1">{{$user->rank}}</span>
-                                        <a href="{{route('doctors.details',$user->number)}}"><h4 class="mb-2">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</h4></a>
-                                        
-                                        <div class="row g-0 mb-2 clearfix car-features">
-
-                                            @php
-                                                $datas = $user->languages; 
-                                                $data = explode(',', $datas); 
-                                            @endphp
-                                        
-                                            <div class="col-6 mb-2"><i class="icon-language mx-1"></i>
-                                                @foreach ($data as $dat)
-                                                 {{$dat}}@if(!$loop->last),@endif
-                                                @endforeach
-                                            </div>
-                                            <div class="col-4 mb-2"><i class="icon-chat-2 mx-1"></i>&#x20A6;{{number_format($user->chat_rate,0)}}
-                                            </div>
-                                            <div class="col-4"><i class="icon-video1 mx-1"></i>&#x20A6;{{number_format($user->video_rate,0)}}
-                                            </div>
-                                            <div class="col-4"><i class="icon-phone mx-1"></i>&#x20A6;{{number_format($user->phone_rate,0)}}
-                                            </div>
-                                            <div class="col-6"><i class="icon-business-time"></i>{{$user->experience}}+
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="card-footer d-flex justify-content-between align-items-center bg-white py-3">
-                                        <div></div>
-                                        <a href="{{route('doctors.details',$user->number)}}" class="button button-green rounded-pill m-0">See Profile</a>
-                                    </div>
-                                </div>
+                            @php
+                                $datas = $user->languages; 
+                                $data = explode(',', $datas); 
+                            @endphp
+                        
+                            <div class="col-6 mb-2"><i class="icon-language mx-1"></i>
+                                @foreach ($data as $dat)
+                                 {{$dat}}@if(!$loop->last),@endif
+                                @endforeach
                             </div>
-                        </div>   
-                        @endforeach
+                            <div class="col-4 mb-2"><i class="icon-chat-2 mx-1"></i>&#x20A6;{{number_format($user->chat_rate,0)}}
+                            </div>
+                            <div class="col-4"><i class="icon-video1 mx-1"></i>&#x20A6;{{number_format($user->video_rate,0)}}
+                            </div>
+                            <div class="col-4"><i class="icon-phone mx-1"></i>&#x20A6;{{number_format($user->phone_rate,0)}}
+                            </div>
+                            <div class="col-6"><i class="icon-business-time"></i>{{$user->experience}}+
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="card-footer d-flex justify-content-between align-items-center bg-white py-3">
+                        <div></div>
+                        <a href="{{route('doctors.details',$user->number)}}" class="button button-green rounded-pill m-0">See Profile</a>
                     </div>
                 </div>
             </div>
-        </section><!-- #content end -->
+        </div>   
+        @endforeach
+        <!-- End of Doctors loop -->
+    
+        <!-- Scroll Indicator -->
+        <div class="carousel-indicators">
+            <div class="indicator"></div>
+        </div>
+    
+        <!-- Carousel Navigation Buttons -->
+        <div class="carousel-navigation">
+            <div class="prev"><i class="icon-angle-left"></i></div>
+            <div class="next"><i class="icon-angle-right"></i></div>
+        </div>
+    
+    </div>
+    
 
         <div id="faq_section"></div>
         <div class="section m-0 mb-0 mt-3 parallax" style="padding: 100px 0; background-color:rgb(61,128,228);"
