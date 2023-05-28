@@ -2,532 +2,432 @@
 @section('PageTitle', 'Home')
 @section('content')
 
-@include('front.layouts.slider')
 
-<section id="content">
-    <div class="content-wrap">
+    @include('front.layouts.slider')
 
-        <div class="promo promo-light promo-full bottommargin-lg header-stick border-top-0 p-5">
-            <div class="container clearfix">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg">
-                        <h3>Try Chatdoct <span>Conveniently</span> and experience medical care like no other</h3>
-                        {{-- <span>get discount <em>0 NGN/booking</em> afterwards. No Ads, No Gimmicks and No SPAM. Just
-                            Real Content.</span> --}}
+
+    <section id="departments">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>Consult from Top Specialties</h2>
+                <p>Expert Online Consultations with Leading Doctors in Various Specialties</p>
+            </div>
+            <div class="row">
+
+
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=covid-19') }}">
+                            <div class="card-img">
+                                <img src="/front/images/covid-19.png" alt="Covid-19">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Covid-19 Specialist</h5>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-12 col-lg-auto mt-4 mt-lg-0">
-                        <a href="{{ route('register') }}" class="button button-large button-circle m-0">Sign Up</a>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=general_practitioner') }}">
+                            <div class="card-img">
+                                <img src="/front/images/general.png" alt="General Practitioner">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">General Practitioner</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=internal_medicine') }}">
+                            <div class="card-img">
+                                <img src="/front/images/Gastroenterologists.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Internal Medicine</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=family_medicine') }}">
+                            <div class="card-img">
+                                <img src="/front/images/sexologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Family Medicine</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=paediatrics') }}">
+                            <div class="card-img">
+                                <img src="/front/images/pediatrition.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Paediatrics</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=gynecology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/gynecologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Gynecology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=obstetrics') }}">
+                            <div class="card-img">
+                                <img src="/front/images/gynecologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Obstetrics</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=orthopaedics') }}">
+                            <div class="card-img">
+                                <img src="/front/images/orthopedic.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Orthopaedics</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=urology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/urologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Urology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=psychiatry') }}">
+                            <div class="card-img">
+                                <img src="/front/images/psychiatrist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Psychiatry</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=cardiology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/cardiologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Cardiology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=ophthalmology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/ophthalmologists.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Ophthalmology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=neurology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/neuro.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Neurology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=nephrology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/homeopathy.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Nephrology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=oncology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/diabetologist.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Oncology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=dermatology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/dermatology.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Dermatology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=immunology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/immunology.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Immunology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=radiology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/radiology.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Radiology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=haematology') }}">
+                            <div class="card-img">
+                                <img src="/front/images/haematology.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Haematology</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=general_surgery') }}">
+                            <div class="card-img">
+                                <img src="/front/images/general_surgery.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">General Surgery</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=plastic_surgery') }}">
+                            <div class="card-img">
+                                <img src="/front/images/plastic_surgery.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Plastic Surgery</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=ent') }}">
+                            <div class="card-img">
+                                <img src="/front/images/ent.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">ENT</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
+                    <div class="card">
+                        <a href="{{ route('speciality', 'speciality=maxillofacial_surgery') }}">
+                            <div class="card-img">
+                                <img src="/front/images/maxillofacial_surgery.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Maxillofacial Surgery</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <section id="featured-doctors" style="background-color: #f9f9f9;">
+        <div class="section-heading text-center" style="padding-top: 20px;">
+            <h2>Featured Doctors</h2>
+            <p>Experience Unparalleled Expertise with Our Featured Doctors</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="owl-carousel owl-theme">
+
+                        @foreach ($doctors as $user)
+                        <div class="doctor-card">
+                            <div class="doctor-image">
+                                <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="Doctor Image">
+                            </div>
+                            <div class="doctor-info">
+                                <h3 class="doctor-name">Dr. {{ $user->first_name.' '.$user->middle_name.' '.$user->last_name }} </h3>
+                                <p class="doctor-about">{{ $user->about }}</p>
+                                <ul class="doctor-details">
+                                    <li>
+                                        <i class="fas fa-comments"></i>
+                                        <span class="doctor-price">Chat Price: &#x20A6;{{number_format($user->chat_rate,0)}}</span>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-video"></i>
+                                        <span class="doctor-price">Video Price: &#x20A6;{{number_format($user->video_rate,0)}}</span>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-phone"></i>
+                                        <span class="doctor-price">Phone Call Price: &#x20A6;{{number_format($user->phone_rate,0)}}</span>
+                                    </li>
+                                    @php
+                                        $datas = $user->languages; 
+                                        $data = explode(',', $datas); 
+                                    @endphp
+                                    <li>
+                                        <i class="fas fa-language"></i>
+                                        <span class="doctor-languages">Languages Spoken:  @foreach ($data as $dat)
+                                            {{$dat}}@if(!$loop->last),@endif
+                                           @endforeach</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="cta-buttons">
+                                <a href="doctor_profile_url" class="btn view-profile-btn">View Profile</a>
+                            </div>
+                        </div>
+                        @endforeach
+                       
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
 
 
 
-        <div class="container clearfix">
-            <div class="row justify-content-center mw-lg mx-auto gutter-20">
 
-                <div class="col-md-6 text-center">
-                    <h3 class="h3 fw-bold mb-3">CONSULT ACROSS <span>TOP</span> SPECIALTIES</h3>
-                    <p class="text-larger text-muted">Consult online with top doctors across specialities from the comfort of your room.</p>
-                </div>
 
-                <div class="w-100 mt-4"></div>
-
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=covid-19') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/covid-19.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Covid-19 Specialist</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=general_practitioner') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/general.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>General Practitioner</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=internal_medicine') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/Gastroenterologists.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Internal Medicine</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=family_medicine') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/sexologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Family medicine</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=paediatrics') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/pediatrition.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Paediatrics</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=gynecology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/gynecologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Gynecology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=obstetrics') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/gynecologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Obstetrics</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=orthopaedics') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/orthopedic.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Orthopaedics</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=urology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/urologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Urology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=psychiatry') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/psychiatrist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Psychiatry</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=endocrinology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/Gastroenterologists.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Endocrinology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=cardiology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/cardiologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Cardiology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=ophthalmology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/ophthalmologists.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Ophthalmology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=neurology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/neuro.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Neurology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=nephrology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/homeopathy.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Nephrology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=oncology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/diabetologist.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Oncology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=dermatology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/dermatology.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Dermatology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=immunology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/immunology.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Immunology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=radiology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/radiology.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Radiology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=haematology') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/haematology.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Haematology</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=general_surgery') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/general_surgery.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>General Surgery</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=plastic_surgery') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/plastic_surgery.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Plastic Surgery</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=ent') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/ent.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>ENT</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-6">
-                    <a href="{{ route('speciality','speciality=maxillofacial_surgery') }}">
-                        <div class="feature-box fbox-center fbox-plain px-3 py-3 rounded-3 bg-light border mx-0">
-                            <div class="fbox-icon mb-2">
-                                <img src="/front/images/maxillofacial_surgery.png">
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Maxillofacial Surgery</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
+    <section id="faq-section">
+        <div class="container">
+            <div class="section-heading text-center" style="padding-top: 20px;">
+                <h2>Our Departments</h2>
+                <p>Explore our diverse range of departments</p>
             </div>
-        </div>
-
-        <div id="oc-products" class="owl-carousel products-carousel carousel-widget"
-        data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3"
-        data-items-lg="4">
-    
-        <!-- Doctors loop -->
-        @foreach ($doctors as $user)
-        <div class="oc-item">
-            <div class="product">
-                <!-- Card -->
-                <div class="card shadow-sm">
-                    <a href="{{route('doctors.details',$user->number)}}"> <img  @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif
-                        class="card-img-top" alt="Doctor Image" ></a>
-                    <div class="card-body">
-                        <span
-                            class="badge bg-info text-dark mb-2 fw-normal px-2 py-1">{{$user->rank}}</span>
-                        <a href="{{route('doctors.details',$user->number)}}"><h4 class="mb-2">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</h4></a>
-                        
-                        <div class="row g-0 mb-2 clearfix car-features">
-
-                            @php
-                                $datas = $user->languages; 
-                                $data = explode(',', $datas); 
-                            @endphp
-                        
-                            <div class="col-6 mb-2"><i class="icon-language mx-1"></i>
-                                @foreach ($data as $dat)
-                                 {{$dat}}@if(!$loop->last),@endif
-                                @endforeach
-                            </div>
-                            <div class="col-4 mb-2"><i class="icon-chat-2 mx-1"></i>&#x20A6;{{number_format($user->chat_rate,0)}}
-                            </div>
-                            <div class="col-4"><i class="icon-video1 mx-1"></i>&#x20A6;{{number_format($user->video_rate,0)}}
-                            </div>
-                            <div class="col-4"><i class="icon-phone mx-1"></i>&#x20A6;{{number_format($user->phone_rate,0)}}
-                            </div>
-                            <div class="col-6"><i class="icon-business-time"></i>{{$user->experience}}+
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="card-footer d-flex justify-content-between align-items-center bg-white py-3">
-                        <div></div>
-                        <a href="{{route('doctors.details',$user->number)}}" class="button button-green rounded-pill m-0">See Profile</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
-            </div>
-        </div>   
-        @endforeach
-        <!-- End of Doctors loop -->
-    
-        <!-- Scroll Indicator -->
-        <div class="carousel-indicators">
-            <div class="indicator"></div>
-        </div>
-    
-        <!-- Carousel Navigation Buttons -->
-        <div class="carousel-navigation">
-            <div class="prev"><i class="icon-angle-left"></i></div>
-            <div class="next"><i class="icon-angle-right"></i></div>
-        </div>
-    
-    </div>
-    
-
-        <div id="faq_section"></div>
-        <div class="section m-0 mb-0 mt-3 parallax" style="padding: 100px 0; background-color:rgb(61,128,228);"
-            data-0-top="background-color:rgb(61,128,228);" data-center-bottom="background-color:rgb(0,0,0);">
-            <div class="container">
-                <div class="row justify-content-center dark topmargin">
-                   
-                    <div class="col-md-7">
-                        <h2 class="text-center text-white mb-5 mt-4 fw-semibold">Frequently Asked Questions
-                        </h2>
-                        <div class="toggle-wrap">
-                           
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        What is Chatdoc?
-                                    </div>
-                                </div>
-                                <div class="toggle-content"> Chatdoc is a telemedicine platform that connects patients with qualified medical doctors through chat, phone call, and video call. Patients can also have their vital signs checked at a triage center and the data can be transmitted directly to the doctor for better diagnosis and care.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        Is Chatdoc a substitute for in-person doctor visits?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">While Chatdoc can provide convenient and efficient medical consultations, it is not meant to replace in-person visits completely. In certain cases, your doctor may advise an in-person visit for a physical examination.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        Is Chatdoc secure and private?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Yes, Chatdoc takes patient privacy and security very seriously. All medical consultations and transmissions of data are encrypted and secure to protect patient information.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        How do I book a doctor appointment through Chatdoc?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Patients can book doctor appointments through the Chatdoc website or mobile app by selecting their preferred doctor and filling out the pre-consultation form.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        What types of payment does Chatdoc accept?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Chatdoc accepts a variety of payment methods, including credit cards and digital wallets, through its secure payment portal.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        Can I have a video call or phone call with a doctor through Chatdoc?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Yes, in addition to chat, Chatdoc also offers video call and phone call consultations with medical doctors.</div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        Is there a fee for using Chatdoc's services?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Yes, there is a fee for medical consultations through Chatdoc. The fee varies based on the type of consultation and the doctor selected.
-                                </div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        Are the medical doctors on Chatdoc licensed and qualified? 
-                                    </div>
-                                </div>
-                                <div class="toggle-content">Yes, all medical doctors on Chatdoc are licensed and qualified to provide medical care. Chatdoc carefully screens and verifies the credentials of all its doctors to ensure patient safety.
-                                </div>
-                            </div>
-                            <div class="toggle">
-                                <div class="toggle-header">
-                                    <div class="toggle-icon">
-                                        <i class="toggle-closed icon-angle-right1"></i>
-                                        <i class="toggle-open icon-angle-down1"></i>
-                                    </div>
-                                    <div class="toggle-title">
-                                        What types of medical doctors can I consult through Chatdoc?
-                                    </div>
-                                </div>
-                                <div class="toggle-content">You can consult with a variety of medical doctors including general practitioners, specialists, and others, based on your medical needs.
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <h5 class="mt-4 text-center fw-normal text-white-50 mb-0">Didn't find what you were
-                            after? <a href="#" class="text-white"><u>Visit the FAQ Page</u></a></h5>
+                <div class="col-md-6 faq-content">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Question 1?</h3>
+                        <p class="faq-answer">Answer 1</p>
                     </div>
-                    <div class="col-md-4">
-                        <h2 class="text-center text-white mb-5 mt-4 fw-semibold">How It Works
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/akgq7hK2mgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Question 2?</h3>
+                        <p class="faq-answer">Answer 2</p>
                     </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Question 3?</h3>
+                        <p class="faq-answer">Answer 3</p>
+                    </div>
+                    <!-- Add more FAQ items as needed -->
                 </div>
             </div>
         </div>
+    </section>
 
-    </div>
-</section><!-- #content end -->
+
+
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">OUR SERVICES</h2>
+            <div class="services-wrapper">
+                <div class="service">
+                    <i class="fas fa-video service-icon"></i>
+                    <h3 class="service-title">TELEMEDICINE</h3>
+                    <p class="service-description">Speak with a medical doctor through video call, chat, and phone
+                        from the comfort of your home.</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-heartbeat service-icon"></i>
+                    <h5 class="service-title">VITAL SIGNS</h5>
+                    <p class="service-description">Visit our patients' triage centre and get free vital signs check
+                        such as blood pressure, weight, and more.</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-flask service-icon"></i>
+                    <h3 class="service-title">LAB SERVICES</h3>
+                    <p class="service-description">Get screening tests for malaria, hepatitis, HIV, blood sugar,
+                        and more.</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-home service-icon"></i>
+                    <h3 class="service-title">HOME VISIT</h3>
+                    <p class="service-description">Request for a physical doctor consultation from the comfort of
+                        your home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 @endsection

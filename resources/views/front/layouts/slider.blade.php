@@ -1,47 +1,32 @@
-<section id="slider" class="slider-element swiper_wrapper" data-autoplay="4500" data-speed="800" data-loop="true"
-    data-grab="true" data-effect="fade" data-arrow="false" style="height: 400px;">
-    <div class="swiper-container swiper-parent">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide dark">
-                <div class="container">
-                    {{-- <div class="slider-caption slider-caption-center">
-                        <div>
-                            <div class="h5 mb-2 font-secondary">Fresh Arrivals</div>
-                            <h2 class="bottommargin-sm text-white">Winter / 2021</h2>
-                            <a href="#" class="button bg-white text-dark button-light">Shop Menswear</a>
-                        </div>
-                    </div> --}}
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="front_new/images/hero-bg-4.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption">
+                        <h2>Expert Care, Anywhere</h2>
+                        <p>Connect with Qualified Doctors Anytime, Anywhere</p>
+                        <a class="btn btn-primary" href="{{ route('login') }}">Join Now</a>
+                    </div>
                 </div>
-                <div class="swiper-slide-bg" style="background-image: url('/front/banner1.jpg');"></div>
-            </div>
-            <div class="swiper-slide dark">
-                <div class="container">
-                    {{-- <div class="slider-caption slider-caption-center">
-                        <div>
-                            <div class="h5 mb-2 font-secondary">Summer Collections</div>
-                            <h2 class="bottommargin-sm text-white">Sale 40% Off</h2>
-                            <a href="#" class="button bg-white text-dark button-light">Shop Beachwear</a>
-                        </div>
-                    </div> --}}
+                <div class="carousel-item">
+                    <img src="front_new/images/hero-bg-2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption">
+                        <h2>Expert Care on Demand</h2>
+                        <p>Access Top Doctors Anytime, Anywhere</p>
+                        <a class="btn btn-primary" href="{{ route('login') }}">Book Now</a>
+                    </div>
                 </div>
-                <div class="swiper-slide-bg"
-                    style="background-image: url('/front/banner2.jpg'); background-position: center 20%;">
-                </div>
-            </div>
-            <div class="swiper-slide dark">
-                <div class="container">
-                    {{-- <div class="slider-caption slider-caption-center">
-                        <div>
-                            <h2 class="bottommargin-sm text-white">New Arrivals / 18</h2>
-                            <a href="#" class="button bg-white text-dark button-light">Shop Womenswear</a>
-                        </div>
-                    </div> --}}
-                </div>
-                <div class="swiper-slide-bg"
-                    style="background-image: url('/front/banner3.jpg'); background-position: center 40%;">
+                <div class="carousel-item">
+                    <img src="front_new/images/hero-bg-3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption">
+                        <h2>Your Health, Our Priority</h2>
+                        <p>Discover Personalized Online Medical Consultations</p>
+                        <a class="btn btn-primary" href="{{ route('login') }}">Register Now</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="swiper-pagination"></div>
-    </div>
-</section>
+    </section>
