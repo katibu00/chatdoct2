@@ -2,9 +2,7 @@
 @section('PageTitle', 'Home')
 @section('content')
 
-
     @include('front.layouts.slider')
-
 
     <section id="departments">
         <div class="container">
@@ -13,7 +11,6 @@
                 <p>Expert Online Consultations with Leading Doctors in Various Specialties</p>
             </div>
             <div class="row">
-
 
                 <div class="col-lg-2 col-md-4 col-sm-6 mb-2">
                     <div class="card">
@@ -293,11 +290,6 @@
                     </div>
                 </div>
 
-
-
-
-
-
             </div>
         </div>
     </section>
@@ -313,45 +305,52 @@
                     <div class="owl-carousel owl-theme">
 
                         @foreach ($doctors as $user)
-    <div class="doctor-card">
-        <div class="doctor-image" style="height: 200px; overflow: hidden;">
-            <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="Doctor Image" style="object-fit: cover; width: 100%; height: 100%;">
-        </div>
-        <div class="doctor-info">
-            <h3 class="doctor-name">Dr. {{ $user->first_name.' '.$user->middle_name.' '.$user->last_name }} </h3>
-            <p class="doctor-about">{{ $user->about }}</p>
-            <ul class="doctor-details">
-                <li>
-                    <i class="fas fa-comments"></i>
-                    <span class="doctor-price">Chat Price: &#x20A6;{{number_format($user->chat_rate,0)}}</span>
-                </li>
-                <li>
-                    <i class="fas fa-video"></i>
-                    <span class="doctor-price">Video Price: &#x20A6;{{number_format($user->video_rate,0)}}</span>
-                </li>
-                <li>
-                    <i class="fas fa-phone"></i>
-                    <span class="doctor-price">Phone Call Price: &#x20A6;{{number_format($user->phone_rate,0)}}</span>
-                </li>
-                @php
-                    $datas = $user->languages; 
-                    $data = explode(',', $datas); 
-                @endphp
-                <li>
-                    <i class="fas fa-language"></i>
-                    <span class="doctor-languages">Languages Spoken:  @foreach ($data as $dat)
-                        {{$dat}}@if(!$loop->last),@endif
-                       @endforeach</span>
-                </li>
-            </ul>
-        </div>
-        <div class="cta-buttons">
-            <a href="doctor_profile_url" class="btn view-profile-btn">View Profile</a>
-        </div>
-    </div>
-@endforeach
-
-                       
+                            <div class="doctor-card">
+                                <div class="doctor-image" style="height: 200px; overflow: hidden;">
+                                    <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
+                                        alt="Doctor Image" style="object-fit: cover; width: 100%; height: 100%;">
+                                </div>
+                                <div class="doctor-info">
+                                    <h5 class="doctor-name">Dr.
+                                        {{ $user->first_name . ' ' . $user->middle_name . ' ' . $user->last_name }} </h5>
+                                    <p class="doctor-about">
+                                        {{ Illuminate\Support\Str::limit($user->about, 60, $end = '...') }}</p>
+                                    <ul class="doctor-details">
+                                        <li>
+                                            <i class="fas fa-comments"></i>
+                                            <span class="doctor-price">Chat Price:
+                                                &#x20A6;{{ number_format($user->chat_rate, 0) }}</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-video"></i>
+                                            <span class="doctor-price">Video Price:
+                                                &#x20A6;{{ number_format($user->video_rate, 0) }}</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-phone"></i>
+                                            <span class="doctor-price">Phone Call Price:
+                                                &#x20A6;{{ number_format($user->phone_rate, 0) }}</span>
+                                        </li>
+                                        @php
+                                            $datas = $user->languages;
+                                            $data = explode(',', $datas);
+                                        @endphp
+                                        <li>
+                                            <i class="fas fa-language"></i>
+                                            <span class="doctor-languages">Languages Spoken: @foreach ($data as $dat)
+                                                    {{ $dat }}@if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="cta-buttons">
+                                    <a href="{{route('doctors.details',$user->number)}}" class="btn view-profile-btn">See Details</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -359,38 +358,66 @@
     </section>
 
 
-
-
-
-
     <section id="faq-section">
         <div class="container">
             <div class="section-heading text-center" style="padding-top: 20px;">
-                <h2>Our Departments</h2>
-                <p>Explore our diverse range of departments</p>
+                <h2>Frequently Asked Questions (FAQ)</h2>
+                <p>Find answers to commonly asked questions</p>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0"
+                        <iframe src="https://www.youtube.com/embed/akgq7hK2mgE" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-md-6 faq-content">
                     <h2>Frequently Asked Questions</h2>
                     <div class="faq-item">
-                        <h3 class="faq-question">Question 1?</h3>
-                        <p class="faq-answer">Answer 1</p>
+                        <h3 class="faq-question">What is Chatdoc?</h3>
+                        <p class="faq-answer">Chatdoc is a telemedicine platform that connects patients with qualified medical doctors through chat, phone call, and video call. Patients can also have their vital signs checked at a triage center and the data can be transmitted directly to the doctor for better diagnosis and care.
+                        </p>
                     </div>
                     <div class="faq-item">
-                        <h3 class="faq-question">Question 2?</h3>
-                        <p class="faq-answer">Answer 2</p>
+                        <h3 class="faq-question">Is Chatdoc a substitute for in-person doctor visits?</h3>
+                        <p class="faq-answer">While Chatdoc can provide convenient and efficient medical consultations, it is not meant to replace in-person visits completely. In certain cases, your doctor may advise an in-person visit for a physical examination.
+                        </p>
                     </div>
                     <div class="faq-item">
-                        <h3 class="faq-question">Question 3?</h3>
-                        <p class="faq-answer">Answer 3</p>
+                        <h3 class="faq-question">Is Chatdoc secure and private?</h3>
+                        <p class="faq-answer">Yes, Chatdoc takes patient privacy and security very seriously. All medical consultations and transmissions of data are encrypted and secure to protect patient information.
+                        </p>
                     </div>
-                    <!-- Add more FAQ items as needed -->
+                    <div class="faq-item">
+                        <h3 class="faq-question">How do I book a doctor appointment through Chatdoc?</h3>
+                        <p class="faq-answer">Patients can book doctor appointments through the Chatdoc website or mobile app by selecting their preferred doctor and filling out the pre-consultation form.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What types of payment does Chatdoc accept?</h3>
+                        <p class="faq-answer">Chatdoc accepts a variety of payment methods, including credit cards and digital wallets, through its secure payment portal.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I have a video call or phone call with a doctor through Chatdoc?</h3>
+                        <p class="faq-answer">Yes, in addition to chat, Chatdoc also offers video call and phone call consultations with medical doctors. </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is there a fee for using Chatdoc's services?</h3>
+                        <p class="faq-answer">Yes, there is a fee for medical consultations through Chatdoc. The fee varies based on the type of consultation and the doctor selected.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Are the medical doctors on Chatdoc licensed and qualified?</h3>
+                        <p class="faq-answer">Yes, all medical doctors on Chatdoc are licensed and qualified to provide medical care. Chatdoc carefully screens and verifies the credentials of all its doctors to ensure patient safety.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What types of medical doctors can I consult through Chatdoc?</h3>
+                        <p class="faq-answer">You can consult with a variety of medical doctors including general practitioners, specialists, and others, based on your medical needs.
+                        </p>
+                    </div>
+                    
                 </div>
             </div>
         </div>
