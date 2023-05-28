@@ -313,43 +313,44 @@
                     <div class="owl-carousel owl-theme">
 
                         @foreach ($doctors as $user)
-                        <div class="doctor-card">
-                            <div class="doctor-image">
-                                <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="Doctor Image">
-                            </div>
-                            <div class="doctor-info">
-                                <h3 class="doctor-name">Dr. {{ $user->first_name.' '.$user->middle_name.' '.$user->last_name }} </h3>
-                                <p class="doctor-about">{{ $user->about }}</p>
-                                <ul class="doctor-details">
-                                    <li>
-                                        <i class="fas fa-comments"></i>
-                                        <span class="doctor-price">Chat Price: &#x20A6;{{number_format($user->chat_rate,0)}}</span>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-video"></i>
-                                        <span class="doctor-price">Video Price: &#x20A6;{{number_format($user->video_rate,0)}}</span>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-phone"></i>
-                                        <span class="doctor-price">Phone Call Price: &#x20A6;{{number_format($user->phone_rate,0)}}</span>
-                                    </li>
-                                    @php
-                                        $datas = $user->languages; 
-                                        $data = explode(',', $datas); 
-                                    @endphp
-                                    <li>
-                                        <i class="fas fa-language"></i>
-                                        <span class="doctor-languages">Languages Spoken:  @foreach ($data as $dat)
-                                            {{$dat}}@if(!$loop->last),@endif
-                                           @endforeach</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="cta-buttons">
-                                <a href="doctor_profile_url" class="btn view-profile-btn">View Profile</a>
-                            </div>
-                        </div>
-                        @endforeach
+    <div class="doctor-card">
+        <div class="doctor-image" style="height: 200px; overflow: hidden;">
+            <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="Doctor Image" style="object-fit: cover; width: 100%; height: 100%;">
+        </div>
+        <div class="doctor-info">
+            <h3 class="doctor-name">Dr. {{ $user->first_name.' '.$user->middle_name.' '.$user->last_name }} </h3>
+            <p class="doctor-about">{{ $user->about }}</p>
+            <ul class="doctor-details">
+                <li>
+                    <i class="fas fa-comments"></i>
+                    <span class="doctor-price">Chat Price: &#x20A6;{{number_format($user->chat_rate,0)}}</span>
+                </li>
+                <li>
+                    <i class="fas fa-video"></i>
+                    <span class="doctor-price">Video Price: &#x20A6;{{number_format($user->video_rate,0)}}</span>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <span class="doctor-price">Phone Call Price: &#x20A6;{{number_format($user->phone_rate,0)}}</span>
+                </li>
+                @php
+                    $datas = $user->languages; 
+                    $data = explode(',', $datas); 
+                @endphp
+                <li>
+                    <i class="fas fa-language"></i>
+                    <span class="doctor-languages">Languages Spoken:  @foreach ($data as $dat)
+                        {{$dat}}@if(!$loop->last),@endif
+                       @endforeach</span>
+                </li>
+            </ul>
+        </div>
+        <div class="cta-buttons">
+            <a href="doctor_profile_url" class="btn view-profile-btn">View Profile</a>
+        </div>
+    </div>
+@endforeach
+
                        
                     </div>
                 </div>
