@@ -884,3 +884,13 @@ header {
 .newsletter-form button:hover {
   background-color: #ffbc53;
 }
+.doctor-image {
+  height: 200px; /* Adjust the height to your desired value */
+  overflow: hidden;
+}
+
+.doctor-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
