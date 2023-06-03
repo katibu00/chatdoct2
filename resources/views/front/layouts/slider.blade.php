@@ -4,7 +4,7 @@
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="front_new/images/hero-bg-4.jpg" class="d-block w-100" alt="...">
+                    <img src="front_new/Banner01.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                         <h2>Expert Care, Anywhere</h2>
                         <p>Connect with Qualified Doctors Anytime, Anywhere</p>
@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="front_new/images/hero-bg-2.jpg" class="d-block w-100" alt="...">
+                    <img src="front_new/Banner02.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                         <h2>Expert Care on Demand</h2>
                         <p>Access Top Doctors Anytime, Anywhere</p>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="front_new/images/hero-bg-3.jpg" class="d-block w-100" alt="...">
+                    <img src="front_new/Banner03.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
                         <h2>Your Health, Our Priority</h2>
                         <p>Discover Personalized Online Medical Consultations</p>

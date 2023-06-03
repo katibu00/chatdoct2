@@ -18,6 +18,9 @@ class PagesController extends Controller
     public function contact(){
         return view('front.contact');
     }
+    public function services(){
+        return view('front.services');
+    }
 
     public function speciality(){
 

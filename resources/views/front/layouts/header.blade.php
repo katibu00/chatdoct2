@@ -2,7 +2,7 @@
  <header>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{ route('homepage') }}">
           <img src="/uploads/logo.png" alt="Chatdoc Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -14,21 +14,21 @@
             <li class="nav-item">
               <a class="nav-link active" href="#about">Home</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="#services">Departments</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
-              <a class="nav-link" href="#doctors">Services</a>
+              <a class="nav-link" href="{{ route('services') }}">Services</a>
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="#faq">FAQ</a>
+              <a class="nav-link" href="{{ route('about') }}">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact Us</a>
+              <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
             </li>
           </ul>
-          <a class="btn btn-primary" href="#book-appointment">Login/Register</a>
+          <a class="btn btn-primary" href="{{ route('login') }}">Login</a>
         </div>
       </nav>
     </div>

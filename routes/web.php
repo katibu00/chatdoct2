@@ -44,6 +44,7 @@ Route::get('/', function () {
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
 Route::get('/featured-doctors', [PagesController::class, 'doctors'])->name('doctors');
 Route::get('/contact-us', [PagesController::class, 'contact'])->name('contact');
+Route::get('/our-services', [PagesController::class, 'services'])->name('services');
 
 Route::get('/speciality', [PagesController::class, 'speciality'])->name('speciality');
 
