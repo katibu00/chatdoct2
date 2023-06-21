@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\User;
+use App\Notifications\BookingNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,7 @@ class HomeController extends Controller
         $data['users'] = User::where('role','doctor')->where('status',1)->where('featured',1)->get();
         $data['user'] = User::where('id',Auth::user()->id)->first();
         $data['payments'] = Payment::where('user_id',$user_id)->latest()->get()->take(4);
+
         return view('patient',$data);
     }
 }

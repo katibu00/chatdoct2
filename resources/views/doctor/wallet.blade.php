@@ -44,8 +44,9 @@
                                                         class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($payment->amount, 0) }}</span>
                                                 </td>
                                                 <td>
-                                                    <span
-                                                        class="text-dark fw-bolder d-block fs-6">{{ ucfirst($payment->status) }}</span>
+                                                    <span class="badge @if($payment->status === 'pending') badge-warning @elseif($payment->status === 'approved') badge-success @elseif($payment->status === 'rejected') badge-danger @endif">
+                                                        {{ ucfirst($payment->status) }}
+                                                    </span>
                                                 </td>
                                             </tr>
                                         @empty

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\WithdrawalRequest;
+use App\Notifications\DoctorApproveWithdrawalNotification;
+use App\Notifications\DoctorRejectWithdrawalNotification;
 use Illuminate\Http\Request;
 
 class AminWithdrawalRequestController extends Controller
@@ -17,6 +20,10 @@ class AminWithdrawalRequestController extends Controller
         $data = WithdrawalRequest::find($request->id);
         $data->status = 'approved';
         if($data->update()){
+
+            $doctor = User::find($data->doctor_id);
+            $doctor->notify(new DoctorApproveWithdrawalNotification($data));
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Application is Approved Successfully'
@@ -27,6 +34,10 @@ class AminWithdrawalRequestController extends Controller
         $data = WithdrawalRequest::find($request->id);
         $data->status = 'rejected';
         if($data->update()){
+
+            $doctor = User::find($data->doctor_id);
+            $doctor->notify(new DoctorRejectWithdrawalNotification($data));
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Application is Rejected Successfully'

@@ -7,6 +7,10 @@ use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\User;
 use App\Models\WithdrawalRequest;
+use App\Notifications\AdminWithdrawalRequestNotification;
+use App\Notifications\PatientCompletionNotification;
+use App\Notifications\PatientPrescriptionNotification;
+use App\Notifications\PatientTimeNotification;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -184,6 +188,8 @@ class DoctorController extends Controller
        if($booking){
         $booking->status = 2;
         $booking->update();
+        $patient = User::find($booking->patient_id);
+        $patient->notify(new PatientCompletionNotification($booking));
 
         Toastr::success('Booking Marked Completed Successfully.', 'Done');
         return redirect()->route('doctor.patients');
@@ -205,6 +211,10 @@ class DoctorController extends Controller
             $booking->status = 1;
             $booking->time = $request->time;
             $booking->update();
+
+            $patient = User::find($booking->patient_id);
+            $time = $request->time;
+            $patient->notify(new PatientTimeNotification($booking, $time));
             Toastr::success('Time Appointed Successfully.', 'Done');
             return redirect()->route('doctor.patients');
         }
@@ -251,7 +261,11 @@ class DoctorController extends Controller
         $book->prescription = 1;
         $book->update();
 
-        Toastr::success('Prescriptiuon Sent sucessfully', 'Done');
+        $patient = User::find($book->patient_id);
+        $patient->notify(new PatientPrescriptionNotification($book));
+
+
+        Toastr::success('Prescription Sent sucessfully', 'Done');
         return redirect()->back();
     }
 
@@ -264,8 +278,10 @@ class DoctorController extends Controller
     
     public function withdrawalRequest(Request $request)
     {
-        $check = WithdrawalRequest::where('doctor_id', auth()->user()->id)->where('status','!=','paid')->first();
-        if ($check) {
+        $check = WithdrawalRequest::where('doctor_id', auth()->user()->id)
+                                    ->whereNotIn('status', ['approved', 'rejected'])
+                                    ->first();
+            if ($check) {
             Toastr::error('Wait until Previous Request has been resolved before submitting a new one.', 'Not Allowed');
             return redirect()->back();
         }
@@ -280,6 +296,14 @@ class DoctorController extends Controller
        $payment->doctor_id = auth()->user()->id;
        $payment->status = 'pending';
        $payment->save();
+
+       $admins = User::where('role','admin')->get();
+       $doctor = User::select('first_name','last_name','middle_name')->where('id', auth()->user()->id)->first();
+
+       foreach($admins as $admin)
+       {
+            $admin->notify(new AdminWithdrawalRequestNotification($doctor));
+       }
 
        Toastr::success('Your Withdrawal Request has been Submiteed Successfully');
        return redirect()->back();

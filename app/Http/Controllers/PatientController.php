@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Prescription;
 use App\Models\User;
+use App\Notifications\BookingNotification;
+use App\Notifications\DoctorBookingNotification;
+use App\Notifications\DoctorCancellationNotification;
+use App\Notifications\PatientBookingNotification;
 use Barryvdh\DomPDF\Facade as PDF;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -119,6 +123,9 @@ class PatientController extends Controller
         }
         $patient->update();
         $doctor->update();
+        $patient->notify(new PatientBookingNotification($book));
+        $doctor->notify(new DoctorBookingNotification($book));
+
         Toastr::success('Your Booking has been made sucessfully', 'Done');
         $data['users'] = User::where('role', 'doctor')->where('status', 1)->get();
         return redirect()->route('reservations');
@@ -268,7 +275,7 @@ class PatientController extends Controller
                 'message' => 'Time period in which you can cancel booking has been elapsed.',
             ]);
         };
-        $doctor = User::select('chat_rate', 'video_rate')->where('id', $booking->doctor_id)->first();
+        $doctor = User::select('chat_rate', 'video_rate','id')->where('id', $booking->doctor_id)->first();
 
         if ($booking->book_type == 'video') {
             $user = User::find(auth()->user()->id);
@@ -280,6 +287,8 @@ class PatientController extends Controller
             $user->balance = $user->balance + $doctor->chat_rate;
             $user->update();
         }
+        $doctor->notify(new DoctorCancellationNotification($booking));
+
         $booking->delete();
 
         return response()->json([
