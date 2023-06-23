@@ -22,6 +22,8 @@ class AminWithdrawalRequestController extends Controller
         if($data->update()){
 
             $doctor = User::find($data->doctor_id);
+            $doctor->total_earning -= $data->amount;
+            $doctor->update();
             $doctor->notify(new DoctorApproveWithdrawalNotification($data));
 
             return response()->json([
