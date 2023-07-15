@@ -17,6 +17,10 @@ class CreatePreferencesTable extends Migration
             $table->id();
             $table->integer('commission');
             $table->integer('welcome_bonus');
+            $table->boolean('sms_doctor_booked')->default(false);
+            $table->boolean('sms_patient_appointed')->default(false);
+            $table->boolean('sms_patient_completed')->default(false);
+            $table->boolean('sms_doctor_credited')->default(false);
             $table->timestamps();
         });
     }

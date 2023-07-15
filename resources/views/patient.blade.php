@@ -142,7 +142,7 @@
                 <div class="card card-xl-stretch mb-xl-8">
                     <div class="card-header border-0 pt-5">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder text-dark">Recent Transactions</span>
+                            <span class="card-label fw-bolder text-dark">Reserved Account Numbers</span>
                         </h3>
                         <div class="card-toolbar">
                             <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -166,23 +166,35 @@
                     </div>
                     <div class="card-body pt-5">
                       
-                        @forelse ($payments as $key => $payment )
-                            <!--begin::Item-->
-                            <div class="d-flex align-items-sm-center mb-7">
-                                <div class="symbol symbol-50px me-5">
-                                    <span class="symbol-label">{{ $key+1 }}</span>
-                                </div>
-                                <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                                    <div class="flex-grow-1 me-2">
-                                        <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">{{ $payment->created_at->diffForHumans() }}</a>
-                                        {{-- <span class="text-muted fw-bold d-block fs-7">{{ $payment->ref }}</span> --}}
+                        
+                        <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
+
+                            @if(is_array($accounts) && count($accounts) > 0)
+                            @foreach($accounts as $key => $account)
+                            
+                            <li class="nav-item">
+                                <a class="nav-link {{ $loop->first ? 'active': '' }}" data-bs-toggle="tab" href="#kt_tab_pane_1{{ $key }}">{{ $account['bankName'] }}</a>
+                            </li>
+                           
+                            @endforeach
+                          @endif
+            
+                        </ul>
+                        
+                        <div class="tab-content" id="myTabContent">
+                            @if(is_array($accounts) && count($accounts) > 0)
+                                @foreach($accounts as $key => $account)
+                                    <div class="tab-pane fade {{ $loop->first ? 'show active': '' }}" id="kt_tab_pane_1{{ $key }}" role="tabpanel">
+                                        <div class="card card-body mb-4" style="background-color: #f7f7f7; border: 1px solid #ebebeb; border-radius: 5px;">
+                                            <h6 class="card-title" style="font-size: 16px; color: #333;">{{ $account['accountNumber'] }}</h6>
+                                            <p class="card-text mb-0" style="font-size: 14px; color: #777;">{{ $account['accountName'] }}</p>
+                                            <p class="card-text mb-0" style="font-size: 14px; color: #777;">{{ $account['bankName'] }}</p>
+                                        </div>
                                     </div>
-                                    <span class="badge badge-light fw-bolder my-2">+&#8358;{{ number_format($payment->amount,0) }}</span>
-                                </div>
-                            </div>
-                        @empty
-                            <div class="alert alert-warning" role="alert">No recent Transaction.</div>
-                        @endforelse
+                                @endforeach
+                            @endif
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -115,7 +115,7 @@ $route = Route::current()->getName();
                     </a>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{($route=='preferences.index')?'show':''}}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{($route=='preferences.index')?'show':''}} {{($route=='monnify.api')?'show':''}} {{($route=='sms.api.index')?'show':''}}">
                     <span class="menu-link">
                             <span class="menu-bullet">
                                 <span class="fa fa-cog"></span>
@@ -130,6 +130,22 @@ $route = Route::current()->getName();
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Preferences</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{($route=='sms.api.index')?'active':''}}" href="{{ route('sms.api.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">SMS API</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{($route=='monnify.api')?'active':''}}" href="{{ route('monnify.api') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Monnify API</span>
                             </a>
                         </div>
                 

@@ -177,8 +177,13 @@ Route::get('/logs/index', [LoginController::class, 'logs'])->name('logs.index')-
 //admin routes
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function(){
 
-    Route::get('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'index'])->name('preferences.index');
-    Route::post('/preferences/index', [App\Http\Controllers\PreferencesController::class, 'store']);
+    Route::get('/preferences', [App\Http\Controllers\PreferencesController::class, 'index'])->name('preferences.index');
+    Route::post('/preferences', [App\Http\Controllers\PreferencesController::class, 'store']);
+    Route::get('/sms_api', [App\Http\Controllers\SMSController::class, 'index'])->name('sms.api.index');
+    Route::post('/sms_api', [App\Http\Controllers\SMSController::class, 'update']);
+    Route::get('/monnify_api', [App\Http\Controllers\MonnifyAPIController::class, 'index'])->name('monnify.api');
+    Route::post('/monnify_api', [App\Http\Controllers\MonnifyAPIController::class, 'store']);
+
     Route::get('/withdrawal_requests/index', [App\Http\Controllers\AminWithdrawalRequestController::class, 'index'])->name('withdrawal.index');
     Route::post('/withdrawal_requests/approve', [App\Http\Controllers\AminWithdrawalRequestController::class, 'approve'])->name('withdrawal.approve');
     Route::post('/withdrawal_requests/reject', [App\Http\Controllers\AminWithdrawalRequestController::class, 'reject'])->name('withdrawal.reject');

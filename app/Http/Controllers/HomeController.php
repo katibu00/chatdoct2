@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Models\ReservedAccount;
 use App\Models\User;
 use App\Notifications\BookingNotification;
 use Carbon\Carbon;
@@ -90,6 +91,14 @@ class HomeController extends Controller
         $data['users'] = User::where('role','doctor')->where('status',1)->where('featured',1)->get();
         $data['user'] = User::where('id',Auth::user()->id)->first();
         $data['payments'] = Payment::where('user_id',$user_id)->latest()->get()->take(4);
+
+        $query = ReservedAccount::where('user_id', $user_id)->first();
+
+        if ($query) {
+            $data['accounts'] = json_decode($query->accounts, true);
+        } else {
+            $data['accounts'] = [];
+        }
 
         return view('patient',$data);
     }

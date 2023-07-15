@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ReservedAccount;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -50,7 +53,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-
+        // Validate the request data
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|alpha',
             'last_name' => 'required|alpha',
@@ -58,7 +61,7 @@ class RegisterController extends Controller
             'phone' => 'required|unique:users,phone',
             'password' => 'required|confirmed|min:6',
         ]);
-
+        
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
@@ -71,21 +74,168 @@ class RegisterController extends Controller
         $users = User::all()->count() + 1;
         $number = sprintf("%03d", $users);
         $reg = $year . $month . $number;
+        
+        $validatedData = $validator->validated();
 
-         User::create([
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'last_name' => $request->last_name,
+        $fullName = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
+        $firstName = explode(' ', $fullName)[0]; 
+        $randomString = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 4);
+        $username = $firstName . $randomString;
+        
+        // Create the user account
+        $user = User::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'username' => $username,
             'number' => $reg,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($validatedData['password']),
         ]);
+        
 
-        return response()->json([
-            'status' => 200,
-            'message' => 'You have been registered successfully. Redirecting to login.',
-        ]);
+        try {
+            // Get the Monnify access token
+            $accessToken = $this->getAccessToken();
+
+            // Create Monnify reserved account
+            $monnifyReservedAccount = $this->createMonnifyReservedAccount($user, $accessToken);
+
+            // Save Monnify reserved account details in the reserved_accounts table
+            ReservedAccount::create([
+                'user_id' => $user->id,
+                'customer_email' => $monnifyReservedAccount->customerEmail,
+                'customer_name' => $monnifyReservedAccount->customerName,
+                'accounts' => json_encode($monnifyReservedAccount->accounts), // Convert the object to JSON string
+            ]);
+
+            // Create a wallet for the user
+            Wallet::create([
+                'user_id' => $user->id,
+                'balance' => 0, // Set initial balance to 0
+            ]);
+
+            // Return a success response
+            return response()->json([
+                'status' => 200,
+                'message' => 'You have been registered successfully. Redirecting to login.',
+            ]);
+        } catch (\Exception $e) {
+            // Handle any exceptions or errors here
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function getAccessToken()
+    {
+        $monnifyKeys = DB::table('monnify_a_p_i_s')->first();
+        $apiKey = $monnifyKeys->public_key;
+        $secretKey = $monnifyKeys->secret_key;
+
+        $encodedKey = base64_encode($apiKey . ':' . $secretKey);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://sandbox.monnify.com/api/v1/auth/login',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                "Authorization: Basic $encodedKey",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            throw new \Exception("cURL Error: " . $err);
+        }
+
+        if ($httpStatus !== 200) {
+            throw new \Exception("Monnify API request failed. Error Response: " . $response);
+        }
+
+        $monnifyResponse = json_decode($response);
+
+        if (!$monnifyResponse->requestSuccessful) {
+            throw new \Exception($monnifyResponse->responseMessage);
+        }
+
+        return $monnifyResponse->responseBody->accessToken;
+    }
+
+    private function createMonnifyReservedAccount(User $user, $accessToken)
+    {
+        $accountReference = uniqid('abc', true);
+        $accountName = $user->first_name;
+
+        $monnifyKeys = DB::table('monnify_a_p_i_s')->first();
+        $contractCode = $monnifyKeys->contract_code;
+
+        $currencyCode = 'NGN';
+        $contractCode = $contractCode;
+        $customerEmail = $user->email;
+        $customerName = $user->first_name;
+        $getAllAvailableBanks = true;
+
+        $data = [
+            'accountReference' => $accountReference,
+            'accountName' => $accountName,
+            'currencyCode' => $currencyCode,
+            'contractCode' => $contractCode,
+            'customerEmail' => $customerEmail,
+            'customerName' => $customerName,
+            'getAllAvailableBanks' => $getAllAvailableBanks,
+        ];
+
+        $jsonData = json_encode($data);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://sandbox.monnify.com/api/v2/bank-transfer/reserved-accounts',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $jsonData,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $accessToken,
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            throw new \Exception("cURL Error: " . $err);
+        }
+
+        if ($httpStatus !== 200) {
+            throw new \Exception("Monnify API request failed. Error Response: " . $response);
+        }
+
+        $monnifyResponse = json_decode($response);
+
+        if (!$monnifyResponse->requestSuccessful) {
+            throw new \Exception($monnifyResponse->responseMessage);
+        }
+
+        return $monnifyResponse->responseBody;
     }
 
 }
