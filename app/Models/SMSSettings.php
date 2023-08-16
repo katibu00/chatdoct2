@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SMSSettings extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'api_token',
+        'sender_id'
+    ];
 }

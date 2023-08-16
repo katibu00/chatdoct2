@@ -15,12 +15,8 @@ class CreateSMSSettingsTable extends Migration
     {
         Schema::create('s_m_s_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('sms_api_url');
             $table->string('api_token');
             $table->string('sender_id');
-            $table->integer('default_sms_type')->default(0);
-            $table->string('default_routing');
-            $table->integer('dlr_timeout');
             $table->timestamps();
         });
     }

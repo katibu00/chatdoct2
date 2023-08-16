@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\ReservedAccount;
+use App\Models\SMSSettings;
 use App\Models\User;
 use App\Notifications\BookingNotification;
 use Carbon\Carbon;
@@ -99,7 +100,11 @@ class HomeController extends Controller
         } else {
             $data['accounts'] = [];
         }
+       
+       
 
         return view('patient',$data);
     }
+
+
 }

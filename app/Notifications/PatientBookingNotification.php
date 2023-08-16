@@ -58,7 +58,7 @@ class PatientBookingNotification extends Notification
     {
         return [
             'type' => 'Booking Notification',
-            'data' => 'You have booked Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->first_name.' via '.$this->booking->book_type,
+            'data' => 'You have booked Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->last_name.' via '.$this->booking->book_type,
         ];
     }
 }

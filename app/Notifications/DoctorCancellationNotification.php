@@ -57,7 +57,7 @@ class DoctorCancellationNotification extends Notification
     {
         return [
             'type' => 'Booking Cancellation',
-            'data' => 'Your booking with '.$this->booking->patient->first_name.' '.$this->booking->patient->first_name.' via '.$this->booking->book_type .' has been cancelled',
+            'data' => 'Your booking with '.$this->booking->patient->first_name.' '.$this->booking->patient->last_name.' via '.$this->booking->book_type .' has been cancelled',
         ];
     }
 }

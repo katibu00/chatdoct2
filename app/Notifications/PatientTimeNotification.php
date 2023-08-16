@@ -58,7 +58,7 @@ class PatientTimeNotification extends Notification
     {
         return [
             'type' => 'Booking Confirmation',
-            'data' => 'Your booking with Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->first_name.' was scheduled by '.$this->time.' via '.$this->booking->book_type,
+            'data' => 'Your booking with Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->last_name.' was scheduled by '.$this->time.' via '.$this->booking->book_type,
         ];
     }
 }

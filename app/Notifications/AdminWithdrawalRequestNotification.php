@@ -57,7 +57,7 @@ class AdminWithdrawalRequestNotification extends Notification
     {
         return [
             'type' => 'Withdrawal Request',
-            'data' => 'Dr. '.$this->doctor->first_name.' '.$this->doctor->first_name. 'Submitted a withdrawal Request',
+            'data' => 'Dr. '.$this->doctor->first_name.' '.$this->doctor->last_name. 'Submitted a withdrawal Request',
         ];
     }
 }

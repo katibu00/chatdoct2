@@ -57,7 +57,7 @@ class PatientPrescriptionNotification extends Notification
     {
         return [
             'type' => 'Prescription Notification',
-            'data' => 'Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->first_name.' has sent you a prescription.',
+            'data' => 'Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->last_name.' has sent you a prescription.',
         ];
     }
 }

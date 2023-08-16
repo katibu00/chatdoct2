@@ -56,7 +56,7 @@ class PatientCompletionNotification extends Notification
     {
         return [
             'type' => 'Booking Completion',
-            'data' => 'Your booking with Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->first_name.' via '.$this->booking->book_type .' has been marked as completed.',
+            'data' => 'Your booking with Dr. '.$this->booking->doctor->first_name.' '.$this->booking->doctor->last_name.' via '.$this->booking->book_type .' has been marked as completed.',
         ];
     }
 }

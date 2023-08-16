@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Prescription;
+use App\Models\SMSSettings;
 use App\Models\User;
 use App\Notifications\BookingNotification;
 use App\Notifications\DoctorBookingNotification;
@@ -126,6 +127,13 @@ class PatientController extends Controller
         $patient->notify(new PatientBookingNotification($book));
         $doctor->notify(new DoctorBookingNotification($book));
 
+        $doctorMessage = 'You have been booked by '.$patient->first_name.' '.$patient->last_name.' via '.$request->book_type;
+        $patientMessage = 'You have booked Dr. '.$doctor->first_name.' '.$doctor->last_name.' via '.$request->book_type;
+
+
+        $this->sendSMS($patient->phone,$patientMessage);
+        $this->sendSMS($doctor->phone,$doctorMessage);
+        
         Toastr::success('Your Booking has been made sucessfully', 'Done');
         $data['users'] = User::where('role', 'doctor')->where('status', 1)->get();
         return redirect()->route('reservations');
@@ -319,4 +327,60 @@ class PatientController extends Controller
         return view('patient.reservations', $data);
     }
 
+
+  
+    private function sendSMS($to, $message)
+    {
+        $settings = SMSSettings::first();
+    
+        if (!$settings) {
+            return ['error' => 'SMS settings not found in the database'];
+        }
+    
+        $apiToken = $settings->api_token;
+        $senderId = $settings->sender_id;
+    
+        $url = 'https://app.smartsmssolutions.com/io/api/client/v1/sms/';
+        $data = array(
+            'token' => $apiToken,
+            'sender' => $senderId,
+            'to' => $to,
+            'message' => $message,
+            'type' => '0',
+            'routing' => '3',
+            'ref_id' => 'unique-ref-id',
+            'simserver_token' => 'simserver-token',
+            'dlr_timeout' => 'dlr-timeout'
+        );
+    
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $data,
+        ));
+    
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    
+        curl_close($curl);
+    
+        $responseData = json_decode($response, true);
+    
+        return [
+            'http_code' => $httpCode,
+            'response' => $responseData
+        ];
+    }
+    
+
+
 }
+
+
