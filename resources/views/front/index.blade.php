@@ -358,6 +358,44 @@
     </section>
 
 
+
+
+
+    <section id="register-section" style="background-color: #ffffff; padding: 40px 0;">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>Join Chatdoc Today</h2>
+                <p>Become a part of our community. Register as a doctor or a patient and experience convenient healthcare.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Register as a Doctor</h5>
+                            <p class="card-text">Are you a qualified medical professional? Join our network of doctors and provide consultations online.</p>
+                            <a href="{{ route('register') }}" class="btn btn-primary">Register as Doctor</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Register as a Patient</h5>
+                            <p class="card-text">Looking for convenient and efficient healthcare? Register as a patient and connect with experienced doctors online.</p>
+                            <a href="{{ route('register') }}" class="btn btn-primary">Register as Patient</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 20px;">
+                <p>Already have an account? <a href="{{ route('login') }}">Sign in here</a>.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
     <section id="faq-section">
         <div class="container">
             <div class="section-heading text-center" style="padding-top: 20px;">

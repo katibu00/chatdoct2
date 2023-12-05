@@ -30,21 +30,18 @@
 						<form class="form w-100" id="register_form">
                             @csrf
 							<div class="mb-10 text-center">
-								<h1 class="text-dark mb-3">Create an Account</h1>
+								<h1 class="text-dark mb-3">Patient Registration</h1>
 								<div class="text-gray-400 fw-bold fs-4">Already have an account?
 								<a href="{{route('login')}}" class="link-primary fw-bolder">Sign in here</a></div>
 							</div>
 							<ul id="error_list"></ul>
 							<div class="row fv-row mb-7">
-								<div class="col-xl-4">
+								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">First Name</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" id="first_name" placeholder="First or Given Name" name="first_name" />
 								</div>
-								<div class="col-xl-4">
-									<label class="form-label fw-bolder text-dark fs-6">Middle Name</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" id="middle_name" placeholder="Middle Name" name="middle_name" />
-								</div>
-								<div class="col-xl-4">
+								
+								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Last Name</label>
 									<input class="form-control form-control-lg form-control-solid" type="text" id="last_name" placeholder="Last or Surname Name" name="last_name" />
 								</div>
@@ -86,6 +83,11 @@
 								</button>
 							</div>
 						</form>
+						<div class="text-center mt-3">
+							<p class="text-muted">Want to register as a doctor?
+								<a href="{{route('doctor.register')}}" class="link-primary fw-bolder">Click here</a>
+							</p>
+						</div>
 					</div>
 				</div>
 				<div class="d-flex flex-center flex-column-auto p-10">
@@ -156,24 +158,7 @@
 								Command: toastr["error"](
 									"Session expired. please login again."
 								);
-								toastr.options = {
-									closeButton: false,
-									debug: false,
-									newestOnTop: false,
-									progressBar: false,
-									positionClass: "toast-top-right",
-									preventDuplicates: false,
-									onclick: null,
-									showDuration: "300",
-									hideDuration: "1000",
-									timeOut: "5000",
-									extendedTimeOut: "1000",
-									showEasing: "swing",
-									hideEasing: "linear",
-									showMethod: "fadeIn",
-									hideMethod: "fadeOut",
-								};
-			
+								
 								setTimeout(() => {
 									window.location.replace('{{ route('login') }}');
 								}, 2000);

@@ -41,6 +41,11 @@
 							@if (session('registered'))
 							<h3 style="color: white; background: green; padding: 5px;">{{session('registered')}}</h3>
 							@endif
+							@if(session('success'))
+								<div class="alert alert-success">
+									{{ session('success') }}
+								</div>
+							@endif
 							<ul id="error_list"></ul>
 							<div class="fv-row mb-10">
 								<label class="form-label fs-6 fw-bolder text-dark">Email/User ID</label>

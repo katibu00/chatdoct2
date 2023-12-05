@@ -17,7 +17,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <!-- JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
 
     <!-- Owl Carousel CSS -->
@@ -141,6 +140,9 @@
             });
         });
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
 
 
 </body>

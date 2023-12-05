@@ -7,6 +7,7 @@ use App\Models\ReservedAccount;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Providers\RouteServiceProvider;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -49,6 +50,10 @@ class RegisterController extends Controller
     public function index()
     {
         return view('auth.register');
+    }
+    public function doctorRegister()
+    {
+        return view('auth.doctor_register');
     }
 
     public function store(Request $request)
@@ -236,6 +241,63 @@ class RegisterController extends Controller
         }
 
         return $monnifyResponse->responseBody;
+    }
+
+
+
+    public function doctorStore(Request $request)
+    {
+        // Validate the incoming request data
+        $this->validate($request, [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'rank' => 'required',
+            'speciality' => 'required|array',
+            'contact_phone' => 'required',
+            'experience' => 'required',
+            'languages' => 'required|array',
+            'folio' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'state' => 'required',
+            'lga' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+
+        $year = date('y');
+        $month = Carbon::now()->format('m');
+        $users = User::all()->count() + 1;
+        $number = sprintf("%03d", $users);
+        $reg = $year . $month . $number;
+
+        // Create a new user instance
+        $user = new User();
+        
+        // Populate user information
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->role = 'doctor';
+        $user->rank = $request->rank;
+        $user->number = $reg;
+        $user->speciality = implode(',', $request->speciality);
+        $user->phone = $request->contact_phone;
+        $user->experience = $request->experience;
+        $user->languages = implode(',', $request->languages);
+        $user->folio = $request->folio;
+        $user->sex = $request->sex;
+        $user->address = $request->address;
+        $user->state = $request->state;
+        $user->lga = $request->lga;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Doctor registration successful!');
     }
 
 }

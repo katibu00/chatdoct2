@@ -40,6 +40,25 @@ Route::get('/', function () {
 
 })->name('homepage');
 
+Route::get('/home', function () {
+    if(auth()->check()){
+        if(Auth::user()->role == 'admin'){
+            return redirect()->route('admin.home');
+        }
+        if(Auth::user()->role == 'patient'){
+            return redirect()->route('patient.home');
+        }
+        if(Auth::user()->role == 'doctor'){
+            return redirect()->route('doctor.home');
+        }
+        if(Auth::user()->role == 'pending'){
+            return redirect()->route('pending.home');
+        }
+    };
+ 
+
+})->name('home');
+
 
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
 Route::get('/featured-doctors', [PagesController::class, 'doctors'])->name('doctors');
@@ -70,8 +89,9 @@ Route::get('/password/reset/{token}', [ForgotPasswordController::class, 'resetFo
 Route::post('/password/forgot', [ForgotPasswordController::class, 'sendEmail']);
 Route::post('/password/reset/reset', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password.reset');
 
-// Route::get('/change/password', [ChangepasswordController::class, 'index'])->name('change.password');
-// Route::post('/change/password', [ChangepasswordController::class, 'change']);
+
+Route::get('/doctor/register', [RegisterController::class, 'doctorRegister'])->name('doctor.register');
+Route::post('/doctor/register', [RegisterController::class, 'doctorStore']);
 
 Route::group(['middleware' => ['auth', 'admin']], function(){
     Route::get('/admin/home', [HomeController::class, 'admin'])->name('admin.home');
