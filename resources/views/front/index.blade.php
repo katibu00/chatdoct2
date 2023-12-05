@@ -373,7 +373,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Register as a Doctor</h5>
                             <p class="card-text">Are you a qualified medical professional? Join our network of doctors and provide consultations online.</p>
-                            <a href="{{ route('register') }}" class="btn btn-primary">Register as Doctor</a>
+                            <a href="{{ route('doctor.register') }}" class="btn btn-primary">Register as Doctor</a>
                         </div>
                     </div>
                 </div>
