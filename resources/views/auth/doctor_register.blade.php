@@ -41,11 +41,11 @@
                             </div>
                         </div>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li class="text-danger">{{ $error }}</li>
                         @endforeach
 
                         <!-- First Name and Last Name -->
-						<div class="row fv-row mb-7">
+						<div class="row fv-row mb-7 mt-3">
 							<div class="col-xl-6">
 								<label class="form-label fw-bolder text-dark fs-6">First Name</label>
 								<input class="form-control form-control-lg form-control-solid @error('first_name') is-invalid @enderror"
