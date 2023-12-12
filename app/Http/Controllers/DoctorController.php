@@ -42,7 +42,7 @@ class DoctorController extends Controller
             'last_name' => 'required|string|max:255',
             'chat_rate' => 'required|integer',
             'video_rate' => 'required|integer',
-            'account_number' => 'required|integer',
+            'account_number' => 'required|digits:10',
             'account_name' => 'required|string|max:255',
             'bank_name' => 'required|string|max:255',
             'phone_rate' => 'required|integer',
