@@ -7,13 +7,12 @@ use App\Models\ReservedAccount;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Providers\RouteServiceProvider;
-use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -66,7 +65,7 @@ class RegisterController extends Controller
             'phone' => 'required|unique:users,phone',
             'password' => 'required|confirmed|min:6',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
@@ -79,14 +78,14 @@ class RegisterController extends Controller
         $users = User::all()->count() + 1;
         $number = sprintf("%03d", $users);
         $reg = $year . $month . $number;
-        
+
         $validatedData = $validator->validated();
 
         $fullName = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
-        $firstName = explode(' ', $fullName)[0]; 
+        $firstName = explode(' ', $fullName)[0];
         $randomString = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 4);
         $username = $firstName . $randomString;
-        
+
         // Create the user account
         $user = User::create([
             'first_name' => $validatedData['first_name'],
@@ -97,7 +96,6 @@ class RegisterController extends Controller
             'number' => $reg,
             'password' => Hash::make($validatedData['password']),
         ]);
-        
 
         try {
             // Get the Monnify access token
@@ -243,11 +241,8 @@ class RegisterController extends Controller
         return $monnifyResponse->responseBody;
     }
 
-
-
     public function doctorStore(Request $request)
-    {
-        // Validate the incoming request data
+    { 
         $this->validate($request, [
             'first_name' => 'required|alpha',
             'last_name' => 'required|alpha',
@@ -255,7 +250,6 @@ class RegisterController extends Controller
             'phone' => 'required',
             'rank' => 'required',
             'speciality' => 'required|array',
-            'contact_phone' => 'required',
             'experience' => 'required',
             'languages' => 'required|array',
             'folio' => 'required',
@@ -264,8 +258,9 @@ class RegisterController extends Controller
             'state' => 'required',
             'lga' => 'required',
             'password' => 'required|min:8|confirmed',
+            'passport' => 'required|image|mimes:jpeg,png,jpg,gif|max:400',
+            'certificate' => 'required|image|mimes:jpeg,png,jpg,gif|max:1500',
         ]);
-
 
         $year = date('y');
         $month = Carbon::now()->format('m');
@@ -275,17 +270,16 @@ class RegisterController extends Controller
 
         // Create a new user instance
         $user = new User();
-        
+
         // Populate user information
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->phone = $request->phone;
         $user->role = 'doctor';
         $user->rank = $request->rank;
         $user->number = $reg;
         $user->speciality = implode(',', $request->speciality);
-        $user->phone = $request->contact_phone;
+        $user->phone = $request->phone;
         $user->experience = $request->experience;
         $user->languages = implode(',', $request->languages);
         $user->folio = $request->folio;
@@ -295,9 +289,27 @@ class RegisterController extends Controller
         $user->lga = $request->lga;
         $user->password = Hash::make($request->password);
 
+        if ($request->file('passport') != null) {
+
+            $file = $request->file('passport');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/avatar', $filename);
+            $user->picture = $filename;
+        }
+
+        if ($request->file('certificate') != null) {
+
+            $file = $request->file('certificate');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '2.' . $extension;
+            $file->move('uploads/certificates', $filename);
+            $user->certificate = $filename;
+        }
+
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Doctor registration successful!');
+        return redirect()->route('login')->with('success', 'Doctor registration successful! Please login below.');
     }
 
 }

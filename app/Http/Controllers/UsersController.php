@@ -8,15 +8,15 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class UsersController extends Controller
 {
+  
     public function applicationsIndex(){
-        $data['users'] = User::where('role','pending')->where('status',0)->latest()->get();
+        $data['users'] = User::where('role','doctor')->where('status',0)->latest()->get();
         return view('users.applications',$data);
     }
 
     public function ApproveRequest($id){
      
         $user = User::findorFail($id);
-        $user->role = 'doctor';
         $user->status = 1;
         $user->update();
 
@@ -25,13 +25,15 @@ class UsersController extends Controller
     }
 
     public function doctorsIndex(){
-        $data['users'] = User::where('role','doctor')->latest()->get();
+        $data['users'] = User::where('role','doctor')->where('status','!=',0)->latest()->get();
         return view('users.doctors',$data);
     }
+
     public function patientsIndex(){
         $data['users'] = User::where('role','patient')->latest()->get();
         return view('users.patients',$data);
     }
+
     public function adminsIndex(){
         $data['users'] = User::where('role','admin')->latest()->get();
         return view('users.admins',$data);
@@ -64,6 +66,7 @@ class UsersController extends Controller
             ]);
         };
     }
+
     public function doctorsReject(Request $request){
         $data = User::find($request->id);
         $data->role = 'patient';
@@ -75,6 +78,7 @@ class UsersController extends Controller
             ]);
         };
     }
+
     public function doctorsSuspend(Request $request){
         $data = User::find($request->id);
         if($data->status == 5){

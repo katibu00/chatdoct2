@@ -31,7 +31,7 @@
                     <img alt="Logo" src="/uploads/logo.png" class="h-40px" />
                 </a>
                 <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-                    <form class="form w-100" action="{{ route('doctor.register') }}" method="POST">
+                    <form class="form w-100" action="{{ route('doctor.register') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-10 text-center">
                             <h1 class="text-dark mb-3">Doctor Registration</h1>
@@ -44,9 +44,58 @@
                             <li class="text-danger">{{ $error }}</li>
                         @endforeach
 
+
+
+
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Passport Picture</label>
+                            <div class="col-lg-8">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true"
+                                    style="background-image: url(/assets/media/avatars/blank.png)">
+                                    <div class="image-input-wrapper w-125px h-125px"
+                                        style="background-image: url(/uploads/default.png)">
+                                    </div>
+                                  
+                                    <label
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                        title="Change image">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="passport" accept=".png, .jpg, .jpeg" />
+                                    
+                                    </label>
+                                   
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                        title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                   
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                        title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                </div>
+                               
+                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                @error('passport')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+
+
+
+
                         <!-- First Name and Last Name -->
 						<div class="row fv-row mb-7 mt-3">
-							<div class="col-xl-6">
+							<div class="col-xl-6 mb-3">
 								<label class="form-label fw-bolder text-dark fs-6">First Name</label>
 								<input class="form-control form-control-lg form-control-solid @error('first_name') is-invalid @enderror"
 									type="text" id="first_name" placeholder="First or Given Name" name="first_name"
@@ -141,17 +190,6 @@
 							@enderror
 						</div>
 						
-
-						<div class="fv-row mb-7">
-							<!-- Contact Phone -->
-							<label class="form-label fw-bolder text-dark fs-6">Contact Phone</label>
-							<input type="tel" class="form-control form-control-lg form-control-solid @error('contact_phone') is-invalid @enderror"
-								name="contact_phone" placeholder="Enter Contact Phone" value="{{ old('contact_phone') }}">
-							@error('contact_phone')
-								<div class="invalid-feedback">{{ $message }}</div>
-							@enderror
-						</div>
-						
 						<div class="fv-row mb-7">
 							<!-- Years of Experience -->
 							<label class="form-label fw-bolder text-dark fs-6">Years of Experience</label>
@@ -183,6 +221,44 @@
 								<div class="invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
+
+                        <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Practice License/Certificate
+                                of Registration</label>
+                            <div class="col-lg-8">
+                                <div class="image-input image-input-outline" data-kt-image-input="true"
+                                    style="background-image: url(/assets/media/avatars/blank.png)">
+                                    <div class="image-input-wrapper w-125px h-150px"
+                                        style="background-image: url(/no-image.jpg)"></div>
+                                    <label
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                        title="Change image">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <input type="file" name="certificate" accept=".png, .jpg, .jpeg" />
+                                    </label>
+
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                        title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                        title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                </div>
+
+                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                @error('certificate')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 						
 
 						<div class="fv-row mb-7">
@@ -223,7 +299,7 @@
                             <!-- State and LGA -->
                             <label class="form-label fw-bolder text-dark fs-6">State and LGA</label>
                             <div class="row">
-                                <div class="col-lg-6 fv-row">
+                                <div class="col-lg-6 mb-3 fv-row">
                                     <select onchange="toggleLGA(this);" name="state" id="state"
                                         class="form-select form-select-solid" data-placeholder="Select State"
                                         data-control="select2">
@@ -377,77 +453,14 @@
     <script>
         var hostUrl = "assets/";
     </script>
+      <script src="/lga/lga2.min.js"></script>
+      <script src="/assets/js/custom/account/settings/profile-details.js"></script>
+      <script src="/assets/js/custom/account/settings/deactivate-account.js"></script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/assets/js/scripts.bundle.js"></script>
-    <script src="/lga/lga2.min.js"></script>
+  
 
-    <script>
-        $(document).ready(function() {
-            $(document).on("submit", "#register_form", function(e) {
-                e.preventDefault();
-
-                let formData = new FormData($('#register_form')[0]);
-
-                spinner =
-                    '<div class="spinner-border" style="height: 20px; width: 20px;" role="status"></div><span class="indicator-label"> &nbsp;Submitting . . .</span>';
-                $(".submit_btn").html(spinner);
-                $(".submit_btn").attr("disabled", true);
-                // console.log(data); return;
-                $.ajaxSetup({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                });
-                $.ajax({
-                    type: "POST",
-                    url: "/register",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-
-                        if (response.status == 400) {
-                            $('#error_list').html("");
-                            $.each(response.errors, function(key, err) {
-                                $("#error_list").append("<li class='text-danger'>" +
-                                    err + "</li>");
-                            });
-                            $('.submit_btn').text("Submit");
-                            $('.submit_btn').attr("disabled", false);
-                            Command: toastr["error"](
-                                "Some Fields are required. Please check your input and try again."
-                                )
-
-                        }
-
-                        if (response.status == 200) {
-                            Command: toastr["success"](response.message)
-
-                            window.location.replace('{{ route('login') }}');
-
-                        }
-                        if (response.status == 500) {
-                            Command: toastr["error"](response.message)
-                            $('.submit_btn').text("Submit");
-                            $('.submit_btn').attr("disabled", false);
-
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        if (xhr.status === 419) {
-                            Command: toastr["error"](
-                                "Session expired. please login again."
-                            );
-
-                            setTimeout(() => {
-                                window.location.replace('{{ route('login') }}');
-                            }, 2000);
-                        }
-                    },
-                });
-            });
-        });
-    </script>
+   
 </body>
 <!--end::Body-->
 

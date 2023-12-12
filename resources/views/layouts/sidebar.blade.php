@@ -62,7 +62,7 @@ $route = Route::current()->getName();
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 @php
-                                   $number = App\Models\User::where('role','pending')->where('status',0)->get()->count();
+                                   $number = App\Models\User::where('role','doctor')->where('status',0)->get()->count();
                                 @endphp
                                 <span class="menu-title">Pending Approvals 	<span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2">{{$number}}</span></span>
                             </a>

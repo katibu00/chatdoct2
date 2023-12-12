@@ -74,15 +74,14 @@
                                             <a>
                                                 <div class="symbol-label">
                                                     <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
-                                                        alt="{{ $user->first_name }} {{ $user->last_name }}" />
+                                                        alt="{{ $user->first_name }} {{ $user->last_name }}" height="50" width="50" />
                                                 </div>
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }}
-                                                {{ $user->middle_name }} {{ $user->last_name }}</a>
+                                            <a class="text-gray-800 text-hover-primary mb-1">{{ $user->first_name }} {{ $user->last_name }}</a>
                                             <span>{{ $user->email }}</span>
                                         </div>
                                     </td>
@@ -217,8 +216,7 @@
                                                                 </div>
                                                                 <!--end::Details-->
                                                             </div>
-                                                            <!--end::Details-->
-                                                            <!--begin::Stats-->
+                                               
                                                             <div class="d-flex">
                                                                 <!--begin::Sales-->
                                                                 <div class="text-end">
@@ -321,11 +319,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--end::User-->
-
-
-
-                                                        <!--begin::User-->
+                                    
                                                         <div
                                                             class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                             <!--begin::Details-->
@@ -407,7 +401,7 @@
                                                                     <a href="/uploads/{{ $user->certificate }}"
                                                                         target="_blank"><img
                                                                             src="/uploads/certificates/{{ $user->certificate }}"
-                                                                            alt="{{ $user->first_name }} {{ $user->last_name }}" /></a>
+                                                                            alt="{{ $user->first_name }} {{ $user->last_name }}" height="800" width="600" /></a>
                                                                     <!--end::Email-->
                                                                 </div>
                                                                 <!--end::Details-->
