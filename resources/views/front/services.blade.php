@@ -1,5 +1,6 @@
 @extends('front.layouts.master')
 @section('PageTitle','Our Services')
+
 @section('content')
 
 <div class="container" style="margin-top: 120px;">

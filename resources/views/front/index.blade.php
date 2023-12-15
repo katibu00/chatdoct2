@@ -1,5 +1,54 @@
 @extends('front.layouts.master')
 @section('PageTitle', 'Home')
+@section('css')
+<style>
+      
+  .card {
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    border-radius: 10px;
+  }
+  
+
+  
+  .card a:hover {
+    text-decoration: none;
+  }
+  .card-body {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .card-img {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom: 5px;
+    padding-top: 10px;
+  }
+  
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 1px;
+  }
+  
+  .card-text {
+    font-size: 14px;
+    color: #888;
+  }
+  
+</style>
+@endsection
 @section('content')
 
     @include('front.layouts.slider')
@@ -495,5 +544,14 @@
         </div>
     </section>
 
+    <section class="newsletter-section">
+        <div class="container newsletter-container">
+            <h2 class="section-title">Subscribe to Our Newsletter</h2>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
 
 @endsection

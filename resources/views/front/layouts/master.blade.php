@@ -15,7 +15,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
+    @yield('css')
     <!-- JavaScript -->
     <script src="js/script.js"></script>
 
@@ -35,25 +35,6 @@
       
 
         @yield('content')
-
-
-
-       
-
-
-        <section class="newsletter-section">
-            <div class="container newsletter-container">
-                <h2 class="section-title">Subscribe to Our Newsletter</h2>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </section>
-
-
-
-
 
 
        @include('front.layouts.footer')
