@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\EscrowTransaction;
 use App\Models\Prescription;
 use App\Models\SMSSettings;
 use App\Models\User;
@@ -63,7 +64,7 @@ class PatientController extends Controller
 
     public function BookDoctor(Request $request)
     {
-        $id = auth()->user()->id;
+        $patient_id = auth()->user()->id;
         $balance = auth()->user()->balance;
         $doctor = User::where('id', $request->doctor_id)->first();
         $chat = $doctor->chat_rate;
@@ -91,7 +92,7 @@ class PatientController extends Controller
             }
         }
 
-        $check = Booking::where('doctor_id', $request->doctor_id)->where('patient_id', $id)->where('status', 1)->first();
+        $check = Booking::where('doctor_id', $request->doctor_id)->where('patient_id', $patient_id)->where('status', 1)->first();
         if ($check) {
 
             Toastr::error('You already have book this doctor', 'Not Allowed');
@@ -99,31 +100,48 @@ class PatientController extends Controller
         }
 
         $book = new Booking();
-        $book->patient_id = $id;
+        $book->patient_id = $patient_id;
         $book->doctor_id = $request->doctor_id;
         $book->time_slot = $request->time_slot;
         $book->book_type = $request->book_type;
         $book->status = 0;
         $book->save();
 
-        $patient = User::findorFail($id);
+        $patient = User::findorFail($patient_id);
         if ($request->book_type == 'chat') {
             $patient->balance = $patient->balance - $chat;
-            $doctor->balance += $chat;
-            $doctor->total_earning += $chat;
+          
+            $escrow = new EscrowTransaction();
+            $escrow->booking_id = $book->id;
+            $escrow->patient_id = $patient_id;
+            $escrow->doctor_id = $request->doctor_id;
+            $escrow->amount = $chat; 
+            $escrow->save();
+
         }
         if ($request->book_type == 'video') {
             $patient->balance = $patient->balance - $video;
-            $doctor->balance += $video;
-            $doctor->total_earning += $video;
+            
+            $escrow = new EscrowTransaction();
+            $escrow->booking_id = $book->id;
+            $escrow->patient_id = $patient_id;
+            $escrow->doctor_id = $request->doctor_id;
+            $escrow->amount = $video; 
+            $escrow->save();
+
         }
         if ($request->book_type == 'phone') {
             $patient->balance = $patient->balance - $phone;
-            $doctor->balance += $phone;
-            $doctor->total_earning += $phone;
+
+            $escrow = new EscrowTransaction();
+            $escrow->booking_id = $book->id;
+            $escrow->patient_id = $patient_id;
+            $escrow->doctor_id = $request->doctor_id;
+            $escrow->amount = $phone; 
+            $escrow->save();
+           
         }
         $patient->update();
-        $doctor->update();
         $patient->notify(new PatientBookingNotification($book));
         $doctor->notify(new DoctorBookingNotification($book));
 
@@ -283,7 +301,7 @@ class PatientController extends Controller
                 'message' => 'Time period in which you can cancel booking has been elapsed.',
             ]);
         };
-        $doctor = User::select('chat_rate', 'video_rate','id')->where('id', $booking->doctor_id)->first();
+        $doctor = User::select('chat_rate', 'video_rate','phone_rate','id')->where('id', $booking->doctor_id)->first();
 
         if ($booking->book_type == 'video') {
             $user = User::find(auth()->user()->id);
@@ -295,9 +313,20 @@ class PatientController extends Controller
             $user->balance = $user->balance + $doctor->chat_rate;
             $user->update();
         }
+        if ($booking->book_type == 'phone') {
+            $user = User::find(auth()->user()->id);
+            $user->balance = $user->balance + $doctor->phone_rate;
+            $user->update();
+        }
+
+        $escrow = EscrowTransaction::where('booking_id',$booking->id)->where('doctor_id',$booking->doctor_id)->where('patient_id',$booking->patient_id)->first();
+        $escrow->completed = true;
+        $escrow->save();
+
         $doctor->notify(new DoctorCancellationNotification($booking));
 
-        $booking->delete();
+        $booking->status = 3;
+        $booking->save();
 
         return response()->json([
             'status' => 200,

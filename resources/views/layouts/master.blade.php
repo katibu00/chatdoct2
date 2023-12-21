@@ -218,13 +218,13 @@
                                             <div class="separator my-2"></div>
 
                                             @if ($user->role == 'patient')
-                                                <div class="menu-item px-5">
+                                                {{-- <div class="menu-item px-5">
                                                     <a href="{{ route('doctor.apply') }}" class="menu-link px-5">
                                                         <span class="menu-text">Apply As Doctor</span>
                                                         <span class="menu-badge">
                                                         </span>
                                                     </a>
-                                                </div>
+                                                </div> --}}
                                                 <div class="menu-item px-5">
                                                     <a href="{{ route('wallet') }}" class="menu-link px-5">Fund
                                                         Account</a>

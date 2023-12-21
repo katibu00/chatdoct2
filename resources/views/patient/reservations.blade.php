@@ -37,11 +37,13 @@
                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="false"
                                         data-placeholder="Select option" data-allow-clear="true"
-                                        data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter" name="status">
+                                        data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter"
+                                        name="status">
                                         <option value="all">All</option>
                                         <option value="1">Initiated</option>
                                         <option value="0">Uninitiated</option>
                                         <option value="2">Completed</option>
+                                        <option value="3">Cancelled</option>
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -56,7 +58,7 @@
                 </div>
             </div>
             <div class="row g-6 g-xl-9">
-                @foreach ($doctors as $key => $doctor)
+                @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
                             <div class="card-body pb-0">
@@ -64,10 +66,11 @@
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <div class="symbol symbol-45px me-5">
                                             <img @if ($doctor['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['book']['picture'] }}" @endif
-                                                alt=""  />
+                                                alt="" />
                                         </div>
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('doctors.details', $doctor['book']['number']) }}" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Dr.
+                                            <a href="{{ route('doctors.details', $doctor['book']['number']) }}"
+                                                class="text-gray-800 text-hover-primary fs-6 fw-bolder">Dr.
                                                 {{ $doctor['book']['first_name'] }} {{ $doctor['book']['middle_name'] }}
                                                 {{ $doctor['book']['last_name'] }}</a>
                                             <span class="text-gray-400 fw-bold">Booked
@@ -82,14 +85,14 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
                                                     viewBox="0 0 24 24">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="5" y="5" width="5" height="5"
-                                                            rx="1" fill="#000000" />
-                                                        <rect x="14" y="5" width="5" height="5"
-                                                            rx="1" fill="#000000" opacity="0.3" />
-                                                        <rect x="5" y="14" width="5" height="5"
-                                                            rx="1" fill="#000000" opacity="0.3" />
-                                                        <rect x="14" y="14" width="5" height="5"
-                                                            rx="1" fill="#000000" opacity="0.3" />
+                                                        <rect x="5" y="5" width="5" height="5" rx="1"
+                                                            fill="#000000" />
+                                                        <rect x="14" y="5" width="5" height="5" rx="1"
+                                                            fill="#000000" opacity="0.3" />
+                                                        <rect x="5" y="14" width="5" height="5" rx="1"
+                                                            fill="#000000" opacity="0.3" />
+                                                        <rect x="14" y="14" width="5" height="5" rx="1"
+                                                            fill="#000000" opacity="0.3" />
                                                     </g>
                                                 </svg>
                                             </span>
@@ -105,131 +108,167 @@
                                                     Booking</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 adjust_time" data-bs-toggle="modal"
-                                                    data-bs-target="#adjust_time_modal"
+                                                <a href="#" class="menu-link px-3 adjust_time"
+                                                    data-bs-toggle="modal" data-bs-target="#adjust_time_modal"
                                                     data-booking_id="{{ $doctor->id }}"
                                                     data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Adjust
                                                     Time</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 change_booking" data-bs-toggle="modal"
-                                                    data-bs-target="#change_booking_modal"
+                                                <a href="#" class="menu-link px-3 change_booking"
+                                                    data-bs-toggle="modal" data-bs-target="#change_booking_modal"
                                                     data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Change booking Type</a>
+                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Change
+                                                    booking Type</a>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="d-flex flex-wrap mb-5">
                                     <div class="row">
-                                       
-                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                         <div class="d-flex align-items-center mb-">
-                                             <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Pre-consultation Form</span>
-                                                @if ($doctor->pre_consultation == 1)                                         
-                                                <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                                     <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="black" />
-                                                 </svg>
-                                                </span>
-                                                 @else
-                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                @endif
-                                         </div>
-                                     </div>
-                                
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                         <div class="d-flex align-items-center mb-">
-                                             <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Prescription</span>
-                                            
-                                                @if ($doctor->prescription == 1) 
-                                                <span class="svg-icon svg-icon-1 svg-icon-success">                                            
-                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                                     <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="black" />
-                                                 </svg>
-                                                </span>
-                                                 @else
-                                                 <span class="svg-icon svg-icon-1 svg-icon-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-                                                        <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black" />
-                                                        <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="black" />
-                                                    </svg>
-                                                </span>
-                                                @endif
-                                         </div>
-                                     </div>
-                            
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                         <div class="d-flex align-items-center mb-">
-                                             <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Booking Type</span>
-                                             <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                @if ($doctor->book_type == 'chat')                                             
-                                                <span class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
-                                                 @elseif($doctor->book_type == 'video')
-                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Video Chat</span>
-                                                 @elseif($doctor->book_type == 'phone')
-                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">Phone Call</span>
-                                                @endif
-                                             </span>
-                                         </div>
-                                     </div>
-                                    
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                         <div class="d-flex align-items-center mb-">
-                                             <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Block</span>
-                                             <span class="svg-icon svg-icon-1 svg-icon-success">
-                                               
-                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->time_slot }}</span>
-                                                
-                                             </span>
-                                         </div>
-                                     </div>
 
-                                     <div
-                                        class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                        <div class="d-flex align-items-center mb-">
-                                            <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
-                                                @if($doctor->status == 0)
-                                                <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting Time Appointment</span>
-                                                @elseif($doctor->status == 1)
-                                                <span class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
-                                                @elseif($doctor->status == 2)
-                                                <span class="badge badge-info fw-bolder me-auto px-4 py-3">completed</span>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Pre-consultation
+                                                    Form</span>
+                                                @if ($doctor->pre_consultation == 1)
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <path
+                                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <rect x="7" y="15.3137" width="12" height="2"
+                                                                rx="1" transform="rotate(-45 7 15.3137)"
+                                                                fill="black" />
+                                                            <rect x="8.41422" y="7" width="12" height="2"
+                                                                rx="1" transform="rotate(45 8.41422 7)"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
                                                 @endif
-                                            
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span
+                                                    class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Prescription</span>
+
+                                                @if ($doctor->prescription == 1)
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <path
+                                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <rect x="7" y="15.3137" width="12" height="2"
+                                                                rx="1" transform="rotate(-45 7 15.3137)"
+                                                                fill="black" />
+                                                            <rect x="8.41422" y="7" width="12" height="2"
+                                                                rx="1" transform="rotate(45 8.41422 7)"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Booking
+                                                    Type</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                    @if ($doctor->book_type == 'chat')
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
+                                                    @elseif($doctor->book_type == 'video')
+                                                        <span class="badge badge-light fw-bolder me-auto px-4 py-3">Video
+                                                            Chat</span>
+                                                    @elseif($doctor->book_type == 'phone')
+                                                        <span class="badge badge-light fw-bolder me-auto px-4 py-3">Phone
+                                                            Call</span>
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Block</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+
+                                                    <span
+                                                        class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->time_slot }}</span>
+
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
+                                                @if ($doctor->status == 0)
+                                                    <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting
+                                                        Time Appointment</span>
+                                                @elseif($doctor->status == 1)
+                                                    <span
+                                                        class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
+                                                @elseif($doctor->status == 2)
+                                                    <span
+                                                        class="badge badge-info fw-bolder me-auto px-4 py-3">completed</span>
+                                                @elseif($doctor->status == 3)
+                                                    <span
+                                                        class="badge badge-danger fw-bolder me-auto px-4 py-3">Cancelled</span>
+                                                @endif
+
+                                            </div>
+                                        </div>
 
 
-                                     @if($doctor->time !== null)
-                                    <!--begin::Due-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
-                                         <div class="d-flex align-items-center mb-">
-                                             <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact Time</span>
-                                             <span class="svg-icon svg-icon-1 svg-icon-success">
-                                                 <span class="badge badge-light fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', @$doctor->time)->format('h:i A') }}</span>
-                                             </span>
-                                             <!--end::Svg Icon-->
-                                         </div>
-                                     </div>
-                                     <!--end::Due-->
-                                    @endif
+                                        @if ($doctor->time !== null)
+                                            <div
+                                                class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                                <div class="d-flex align-items-center mb-">
+                                                    <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact
+                                                        Time</span>
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', @$doctor->time)->format('h:i A') }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="separator mb-4"></div>
-                                <!--end::Separator-->
-
                                 <div class="symbol-group symbol-hover mb-3">
                                     <div class="" data-bs-toggle="tooltip" title="Fill out the pre-consultation">
                                         <a class="btn btn-sm  btn-bg-info btn-active-color-info text-white doctor"
@@ -237,8 +276,9 @@
                                             data-id="{{ $doctor->id }}">Fill Form</a>
                                     </div>
                                     @if ($doctor->book_type == 'chat')
-                                        @if($doctor->time !== null)
-                                            <div class="ml-1" data-bs-toggle="tooltip" title="Open chat with the doctor">
+                                        @if ($doctor->time !== null)
+                                            <div class="ml-1" data-bs-toggle="tooltip"
+                                                title="Open chat with the doctor">
                                                 <a href="{{ route('chats') }}"
                                                     class="btn btn-sm  btn-bg-light btn-active-color-primary">Chat</a>
                                             </div>
@@ -263,44 +303,28 @@
                                 </div>
 
                             </div>
-                            <!--end::Body-->
                         </div>
                     </div>
 
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">
-                        <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
-                            <!--begin::Modal content-->
                             <div class="modal-content">
-                                <!--begin::Form-->
-
-                                <!--begin::Modal header-->
                                 <div class="modal-header" id="kt_modal_new_address_header">
-                                    <!--begin::Modal title-->
                                     <h2>Video Chat Link from Dr. {{ $doctor['book']['first_name'] }}
                                         {{ $doctor['book']['middle_name'] }} {{ $doctor['book']['last_name'] }}</h2>
-                                    <!--end::Modal title-->
-                                    <!--begin::Close-->
                                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                    height="2" rx="1" transform="rotate(-45 6 17.3137)"
-                                                    fill="black" />
-                                                <rect x="7.41422" y="6" width="16" height="2"
-                                                    rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                    transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->
                                     </div>
-                                    <!--end::Close-->
                                 </div>
-                                <!--end::Modal header-->
-                                <!--begin::Modal body-->
                                 <div class="modal-body py-10 px-lg-17">
-                                    <!--begin::Scroll-->
                                     <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll"
                                         data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                                         data-kt-scroll-max-height="auto"
@@ -308,49 +332,30 @@
                                         data-kt-scroll-wrappers="#kt_modal_new_address_scroll"
                                         data-kt-scroll-offset="300px">
 
-
-
-                                        <!--begin::Input group-->
                                         <div class="row mb-5">
-                                            <!--begin::Col-->
                                             <div class="col-md-12 fv-row">
-                                                <!--begin::Label-->
                                                 <label class="required fs-5 fw-bold mb-2">Link</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
                                                 <textarea name="link" class="form-control form-control-lg form-control-solid" readonly>{{ $doctor->link == '' ? 'Link Not yet Sent.' : $doctor->link }}</textarea>
-
-                                                <!--end::Input-->
                                             </div>
-                                            <!--end::Col-->
                                         </div>
-                                        <!--end::Input group-->
-
-
 
                                     </div>
-                                    <!--end::Scroll-->
                                 </div>
-                                <!--end::Modal body-->
-                                <!--begin::Modal footer-->
                                 <div class="modal-footer flex-center">
-                                    <!--begin::Button-->
                                     <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">OK</button>
-                                    <!--end::Button-->
-
                                 </div>
-                                <!--end::Modal footer-->
-
-                                <!--end::Form-->
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="alert alert-warning" role="alert">You have no recent bookings. When you, they will show
+                        up here.</div>
+                    </td>
+                @endforelse
 
             </div>
         </div>
 
-        <!--begin::Modal - -->
         <div class="modal fade" id="form" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
@@ -363,17 +368,15 @@
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                            height="2" rx="1" transform="rotate(-45 6 17.3137)"
-                                            fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2"
-                                            rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
@@ -399,7 +402,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="row mb-5" id="issomeone1" style="display: none;">
                                     <div class="col-md-12 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Person Name</label>
@@ -407,7 +410,7 @@
                                             name="name" id="name" />
                                     </div>
                                 </div>
-                               
+
                                 <div class="row mb-5" id="issomeone2" style="display: none;">
                                     <div class="col-md-6 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Person Age</label>
@@ -425,7 +428,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row mb-5">
                                     <div class="col-md-12 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Complains</label>
@@ -433,7 +436,7 @@
                                         <input type="hidden" name="get_id" id="get_id" />
                                     </div>
                                 </div>
-                               
+
                                 <div class="row mb-5">
                                     <label class="fs-5 fw-bold mb-2">Vital Signs (if available)</label>
                                     <div class="col-md-4 fv-row">
@@ -467,7 +470,7 @@
                                             placeholder="" name="weight" id="weight" />
                                     </div>
                                 </div>
-                              
+
                                 <div class="row mb-5">
                                     <div class="col-md-12 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Medical History</label>
@@ -498,8 +501,8 @@
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                        rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black" />
                                     <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                         transform="rotate(45 7.41422 6)" fill="black" />
                                 </svg>
@@ -515,7 +518,7 @@
                                 <option value="chat">Chat</option>
                                 <option value="video">Video Chat</option>
                                 <option value="phone">Phone Call</option>
-                               
+
                             </select>
                         </div>
                     </div>
@@ -536,8 +539,8 @@
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                        rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black" />
                                     <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                         transform="rotate(45 7.41422 6)" fill="black" />
                                 </svg>
@@ -547,8 +550,8 @@
                     <div class="modal-body py-10 px-lg-17">
 
                         <div class="col-md-6 fv-row">
-                            <select name="time_slot" id="time_slot" class="form-select form-select-solid mb-3" data-control="select2"
-                                data-hide-search="true" data-placeholder="Time Slot...">
+                            <select name="time_slot" id="time_slot" class="form-select form-select-solid mb-3"
+                                data-control="select2" data-hide-search="true" data-placeholder="Time Slot...">
                                 <option></option>
                                 <option value="Morning">Morning (6AM - 11:59PM)</option>
                                 <option value="Noon">Afternoon (12PM - 5:59PM)</option>
@@ -575,8 +578,8 @@
                             <span class="svg-icon svg-icon-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none">
-                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                        rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                        transform="rotate(-45 6 17.3137)" fill="black" />
                                     <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                         transform="rotate(45 7.41422 6)" fill="black" />
                                 </svg>
@@ -723,30 +726,11 @@
                     dataType: "json",
                     success: function(response) {
 
-
                         if (response.status == 400) {
-
                             $('.change_book_btn').text("Continue");
                             $('.change_book_btn').attr("disabled", false);
                             $('#change_booking_modal').modal('hide');
                             Command: toastr["error"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
 
                         }
                         if (response.status == 200) {
@@ -755,23 +739,7 @@
                             $('.change_book_btn').attr("disabled", false);
                             $('#change_booking_modal').modal('hide');
                             Command: toastr["success"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
+
                             window.location.replace('{{ route('reservations') }}');
                         }
 
@@ -781,23 +749,6 @@
                             Command: toastr["error"](
                                 "Session expired. please login again."
                             );
-                            toastr.options = {
-                                closeButton: false,
-                                debug: false,
-                                newestOnTop: false,
-                                progressBar: false,
-                                positionClass: "toast-top-right",
-                                preventDuplicates: false,
-                                onclick: null,
-                                showDuration: "300",
-                                hideDuration: "1000",
-                                timeOut: "5000",
-                                extendedTimeOut: "1000",
-                                showEasing: "swing",
-                                hideEasing: "linear",
-                                showMethod: "fadeIn",
-                                hideMethod: "fadeOut",
-                            };
 
                             setTimeout(() => {
                                 window.location.replace('{{ route('login') }}');
@@ -838,23 +789,6 @@
                             $('.adjust_btn').attr("disabled", false);
                             // $('#cancel_booking_modal').modal('hide');
                             Command: toastr["error"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
 
                         }
                         if (response.status == 200) {
@@ -863,23 +797,7 @@
                             $('.adjust_btn').attr("disabled", false);
                             $('#adjust_time_modal').modal('hide');
                             Command: toastr["success"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
+
                             window.location.replace('{{ route('reservations') }}');
                         }
 
@@ -889,23 +807,6 @@
                             Command: toastr["error"](
                                 "Session expired. please login again."
                             );
-                            toastr.options = {
-                                closeButton: false,
-                                debug: false,
-                                newestOnTop: false,
-                                progressBar: false,
-                                positionClass: "toast-top-right",
-                                preventDuplicates: false,
-                                onclick: null,
-                                showDuration: "300",
-                                hideDuration: "1000",
-                                timeOut: "5000",
-                                extendedTimeOut: "1000",
-                                showEasing: "swing",
-                                hideEasing: "linear",
-                                showMethod: "fadeIn",
-                                hideMethod: "fadeOut",
-                            };
 
                             setTimeout(() => {
                                 window.location.replace('{{ route('login') }}');
@@ -943,23 +844,7 @@
                             $('.cancel_btn').attr("disabled", false);
                             $('.cancel_booking_modal').modal('hide');
                             Command: toastr["success"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
+
                             window.location.replace('{{ route('reservations') }}');
                         }
                         if (response.status == 400) {
@@ -967,23 +852,7 @@
                             $('.cancel_btn').attr("disabled", false);
                             $('.cancel_booking_modal').modal('hide');
                             Command: toastr["error"](response.message)
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
+
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
@@ -991,23 +860,7 @@
                             Command: toastr["error"](
                                 "Session expired. please login again."
                             );
-                            toastr.options = {
-                                closeButton: false,
-                                debug: false,
-                                newestOnTop: false,
-                                progressBar: false,
-                                positionClass: "toast-top-right",
-                                preventDuplicates: false,
-                                onclick: null,
-                                showDuration: "300",
-                                hideDuration: "1000",
-                                timeOut: "5000",
-                                extendedTimeOut: "1000",
-                                showEasing: "swing",
-                                hideEasing: "linear",
-                                showMethod: "fadeIn",
-                                hideMethod: "fadeOut",
-                            };
+
 
                             setTimeout(() => {
                                 window.location.replace('{{ route('login') }}');

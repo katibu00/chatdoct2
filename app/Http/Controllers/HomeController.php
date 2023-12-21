@@ -12,31 +12,17 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+use App\Models\AdminEarning;
+use App\Models\Preferences;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function admin()
-    {
-        $data['patients'] = User::where('role','patient')->get()->count();
-        $data['doctors'] = User::where('role','doctor')->get()->count();
-        $data['admins'] = User::where('role','admin')->get()->count();
-        $data['balance'] = User::sum('balance');
-        return view('admin',$data);
-    }
     public function doctor()
     {
 
@@ -105,6 +91,98 @@ class HomeController extends Controller
 
         return view('patient',$data);
     }
+
+
+
+
+
+
+
+
+public function admin()
+{
+    // Previous 30 days date for user registrations
+    $start_date_users = Carbon::now()->subDays(30);
+
+    // Count user registrations within the last 30 days
+    $userRegistrations = User::where('created_at', '>=', $start_date_users)
+        ->get()
+        ->groupBy(function ($date) {
+            return Carbon::parse($date->created_at)->format('d M');
+        });
+
+    // Extract date labels and user counts
+    $userRegistrationLabels = $userRegistrations->keys();
+    $userRegistrationCounts = $userRegistrations->values()->map->count();
+
+    // Previous 7 days date for admin earnings
+    $start_date_earnings = Carbon::now()->subDays(7);
+
+    // Get admin earnings within the last 7 days
+    $adminEarningsLast7Days = AdminEarning::where('created_at', '>=', $start_date_earnings)->sum('amount');
+
+    // Get total admin earnings
+    $totalAdminEarnings = AdminEarning::sum('amount');
+
+    // Get preferences for commission rate
+    $preferences = Preferences::find(1);
+    $commissionRate = $preferences->commission;
+
+    // Other data
+    $patients = User::where('role', 'patient')->count();
+    $doctors = User::where('role', 'doctor')->count();
+    $admins = User::where('role', 'admin')->count();
+    $balance = User::sum('balance');
+    $commision = $commissionRate;
+
+
+    $endDate = now(); // Today's date
+    $startDate = now()->subDays(14); // 15 days ago
+
+    $dates = [];
+    $userCounts = [];
+
+    for ($date = $startDate; $date <= $endDate; $date->addDay()) {
+        $day = $date->format('Y-m-d');
+        $count = User::whereDate('created_at', $day)->count();
+
+        $dates[] = $day;
+        $userCounts[] = $count;
+    }
+
+    // Convert dates to JSON for use in JavaScript
+    $datesJson = json_encode($dates);
+    $userCountsJson = json_encode($userCounts);
+
+    $totalBookings = Booking::count();
+    $completedBookings = Booking::where('status', 2)->count();
+    $cancelledBookings = Booking::where('status', 3)->count();
+    $unattendedBookings = Booking::where('status', 0)->count();
+    $activeBookings = Booking::where('status', 1)->count();
+
+
+
+
+    return view('admin', compact(
+        'patients',
+        'doctors',
+        'admins',
+        'balance',
+        'userRegistrationLabels',
+        'userRegistrationCounts',
+        'adminEarningsLast7Days',
+        'datesJson',
+        'userCountsJson',
+        'totalAdminEarnings',
+        'commision',
+        'totalBookings',
+        'completedBookings',
+        'cancelledBookings',
+        'unattendedBookings',
+        'activeBookings'
+    ));
+}
+
 
 
 }

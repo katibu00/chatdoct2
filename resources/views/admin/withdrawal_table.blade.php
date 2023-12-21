@@ -1,3 +1,8 @@
+@php
+$query = App\Models\Preferences::find(1);
+$commision = @$query->commission;
+@endphp
+
 <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
     <thead>
         <tr class="border-bottom-0">
@@ -5,6 +10,8 @@
             <th class="p-0 mi1n-w-175px">Doctor</th>
             <th class="p-0 min-w-175px">Date</th>
             <th class="p-0 min-w-175px">Amount</th>
+            <th class="p-0 min-w-175px">Payout</th>
+            <th class="p-0 min-w-175px">Comm. ({{ $commision }}%)</th>
             <th class="p-0 min-w-150px">Status</th>
             <th class="p-0 min-w-150px">Action</th>
         </tr>
@@ -24,9 +31,20 @@
                     <span
                         class="text-dark fw-bolder d-block fs-6">{{ $payment->created_at->diffForHumans() }}</span>
                 </td>
+                @php
+                   $commision_charged = $payment->amount * $commision/100
+                @endphp
                 <td>
                     <span
-                        class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($payment->amount, 0) }}</span>
+                        class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($payment->amount,0) }}</span>
+                </td>
+                <td>
+                    <span
+                        class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($payment->amount - $commision_charged, 0) }}</span>
+                </td>
+                <td>
+                    <span
+                        class="text-dark fw-bolder d-block fs-6">&#8358;{{ number_format($commision_charged, 0) }}</span>
                 </td>
                 <td>
                     <span class="text-dark fw-bolder d-block fs-6">

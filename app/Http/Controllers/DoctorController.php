@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\EscrowTransaction;
 use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\User;
@@ -189,7 +190,16 @@ class DoctorController extends Controller
         $booking->status = 2;
         $booking->update();
         $patient = User::find($booking->patient_id);
+        $doctor = User::find($booking->doctor_id);
         $patient->notify(new PatientCompletionNotification($booking));
+
+        $escrow = EscrowTransaction::where('booking_id',$booking->id)->where('doctor_id',$booking->doctor_id)->where('patient_id',$booking->patient_id)->first();
+        $escrow->completed = true;
+        $escrow->save();
+
+        $doctor->balance  += $escrow->amount;
+        $doctor->total_earning  += $escrow->amount;
+        $doctor->update();
 
         Toastr::success('Booking Marked Completed Successfully.', 'Done');
         return redirect()->route('doctor.patients');

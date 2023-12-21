@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MonnifyAPIController;
 use App\Http\Controllers\PagesController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -75,6 +76,7 @@ Route::get('/chats', function () {
     return view('test');
 })->name('chats');
 
+Route::post('/get-transfers',  [MonnifyAPIController::class, 'getTransfers']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
