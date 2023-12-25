@@ -7,6 +7,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\ReservedAccount;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +19,20 @@ use Unicodeveloper\Paystack\Paystack;
 class WalletController extends Controller
 {
     public function index(){
-        return view('finance.wallet');
+
+        $query = ReservedAccount::where('user_id', auth()->user()->id)->first();
+
+        if ($query) {
+            $data['accounts'] = json_decode($query->accounts, true);
+        } else {
+            $data['accounts'] = [];
+        }
+        return view('finance.wallet', $data);
+    }
+    public function paystackIndex(){
+
+
+        return view('finance.paystack');
     }
 
 

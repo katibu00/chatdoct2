@@ -156,6 +156,7 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth']], function(){
     Route::get('/reservations', [App\Http\Controllers\PatientController::class, 'MyReservations'])->name('reservations');
     Route::post('/reservations', [App\Http\Controllers\PatientController::class, 'PreFormSave'])->name('reservations');
     Route::get('/wallet', [App\Http\Controllers\WalletController::class, 'index'])->name('wallet');
+    Route::get('/wallet/pay_with_paystack', [App\Http\Controllers\WalletController::class, 'paystackIndex'])->name('pay_with_paystack');
 
     Route::get('/prescription/download/{id}', [App\Http\Controllers\PatientController::class, 'download'])->name('download');
 

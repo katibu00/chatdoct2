@@ -1,101 +1,64 @@
 @extends('layouts.master')
 @section('PageTitle','Wallet')
 @section('content')
-@php
-    $user = Auth::user();
-@endphp
 
-	<!--begin::Post-->
-    <div class="post d-flex flex-column-fluid" id="kt_post">
-        <div id="kt_content_container" class="container-xxl">
-          
-            <div class="card mb-5 mb-xl-10">
+<div class="container-xxl mt-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Pay Online</h3>
+                        <h3 class="fw-bold m-0">Wallet Balance</h3>
                     </div>
                 </div>
-             
-                <div id="kt_account_profile_details" class="collapse show">
-                    <!--begin::Form-->
-                    <form class="form" action="{{route('pay')}}" method="post">
-                       @csrf
-                        <!--begin::Card body-->
-                        <div class="card-body border-top p-9">
-                          
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
-                             
-                                <div class="col-lg-8">
-                                    <div class="row">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6 fv-row">
-                                            <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{$user->first_name}}" />
-                                        </div>                        
-                                        <div class="col-lg-6 fv-row">
-                                            <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{$user->last_name}}" />
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                </div>
-                            </div>
-                           
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span class="required">Contact Phone</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
-                                </label>
-                               
-                                <div class="col-lg-8 fv-row">
-                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="{{$user->phone}}" />
-                                    @error('phone')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                                </div>
-                            </div>
-                           
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span class="required">Email</span>
-                                </label>
-                             
-                                <div class="col-lg-8 fv-row">
-                                    <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Enter your Age" value="{{$user->email}}" />
-                                    @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                                </div>
-                            </div>
-                          
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span class="required">Amount</span>
-                                </label>
-                                <div class="col-lg-8 fv-row">
-                                    <input type="number" name="amount" class="form-control form-control-lg form-control-solid" placeholder="Enter the amount"  />
-                                    @error('amount')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
-                            <input type="hidden" name="currency" value="NGN">
-                   
             
-             
+                <div id="kt_account_profile_details" class="collapse show">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-4">
+                            <h4 class="fw-bold">Current Balance: &#x20A6;{{number_format(Auth::user()->balance,0)}}</h4>
+                            <a href="{{ route('wallet') }}" class="btn btn-primary btn-sm">Refresh Balance</a>
                         </div>
-                       
-                        <div class="card-footer d-flex justify-content-end py-6 px-9">
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Proceed to Payment</button>
+
+                        <div class="mb-4">
+                            <h5 class="fw-bold">Add Funds to Your Account</h5>
+                           
+
+                            <div class="d-flex">
+                                <a href="{{ route('pay_with_paystack') }}" class="btn btn-success me-3">Pay with Paystack</a>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Reserved Account Details -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Bank Transfer Details</h5>
+
+                    @if(is_array($accounts) && count($accounts) > 0)
+                    @foreach($accounts as $key => $account)
+                    <div class="mb-3 {{ $loop->first ? 'border-top pt-3': '' }}">
+                        <p class="mb-1">Account Name: {{ $account['accountName'] }}</p>
+                        <p class="mb-1">Account Number: {{ $account['accountNumber'] }}</p>
+                        <p class="mb-1">Bank Name: {{ $account['bankName'] }}</p>
+                        {{-- <p class="mb-0">Charges: 5 per transfer</p> --}}
+                    </div>
+                </div>
+                @endforeach
+            @endif
+                  
+                    <p class="fw-bold mb-1">Transfer Instructions:</p>
+                    <ul class="list-unstyled">
+                        <li>1. Make a bank transfer using the provided account details.</li>
+                        <li>2. Wait 5 - 10 minutes and refresh your wallet balance again.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!--end::Post-->
+</div>
 
 @endsection
