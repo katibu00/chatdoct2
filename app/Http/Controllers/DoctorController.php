@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\EscrowTransaction;
-use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\User;
 use App\Models\WithdrawalRequest;
@@ -170,7 +169,6 @@ class DoctorController extends Controller
 
         return view('doctor.reservations', $data);
     }
-    
 
     public function markComplete($id)
     {
