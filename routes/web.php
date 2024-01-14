@@ -74,7 +74,7 @@ Route::get('/terms', function(){
 
 Route::get('/chats', function () {
     return view('test');
-})->name('chats');
+})->name('chats')->middleware('auth');
 
 Route::post('/get-transfers',  [MonnifyAPIController::class, 'getTransfers']);
 

@@ -2390,25 +2390,10 @@ var render = function render() {
     attrs: {
       id: "kt_chat_messenger_body"
     }
-  }, [_c("div", {
-    directives: [{
-      name: "chat-scroll",
-      rawName: "v-chat-scroll"
-    }],
-    staticClass: "scroll-y me-n5 pe-5 h-300px h-lg-auto",
-    attrs: {
-      "data-kt-element": "messages",
-      "data-kt-scroll": "true",
-      "data-kt-scroll-activate": "{default: false, lg: true}",
-      "data-kt-scroll-max-height": "auto",
-      "data-kt-scroll-dependencies": "#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer",
-      "data-kt-scroll-wrappers": "#kt_content, #kt_chat_messenger_body",
-      "data-kt-scroll-offset": "-2px"
-    }
   }, _vm._l(_vm.userMessage.messages, function (message) {
     return _c("div", {
       key: message.id
-    }, [message.user.id == _vm.userMessage.user.id ? _c("div", {
+    }, [message.user.id !== _vm.userMessage.user.id ? _c("div", {
       staticClass: "d-flex justify-content-end mb-10",
       attrs: {
         "data-kt-element": "template-out"
@@ -2421,13 +2406,13 @@ var render = function render() {
       staticClass: "me-3"
     }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "dddd, MMMM Do YYYY, h:mm:ss a")))]), _vm._v(" "), _c("a", {
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))]), _vm._v(" "), _c("a", {
       staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary ms-1",
       attrs: {
         href: "#"
       }
     }, [_vm._v("Me")])])]), _vm._v(" "), _c("div", {
-      staticClass: "p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end",
+      staticClass: "p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-end",
       attrs: {
         "data-kt-element": "message-text"
       }
@@ -2447,15 +2432,15 @@ var render = function render() {
       attrs: {
         href: "#"
       }
-    }, [_vm._v("Doctor")]), _vm._v(" "), _c("span", {
+    }, [_vm._v("Dr. " + _vm._s(message.user.first_name) + " " + _vm._s(message.user.middle_name) + " " + _vm._s(message.user.last_name))]), _vm._v(" "), _c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "dddd, MMMM Do YYYY, h:mm:ss a")))])])]), _vm._v(" "), _c("div", {
-      staticClass: "p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start",
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
+      staticClass: "p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-start",
       attrs: {
         "data-kt-element": "message-text"
       }
     }, [_vm._v(_vm._s(message.message))])])])]);
-  }), 0)]), _vm._v(" "), _c("div", {
+  }), 0), _vm._v(" "), _c("div", {
     staticClass: "card-footer pt-4",
     attrs: {
       id: "kt_chat_messenger_footer"
@@ -2670,7 +2655,7 @@ var render = function render() {
   }, _vm._l(_vm.userMessage.messages, function (message) {
     return _c("div", {
       key: message.id
-    }, [message.user.id === _vm.userMessage.user.id ? _c("div", {
+    }, [message.user.id !== _vm.userMessage.user.id ? _c("div", {
       staticClass: "d-flex justify-content-end mb-10",
       attrs: {
         "data-kt-element": "template-out"
@@ -2683,12 +2668,12 @@ var render = function render() {
       staticClass: "me-3"
     }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "dddd, MMMM Do YYYY, h:mm:ss a")))]), _vm._v(" "), _c("a", {
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))]), _vm._v(" "), _c("a", {
       staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary ms-1",
       attrs: {
         href: "#"
       }
-    }, [_vm._v("Me")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("Me")])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end",
       attrs: {
         "data-kt-element": "message-text"
@@ -2702,7 +2687,7 @@ var render = function render() {
       staticClass: "d-flex flex-column align-items-start"
     }, [_c("div", {
       staticClass: "d-flex align-items-center mb-2"
-    }, [_vm._m(2, true), _vm._v(" "), _c("div", {
+    }, [_c("div", {
       staticClass: "ms-3"
     }, [_c("a", {
       staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary me-1",
@@ -2711,7 +2696,7 @@ var render = function render() {
       }
     }, [_vm._v(_vm._s(message.user.first_name) + " " + _vm._s(message.user.middle_name) + " " + _vm._s(message.user.last_name))]), _vm._v(" "), _c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "dddd, MMMM Do YYYY, h:mm:ss a")))])])]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start",
       attrs: {
         "data-kt-element": "message-text"
@@ -2760,7 +2745,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "d-flex flex-stack"
-  }, [_vm._m(3), _vm._v(" "), _vm.userMessage.user ? _c("button", {
+  }, [_vm._m(1), _vm._v(" "), _vm.userMessage.user ? _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button",
@@ -2782,28 +2767,6 @@ var staticRenderFns = [function () {
   }, [_c("i", {
     staticClass: "bi bi-arrow-left"
   })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "symbol symbol-35px symbol-circle"
-  }, [_c("span", {
-    staticClass: "text-light fs-6 fw-bolder",
-    staticStyle: {
-      color: "#6c757d"
-    }
-  }, [_vm._v("Me")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "symbol symbol-35px symbol-circle"
-  }, [_c("span", {
-    staticClass: "fs-6 fw-bolder",
-    staticStyle: {
-      color: "#000"
-    }
-  }, [_vm._v("Patient")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
