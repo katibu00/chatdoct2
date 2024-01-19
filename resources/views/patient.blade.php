@@ -123,8 +123,12 @@
                                 <img @if (!empty($booking['book']['picture']) && $booking['book']['picture'] == 'default.png') src="/uploads/default.png" @elseif (!empty($booking['book']['picture'])) src="/uploads/avatar/{{ $booking['book']['picture'] }}" @endif class="" alt="" />
                             </div>
                             <div class="flex-grow-1">
-                                <a href="{{ route('reservations') }}" class="text-dark fw-bolder text-hover-primary fs-6">Dr. {{$booking['book']['first_name']}} {{$booking['book']['last_name']}}</a>
-                                <span class="text-muted d-block fw-bold">
+                                <a href="{{ route('reservations') }}" class="text-dark fw-bolder text-hover-primary fs-6">
+                                    @if (!empty($booking['book']))
+                                        Dr. {{ $booking['book']['first_name'] ?? '' }} {{ $booking['book']['last_name'] ?? '' }}
+                                    @endif
+                                </a>
+                                    <span class="text-muted d-block fw-bold">
                                     <span class="badge badge-light-info fs-7 fw-bolder">{{$booking->book_type}}</span>
                                     {!! $booking->pre_consultation == 1? '<span class="badge badge-light-success mb-1">form filled</span>' : '<span class="badge badge-light-danger mb-1">Form not filled</span>' !!}
                                     {!! $booking->prescription == 1? '<span class="badge badge-light-success mb-1">Prescribed</span>' : '<span class="badge badge-light-danger mb-1">Not Prescribed</span>' !!}
