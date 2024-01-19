@@ -120,7 +120,7 @@
                         @forelse ($recent as $key => $booking)
                         <div class="d-flex align-items-center mb-7">
                             <div class="symbol symbol-50px me-5">
-                                <img @if ($booking['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $booking['book']['picture'] }}" @endif class="" alt="" />
+                                <img @if (!empty($booking['book']['picture']) && $booking['book']['picture'] == 'default.png') src="/uploads/default.png" @elseif (!empty($booking['book']['picture'])) src="/uploads/avatar/{{ $booking['book']['picture'] }}" @endif class="" alt="" />
                             </div>
                             <div class="flex-grow-1">
                                 <a href="{{ route('reservations') }}" class="text-dark fw-bolder text-hover-primary fs-6">Dr. {{$booking['book']['first_name']}} {{$booking['book']['last_name']}}</a>
