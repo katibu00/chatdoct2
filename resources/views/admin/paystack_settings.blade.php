@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('PageTitle', 'Monnify API Settings')
+@section('PageTitle', 'Paystack API Settings')
 
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -9,11 +9,10 @@
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
                     data-bs-target="#sms_settings" aria-expanded="true" aria-controls="sms_settings">
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Monnify API Settings</h3>
+                        <h3 class="fw-bolder m-0">Paystack API Settings</h3>
                     </div>
                 </div>
-                <div id="sms_settings" class="collapse show">
-                    @if(session('success'))
+                @if(session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
@@ -28,7 +27,9 @@
                                 </ul>
                             </div>
                         @endif
-                    <form class="form" action="{{ route('monnify.api') }}" method="post">
+                <div id="sms_settings" class="collapse show">
+                    
+                    <form class="form" action="{{ route('paystack.api') }}" method="post">
                         @csrf
                         <div class="card-body border-top p-9">
                             <!-- SMS API URL -->
@@ -39,7 +40,7 @@
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="secret_key"
                                         class="form-control form-control-lg form-control-solid"
-                                        placeholder="Secret Key" value="{{ @$monnifyKeys->secret_key }}" />
+                                        placeholder="Secret Key" value="{{ @$paystackKeys->secret_key }}" />
                                     @error('secret_key')
                                         <span class="text-danger">{{ @$message }}</span>
                                     @enderror
@@ -52,25 +53,13 @@
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="public_key"
                                         class="form-control form-control-lg form-control-solid"
-                                        placeholder="Public Key" value="{{ @$monnifyKeys->public_key }}" />
+                                        placeholder="Public Key" value="{{ @$paystackKeys->public_key }}" />
                                     @error('public_key')
                                         <span class="text-danger">{{ @$message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    Contract Code
-                                </label>
-                                <div class="col-lg-8 fv-row">
-                                    <input type="text" name="contract_code"
-                                        class="form-control form-control-lg form-control-solid"
-                                        placeholder="Contract Code" value="{{ @$monnifyKeys->contract_code }}" />
-                                    @error('contract_code')
-                                        <span class="text-danger">{{ @$message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                           
                             
                            
                         </div>
@@ -82,5 +71,4 @@
             </div>
         </div>
     </div>
-    <!--end::Post-->
 @endsection

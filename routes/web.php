@@ -207,6 +207,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function()
     Route::get('/monnify_api', [App\Http\Controllers\MonnifyAPIController::class, 'index'])->name('monnify.api');
     Route::post('/monnify_api', [App\Http\Controllers\MonnifyAPIController::class, 'store']);
 
+    Route::get('/paystack_api', [App\Http\Controllers\PaystackAPIController::class, 'index'])->name('paystack.api');
+    Route::post('/paystack_api', [App\Http\Controllers\PaystackAPIController::class, 'store']);
+
     Route::get('/withdrawal_requests/index', [App\Http\Controllers\AminWithdrawalRequestController::class, 'index'])->name('withdrawal.index');
     Route::post('/withdrawal_requests/approve', [App\Http\Controllers\AminWithdrawalRequestController::class, 'approve'])->name('withdrawal.approve');
     Route::post('/withdrawal_requests/reject', [App\Http\Controllers\AminWithdrawalRequestController::class, 'reject'])->name('withdrawal.reject');
