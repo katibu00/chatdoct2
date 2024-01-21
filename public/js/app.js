@@ -2406,12 +2406,7 @@ var render = function render() {
       staticClass: "me-3"
     }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))]), _vm._v(" "), _c("a", {
-      staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary ms-1",
-      attrs: {
-        href: "#"
-      }
-    }, [_vm._v("Me")])])]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-end",
       attrs: {
         "data-kt-element": "message-text"
@@ -2427,12 +2422,7 @@ var render = function render() {
       staticClass: "d-flex align-items-center mb-2"
     }, [_c("div", {
       staticClass: "ms-3"
-    }, [_c("a", {
-      staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary me-1",
-      attrs: {
-        href: "#"
-      }
-    }, [_vm._v("Dr. " + _vm._s(message.user.first_name) + " " + _vm._s(message.user.middle_name) + " " + _vm._s(message.user.last_name))]), _vm._v(" "), _c("span", {
+    }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
     }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-start",
@@ -2668,12 +2658,7 @@ var render = function render() {
       staticClass: "me-3"
     }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
-    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))]), _vm._v(" "), _c("a", {
-      staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary ms-1",
-      attrs: {
-        href: "#"
-      }
-    }, [_vm._v("Me")])])]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end",
       attrs: {
         "data-kt-element": "message-text"
@@ -2689,12 +2674,7 @@ var render = function render() {
       staticClass: "d-flex align-items-center mb-2"
     }, [_c("div", {
       staticClass: "ms-3"
-    }, [_c("a", {
-      staticClass: "fs-5 fw-bolder text-gray-900 text-hover-primary me-1",
-      attrs: {
-        href: "#"
-      }
-    }, [_vm._v(_vm._s(message.user.first_name) + " " + _vm._s(message.user.middle_name) + " " + _vm._s(message.user.last_name))]), _vm._v(" "), _c("span", {
+    }, [_c("span", {
       staticClass: "text-muted fs-7 mb-1"
     }, [_vm._v(_vm._s(_vm._f("moment")(message.created_at, "MMM D, h:mm a")))])])]), _vm._v(" "), _c("div", {
       staticClass: "p-5 rounded bg-light-info text-dark fw-bold mw-lg-400px text-start",

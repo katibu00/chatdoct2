@@ -167,7 +167,7 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth']], function(){
 });
 
 Route::post('/pay', [App\Http\Controllers\WalletController::class, 'redirectToGateway'])->name('pay')->middleware('auth');
-Route::get('/payment/callback', [App\Http\Controllers\WalletController::class, 'handleGatewayCallback'])->middleware('auth');
+Route::get('/payment/callback', [App\Http\Controllers\WalletController::class, 'handleGatewayCallback']);
 
 //doctor routes
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){
