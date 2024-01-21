@@ -111,31 +111,34 @@
                                             </span>
                                         </button>
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
-                                            data-kt-menu="true">
-                                            <div class="separator mb-3 opacity-75"></div>
+                                        data-kt-menu="true">
+                                        <div class="separator mb-3 opacity-75"></div>
+                                        
+                                        @if ($doctor['book'])
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 cancel_booking"
-                                                    data-bs-toggle="modal" data-bs-target="#cancel_booking_modal"
-                                                    data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Cancel
-                                                    Booking</a>
+                                                <a href="#" class="menu-link px-3 cancel_booking" data-bs-toggle="modal"
+                                                    data-bs-target="#cancel_booking_modal" data-booking_id="{{ $doctor->id }}"
+                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    Cancel Booking
+                                                </a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 adjust_time"
-                                                    data-bs-toggle="modal" data-bs-target="#adjust_time_modal"
-                                                    data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Adjust
-                                                    Time</a>
+                                                <a href="#" class="menu-link px-3 adjust_time" data-bs-toggle="modal"
+                                                    data-bs-target="#adjust_time_modal" data-booking_id="{{ $doctor->id }}"
+                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    Adjust Time
+                                                </a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 change_booking"
-                                                    data-bs-toggle="modal" data-bs-target="#change_booking_modal"
-                                                    data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">Change
-                                                    booking Type</a>
+                                                <a href="#" class="menu-link px-3 change_booking" data-bs-toggle="modal"
+                                                    data-bs-target="#change_booking_modal" data-booking_id="{{ $doctor->id }}"
+                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    Change booking Type
+                                                </a>
                                             </div>
-
-                                        </div>
+                                        @endif
+                                    </div>
+                                    
                                     </div>
                                 </div>
 
