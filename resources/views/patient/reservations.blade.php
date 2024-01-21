@@ -65,8 +65,15 @@
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <div class="symbol symbol-45px me-5">
-                                            <img @if ($doctor['book']['picture'] == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor['book']['picture'] }}" @endif
-                                                alt="" />
+                                            <img @if ($doctor['book'] && $doctor['book']['picture'])
+                                                @if ($doctor['book']['picture'] == 'default.png')
+                                                    src="/uploads/default.png"
+                                                @else
+                                                    src="/uploads/avatar/{{ $doctor['book']['picture'] }}"
+                                                @endif
+                                            @endif
+                                    >
+                                    
                                         </div>
                                         <div class="d-flex flex-column">
                                             <a href="{{ route('doctors.details', $doctor['book']['number']) }}"
