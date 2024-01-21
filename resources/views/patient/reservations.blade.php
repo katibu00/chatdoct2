@@ -76,13 +76,19 @@
                                     
                                         </div>
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('doctors.details', $doctor['book']['number']) }}"
-                                                class="text-gray-800 text-hover-primary fs-6 fw-bolder">Dr.
-                                                {{ $doctor['book']['first_name'] }} {{ $doctor['book']['middle_name'] }}
-                                                {{ $doctor['book']['last_name'] }}</a>
-                                            <span class="text-gray-400 fw-bold">Booked
-                                                {{ $doctor->created_at->diffForHumans() }}</span>
+                                            @if ($doctor['book'])
+                                                <a href="{{ route('doctors.details', $doctor['book']['number']) }}"
+                                                    class="text-gray-800 text-hover-primary fs-6 fw-bolder">
+                                                    Dr. {{ $doctor['book']['first_name'] ?? '' }}
+                                                    {{ $doctor['book']['middle_name'] ?? '' }}
+                                                    {{ $doctor['book']['last_name'] ?? '' }}
+                                                </a>
+                                                <span class="text-gray-400 fw-bold">
+                                                    Booked {{ $doctor->created_at ? $doctor->created_at->diffForHumans() : '' }}
+                                                </span>
+                                            @endif
                                         </div>
+                                        
                                     </div>
                                     <div class="my-0">
                                         <button type="button"
