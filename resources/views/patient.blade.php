@@ -146,7 +146,7 @@
                 <div class="card card-xl-stretch mb-xl-8">
                     <div class="card-header border-0 pt-5">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder text-dark">Reserved Account Numbers</span>
+                            <span class="card-label fw-bolder text-dark">Wallet</span>
                         </h3>
                         <div class="card-toolbar">
                             <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -171,7 +171,7 @@
                     <div class="card-body pt-5">
                       
                         
-                        <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
+                        {{-- <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
 
                             @if(is_array($accounts) && count($accounts) > 0)
                             @foreach($accounts as $key => $account)
@@ -197,7 +197,10 @@
                                     </div>
                                 @endforeach
                             @endif
-                        </div>
+                        </div> --}}
+                        <p><strong>Wallet Balance:</strong> &#x20A6;{{ number_format(auth()->user()->balance,0) }}</p>
+                        <a href="{{ route('pay_with_paystack') }}" class="btn btn-primary text-hover-primary fs-6">Add Funds</a>
+
 
                     </div>
                 </div>
