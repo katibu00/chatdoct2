@@ -170,43 +170,91 @@ class DoctorController extends Controller
         return view('doctor.reservations', $data);
     }
 
-    public function markComplete($id)
-    {
+    // public function markComplete($id)
+    // {
    
-       $booking = Booking::where('id',$id)->first();
+    //    $booking = Booking::where('id',$id)->first();
 
-       if(auth()->user()->role != 'admin')
-       {
-            if($booking->doctor_id != auth()->user()->id)
-            {
+    //    if(auth()->user()->role != 'admin')
+    //    {
+    //         if($booking->doctor_id != auth()->user()->id)
+    //         {
+    //         Toastr::error('Booking Not for you.', 'Error');
+    //         return redirect()->back();
+    //         }
+    //    }
+       
+    //    if($booking){
+    //     $booking->status = 2;
+    //     $booking->update();
+    //     $patient = User::find($booking->patient_id);
+    //     $doctor = User::find($booking->doctor_id);
+    //     $patient->notify(new PatientCompletionNotification($booking));
+
+    //     $escrow = EscrowTransaction::where('booking_id',$booking->id)->where('doctor_id',$booking->doctor_id)->where('patient_id',$booking->patient_id)->first();
+    //     $escrow->completed = true;
+    //     $escrow->save();
+
+    //     $doctor->balance  += $escrow->amount;
+    //     $doctor->total_earning  += $escrow->amount;
+    //     $doctor->update();
+
+    //     Toastr::success('Booking Marked Completed Successfully.', 'Done');
+    //     return redirect()->route('doctor.patients');
+
+    //    }
+
+    //    Toastr::error('Booking Not found.', 'Error');
+    //    return redirect()->back();
+    // }
+
+
+    public function markComplete($id)
+{
+    $booking = Booking::where('id', $id)->first();
+
+    if (!$booking) {
+        Toastr::error('Booking Not found.', 'Error');
+        return redirect()->back();
+    }
+
+    if (auth()->user()->role != 'admin') {
+        if ($booking->doctor_id != auth()->user()->id) {
             Toastr::error('Booking Not for you.', 'Error');
             return redirect()->back();
-            }
-       }
-       
-       if($booking){
-        $booking->status = 2;
-        $booking->update();
-        $patient = User::find($booking->patient_id);
-        $doctor = User::find($booking->doctor_id);
-        $patient->notify(new PatientCompletionNotification($booking));
-
-        $escrow = EscrowTransaction::where('booking_id',$booking->id)->where('doctor_id',$booking->doctor_id)->where('patient_id',$booking->patient_id)->first();
-        $escrow->completed = true;
-        $escrow->save();
-
-        $doctor->balance  += $escrow->amount;
-        $doctor->total_earning  += $escrow->amount;
-        $doctor->update();
-
-        Toastr::success('Booking Marked Completed Successfully.', 'Done');
-        return redirect()->route('doctor.patients');
-
-       }
-
-       Toastr::error('Booking Not found.', 'Error');
-       return redirect()->back();
+        }
     }
+
+    // Check if the booking is already marked as complete
+    if ($booking->status == 2) {
+        Toastr::warning('Booking is already marked as complete.', 'Warning');
+        return redirect()->back();
+    }
+
+    // Mark the booking as complete
+    $booking->status = 2;
+    $booking->update();
+
+    $patient = User::find($booking->patient_id);
+    $doctor = User::find($booking->doctor_id);
+    $patient->notify(new PatientCompletionNotification($booking));
+
+    $escrow = EscrowTransaction::where('booking_id', $booking->id)
+        ->where('doctor_id', $booking->doctor_id)
+        ->where('patient_id', $booking->patient_id)
+        ->first();
+
+    $escrow->completed = true;
+    $escrow->save();
+
+    $doctor->balance += $escrow->amount;
+    $doctor->total_earning += $escrow->amount;
+    $doctor->update();
+
+    Toastr::success('Booking Marked Completed Successfully.', 'Done');
+    return redirect()->route('doctor.patients');
+}
+
     
     public function appointTime(Request $request)
     {

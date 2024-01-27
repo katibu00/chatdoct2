@@ -91,6 +91,12 @@ class PatientController extends Controller
                 return redirect()->back();
             }
         }
+        if ($request->book_type == 'phone') {
+            if ($balance < $phone) {
+                Toastr::error('Your balance is too low for this transaction. Please fund your wallet and try again.', 'Balance not Enough');
+                return redirect()->back();
+            }
+        }
 
         $check = Booking::where('doctor_id', $request->doctor_id)->where('patient_id', $patient_id)->where('status', 1)->first();
         if ($check) {
