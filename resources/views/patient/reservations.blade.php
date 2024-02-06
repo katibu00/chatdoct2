@@ -58,90 +58,81 @@
                 </div>
             </div>
             <div class="row g-6 g-xl-9">
+                
                 @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
                             <div class="card-body pb-0">
+                            
+
                                 <div class="d-flex align-items-center mb-5">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <div class="symbol symbol-45px me-5">
-                                            <img @if ($doctor['book'] && $doctor['book']['picture'])
-                                                @if ($doctor['book']['picture'] == 'default.png')
-                                                    src="/uploads/default.png"
-                                                @else
-                                                    src="/uploads/avatar/{{ $doctor['book']['picture'] }}"
-                                                @endif
+                                    <div class="symbol symbol-30px me-3">
+                                        <img @if ($doctor['book'] && $doctor['book']['picture'])
+                                            @if ($doctor['book']['picture'] == 'default.png')
+                                                src="/uploads/default.png"
+                                            @else
+                                                src="/uploads/avatar/{{ $doctor['book']['picture'] }}"
                                             @endif
-                                    >
-                                    
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            @if ($doctor['book'])
-                                                <a href="{{ route('doctors.details', $doctor['book']['number']) }}"
-                                                    class="text-gray-800 text-hover-primary fs-6 fw-bolder">
-                                                    Dr. {{ $doctor['book']['first_name'] ?? '' }}
-                                                    {{ $doctor['book']['middle_name'] ?? '' }}
-                                                    {{ $doctor['book']['last_name'] ?? '' }}
-                                                </a>
-                                                <span class="text-gray-400 fw-bold">
-                                                    Booked {{ $doctor->created_at ? $doctor->created_at->diffForHumans() : '' }}
-                                                </span>
-                                            @endif
-                                        </div>
-                                        
+                                        @endif>
                                     </div>
-                                    <div class="my-0">
-                                        <button type="button"
-                                            class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                                    viewBox="0 0 24 24">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="5" y="5" width="5" height="5" rx="1"
-                                                            fill="#000000" />
-                                                        <rect x="14" y="5" width="5" height="5" rx="1"
-                                                            fill="#000000" opacity="0.3" />
-                                                        <rect x="5" y="14" width="5" height="5" rx="1"
-                                                            fill="#000000" opacity="0.3" />
-                                                        <rect x="14" y="14" width="5" height="5" rx="1"
-                                                            fill="#000000" opacity="0.3" />
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
-                                        data-kt-menu="true">
-                                        <div class="separator mb-3 opacity-75"></div>
-                                        
+                                    <div class="d-flex flex-column">
                                         @if ($doctor['book'])
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 cancel_booking" data-bs-toggle="modal"
-                                                    data-bs-target="#cancel_booking_modal" data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
-                                                    Cancel Booking
-                                                </a>
-                                            </div>
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 adjust_time" data-bs-toggle="modal"
-                                                    data-bs-target="#adjust_time_modal" data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
-                                                    Adjust Time
-                                                </a>
-                                            </div>
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 change_booking" data-bs-toggle="modal"
-                                                    data-bs-target="#change_booking_modal" data-booking_id="{{ $doctor->id }}"
-                                                    data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
-                                                    Change booking Type
-                                                </a>
-                                            </div>
+                                            <a href="{{ route('doctors.details', $doctor['book']['number']) }}" class="text-gray-800 text-hover-primary fs-8 fw-bolder">
+                                                Dr. {{ $doctor['book']['first_name'] ?? '' }}
+                                                {{ $doctor['book']['middle_name'] ?? '' }}
+                                                {{ $doctor['book']['last_name'] ?? '' }}
+                                            </a>
+                                            <span class="ext-gray-400 fs-9 fw-bold">
+                                                Booked {{ $doctor->created_at ? $doctor->created_at->diffForHumans() : '' }}
+                                            </span>
                                         @endif
                                     </div>
-                                    
+                                    <div class="ms-auto">
+                                        <button type="button" class="btn btn-sm btn-secondary btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            @if ($doctor['book'])
+                                                <a href="#" class="dropdown-item cancel_booking" data-bs-toggle="modal" data-bs-target="#cancel_booking_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    <i class="bi bi-calendar-x-fill me-2"></i> Cancel Booking
+                                                </a>
+                                                <a href="#" class="dropdown-item adjust_time" data-bs-toggle="modal" data-bs-target="#adjust_time_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    <i class="bi bi-clock-fill me-2"></i> Adjust Time
+                                                </a>
+                                                <a href="#" class="dropdown-item change_booking" data-bs-toggle="modal" data-bs-target="#change_booking_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                                    <i class="bi bi-arrow-repeat me-2"></i> Change Booking Type
+                                                </a>
+                                        
+                                                <div class="dropdown-divider"></div>
+                                        
+                                                <a href="#" class="dropdown-item fill_form" data-bs-toggle="modal" data-bs-target="#form" data-id="{{ $doctor->id }}">
+                                                    <i class="bi bi-file-earmark-text-fill me-2"></i> Fill Form
+                                                </a>
+                                                
+                                                @if ($doctor->book_type == 'chat' && $doctor->time !== null)
+                                                    <a href="{{ route('chats') }}" class="dropdown-item open_chat">
+                                                        <i class="bi bi-chat-fill me-2"></i> Open Chat with the Doctor
+                                                    </a>
+                                                @endif
+                                        
+                                                @if ($doctor->book_type == 'video')
+                                                    <a href="#" class="dropdown-item view_copy_link" data-bs-toggle="modal" data-bs-target="#link{{ $key }}" data-id="{{ $doctor->id }}">
+                                                        <i class="bi bi-link-45deg me-2"></i> View and Copy Video Conference Link
+                                                    </a>
+                                                @endif
+                                        
+                                                @if ($doctor->prescription == 1)
+                                                    <a href="{{ route('download', $doctor->id) }}" class="dropdown-item download_prescription">
+                                                        <i class="bi bi-file-earmark-arrow-down-fill me-2"></i> Download Prescription
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        </div>
+                                        
                                     </div>
                                 </div>
-
+                    
                                 <div class="d-flex flex-wrap mb-5">
                                     <div class="row">
 
@@ -284,7 +275,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="separator mb-4"></div>
+                                {{-- <div class="separator mb-4"></div>
                                 <div class="symbol-group symbol-hover mb-3">
                                     <div class="" data-bs-toggle="tooltip" title="Fill out the pre-consultation">
                                         <a class="btn btn-sm  btn-bg-info btn-active-color-info text-white doctor"
@@ -316,7 +307,7 @@
                                         </div>
                                     @endif
 
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

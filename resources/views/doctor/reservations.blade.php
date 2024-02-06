@@ -60,93 +60,74 @@
                 @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
-                            <div class="card-body pb-0">
+                            <div class="card-body pb-0"> 
+
                                 <div class="d-flex align-items-center mb-5">
-                                    <div class="d-flex align-items-center flex-grow-1">
-                                        <div class="symbol symbol-45px me-5">
-                                            <img @if ( @$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif
-                                                alt=""  />
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">
-                                                {{ @$doctor->patient->first_name }}
-                                                {{  @$doctor->patient->middle_name }}
-                                                {{  @$doctor->patient->last_name }}</a>
-                                            <span class="text-gray-400 fw-bold">Booked
-                                                {{ $doctor->created_at->diffForHumans() }}</span>
-                                        </div>
+                                    <div class="symbol symbol-30px me-3">
+                                        <img @if ( @$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif alt=""  />
                                     </div>
-                                    <div class="my-0">
-                                        <button type="button"
-                                            class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                                    viewBox="0 0 24 24">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="5" y="5" width="5" height="5"
-                                                            rx="1" fill="#000000" />
-                                                        <rect x="14" y="5" width="5" height="5"
-                                                            rx="1" fill="#000000" opacity="0.3" />
-                                                        <rect x="5" y="14" width="5" height="5"
-                                                            rx="1" fill="#000000" opacity="0.3" />
-                                                        <rect x="14" y="14" width="5"
-                                                            height="5" rx="1" fill="#000000"
-                                                            opacity="0.3" />
-                                                    </g>
-                                                </svg>
-                                            </span>
+                                    <div class="d-flex flex-column">
+                                        <a href="#" class="ttext-gray-800 text-hover-primary fs-8 fw-bolder">
+                                            {{ @$doctor->patient->first_name }}
+                                            {{  @$doctor->patient->middle_name }}
+                                            {{  @$doctor->patient->last_name }}</a>
+                                        <span class="text-gray-400 fs-9 fw-bold">Booked {{ $doctor->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <button type="button" class="btn btn-sm btn-secondary btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
                                         </button>
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
-                                            data-kt-menu="true">
-                                            <div class="separator mb-3 opacity-75"></div>
-
+                                        
+                                        
+                                        <div class="dropdown-menu dropdown-menu-end">
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
-                                                    data-bs-toggle="modal" data-bs-target="#form{{ $key }}"
-                                                    data-id="{{ $doctor->id }}">Pre-consultation Form</a>
+                                                <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#form{{ $key }}" data-id="{{ $doctor->id }}">
+                                                    <i class="bi bi-file-earmark-text menu-icon"></i> Pre-consultation Form
+                                                </a>
                                             </div>
-
-
+                                        
                                             @if ($doctor->book_type == 'chat')
                                                 <div class="menu-item px-3">
-                                                    <a href="{{ route('doctor.chat') }}" class="menu-link" style="pointer-events: {{ $doctor->status == 1? '':'none'}}">Go to Chat</a>
+                                                    <a href="{{ route('doctor.chat') }}" class="menu-link" style="pointer-events: {{ $doctor->status == 1 ? '':'none' }}">
+                                                        <i class="bi bi-chat menu-icon"></i> Go to Chat
+                                                    </a>
                                                 </div>
                                             @else
                                                 <div class="menu-item px-3">
-                                                    <a class="menu-link" data-bs-toggle="modal"
-                                                        data-bs-target="#link{{ $key }}"
-                                                        data-id="{{ $doctor->id }}">Send Link</a>
+                                                    <a class="menu-link" data-bs-toggle="modal" data-bs-target="#link{{ $key }}" data-id="{{ $doctor->id }}">
+                                                        <i class="bi bi-envelope menu-icon"></i> Send Link
+                                                    </a>
                                                 </div>
                                             @endif
-
-                                           
+                                        
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 appoint_time"
-                                                    data-bs-toggle="modal" data-bs-target="#appoint_time"
-                                                    data-id="{{ $doctor->id }}"
-                                                    data-name="{{  @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">Appoint Time</a>
+                                                <a href="#" class="menu-link px-3 appoint_time" data-bs-toggle="modal" data-bs-target="#appoint_time" data-id="{{ $doctor->id }}" data-name="{{ @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">
+                                                    <i class="bi bi-clock-history menu-icon"></i> Appoint Time
+                                                </a>
                                             </div>
+                                        
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 subs"
-                                                    data-bs-toggle="modal" data-bs-target="#subscription"
-                                                    data-id="{{ $doctor->id }}"
-                                                    data-name="{{  @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">Send Prescription</a>
+                                                <a href="#" class="menu-link px-3 subs" data-bs-toggle="modal" data-bs-target="#subscription" data-id="{{ $doctor->id }}" data-name="{{ @$doctor->patient->first_name.' '. @$doctor->patient->middle_name.' '. @$doctor->patient->last_name }}">
+                                                    <i class="bi bi-file-earmark-check menu-icon"></i> Send Prescription
+                                                </a>
                                             </div>
+                                        
                                             <div class="menu-item px-3">
-                                                <a href="tel:{{ @$doctor->patient->phone }}" class="menu-link px-3 ">Call Patient</a>
+                                                <a href="tel:{{ @$doctor->patient->phone }}" class="menu-link px-3">
+                                                    <i class="bi bi-telephone-outbound menu-icon"></i> Call Patient
+                                                </a>
                                             </div>
+                                        
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('doctor.patients.complete',$doctor->id)}}" class="menu-link px-3 ">Mark Completed</a>
+                                                <a href="{{ route('doctor.patients.complete', $doctor->id) }}" class="menu-link px-3">
+                                                    <i class="bi bi-check2 menu-icon"></i> Mark Completed
+                                                </a>
                                             </div>
-
-
                                         </div>
-                                        <!--end::Menu 2-->
+                                        
                                     </div>
-                                    <!--end::Menu-->
                                 </div>
-                                <!--end::Header-->
+                                
 
                                 <div class="d-flex flex-wrap mb-5">
                                     <div class="row">
