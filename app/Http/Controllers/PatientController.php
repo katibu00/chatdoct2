@@ -24,12 +24,12 @@ class PatientController extends Controller
         return view('patient.doctors', $data);
     }
 
-    public function DoctorsDetails($number)
+    public function DoctorsDetails($id)
     {
 
         if (Auth::guest()) {
 
-            return view('auth.login', compact('number'));
+            return view('auth.login', compact('id'));
         }
 
         $hour = date("H");
@@ -48,7 +48,7 @@ class PatientController extends Controller
         }
         $day = strtolower(date('l')) . 's';
 
-        $data['user'] = User::where('number', $number)->first();
+        $data['user'] = User::where('id', $id)->first();
         $schedules = explode(',', $data['user']->$day);
 
         $data['availability'] = '';

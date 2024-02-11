@@ -34,17 +34,7 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <div class="d-flex align-items-center bg-light-warning rounded p-5 mb-7">
-                            <span class="svg-icon svg-icon-warning me-5">
-                                <span class="svg-icon svg-icon-1">
-                                    <i class="fa fa-user text-danger opacity-75"></i>
-                                </span>
-                            </span>
-                            <div class="flex-grow-1 me-2">
-                                <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Patient Number</a>
-                            </div>
-                            <span class="fw-bolder text-danger py-1">P{{$user->number}}</span>
-                        </div>
+                       
                         <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
                             <span class="svg-icon svg-icon-success me-5">
                                 <span class="svg-icon svg-icon-1">
@@ -244,7 +234,7 @@
                                 <img @if($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{$user->picture}}" @endif alt="{{$user->first_name}} {{$user->last_name}}" />
                                 <div class="bg-{{$availability == 'yes'?'success':'danger'}} position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-white h-15px w-15px ms-n3 mt-n3"></div>
                             </div>
-                            <a href="{{route('doctors.details',$user->number)}}" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</a>
+                            <a href="{{route('doctors.details',$user->id)}}" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">Dr. {{$user->first_name}} {{$user->middle_name}} {{$user->last_name}}</a>
                             <div class="badge badge-lg badge-light-primary d-inline mb-1">{{$user->rank}}</div>
                             <div class="d-flex flex-center align-items-center justify-content-center flex-wrap mb-2">
                                 <div class="border border-dashed rounded d-flex min-w-25px py-1 px-2 mx-1 mb-1">
@@ -271,7 +261,7 @@
                                     <div class="fs-6 fw-bolder text-gray-700">&#x20A6;{{number_format($user->phone_rate,0)}}<br />  <span class="fw-bold text-gray-400"></span></div>
                                 </div>
                             </div>
-                            <a href="{{route('doctors.details',$user->number)}}" class="btn btn-sm btn-light-primary">
+                            <a href="{{route('doctors.details',$user->id)}}" class="btn btn-sm btn-light-primary">
                             <!--end::Svg Icon-->View Details</a>
                         </div>
                     </div>

@@ -83,7 +83,7 @@
                                 
                                 <!--end::Stats-->
                             </div>
-                            <a href="{{route('doctors.details',$user->number)}}" class="btn btn-sm btn-light-primary">
+                            <a href="{{route('doctors.details',$user->id)}}" class="btn btn-sm btn-light-primary">
                             <!--end::Svg Icon-->View Details</a>
                         </div>
                     </div>

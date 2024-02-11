@@ -262,12 +262,7 @@ class RegisterController extends Controller
             'certificate' => 'required|image|mimes:jpeg,png,jpg,gif|max:1500',
         ]);
 
-        $year = date('y');
-        $month = Carbon::now()->format('m');
-        $users = User::all()->count() + 1;
-        $number = sprintf("%03d", $users);
-        $reg = $year . $month . $number;
-
+        
         // Create a new user instance
         $user = new User();
 
@@ -277,7 +272,6 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->role = 'doctor';
         $user->rank = $request->rank;
-        $user->number = $reg;
         $user->speciality = implode(',', $request->speciality);
         $user->phone = $request->phone;
         $user->experience = $request->experience;

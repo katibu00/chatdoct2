@@ -150,7 +150,7 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth']], function(){
 
     Route::get('/doctors', [App\Http\Controllers\PatientController::class, 'DoctorsIndex'])->name('doctors.index');
     Route::post('/doctors', [App\Http\Controllers\PatientController::class, 'sortBookings'])->name('doctors.index');
-    Route::get('/doctors/details/{number}', [App\Http\Controllers\PatientController::class, 'DoctorsDetails'])->name('doctors.details');
+    Route::get('/doctors/details/{id}', [App\Http\Controllers\PatientController::class, 'DoctorsDetails'])->name('doctors.details');
 
     Route::post('/book', [App\Http\Controllers\PatientController::class, 'BookDoctor'])->name('book');
     Route::get('/reservations', [App\Http\Controllers\PatientController::class, 'MyReservations'])->name('reservations');

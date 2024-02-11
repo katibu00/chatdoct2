@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         @if ($doctor['book'])
-                                            <a href="{{ route('doctors.details', $doctor['book']['number']) }}" class="text-gray-800 text-hover-primary fs-8 fw-bolder">
+                                            <a href="{{ route('doctors.details', $doctor['book']['id']) }}" class="text-gray-800 text-hover-primary fs-8 fw-bolder">
                                                 Dr. {{ $doctor['book']['first_name'] ?? '' }}
                                                 {{ $doctor['book']['middle_name'] ?? '' }}
                                                 {{ $doctor['book']['last_name'] ?? '' }}

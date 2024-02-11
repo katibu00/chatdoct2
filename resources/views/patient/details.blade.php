@@ -88,9 +88,7 @@
                                     @if($availability == 'no')
                                     <div class=" badge badge-light-danger">Not Available</div>
                                     @endif
-                                    <div class="fw-bolder mt-5">User ID</div>
-                                    <div class="text-gray-600">D{{$user->number}}</div>
-                                   
+                                    
                                     <div class="fw-bolder mt-5">About</div>
                                     <div class="text-gray-600">
                                         <!--begin::Notice-->
