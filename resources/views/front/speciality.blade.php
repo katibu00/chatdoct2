@@ -195,14 +195,14 @@
                             <div class="card mb-3">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
-                                        <a href="{{ route('doctors.details', $user->number) }}" class="card-img-link">
+                                        <a href="{{ route('doctors.details', $user->id) }}" class="card-img-link">
                                             <img @if ($user->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $user->picture }}" @endif
                                                 height="250" class="card-img rounded" alt="{{ $user->first_name }}">
                                         </a>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <a href="{{ route('doctors.details', $user->number) }}"
+                                            <a href="{{ route('doctors.details', $user->id) }}"
                                                 class="card-title-link">
                                                 <h5 class="card-title">Dr.
                                                     {{ $user->first_name . ' ' . $user->middle_name . ' ' . $user->last_name }}

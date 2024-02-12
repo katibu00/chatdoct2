@@ -396,7 +396,7 @@
                                     </ul>
                                 </div>
                                 <div class="cta-buttons">
-                                    <a href="{{route('doctors.details',$user->number)}}" class="btn view-profile-btn">See Details</a>
+                                    <a href="{{route('doctors.details',$user->id)}}" class="btn view-profile-btn">See Details</a>
                                 </div>
                             </div>
                         @endforeach
