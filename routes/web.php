@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MonnifyAPIController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\WalletController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -166,8 +167,11 @@ Route::group(['prefix' => 'patient', 'middleware' => ['auth']], function(){
 
 });
 
-Route::post('/pay', [App\Http\Controllers\WalletController::class, 'redirectToGateway'])->name('pay')->middleware('auth');
-Route::get('/payment/callback', [App\Http\Controllers\WalletController::class, 'handleGatewayCallback']);
+// Route::post('/pay', [App\Http\Controllers\WalletController::class, 'redirectToGateway'])->name('pay')->middleware('auth');
+// Route::get('/payment/callback', [App\Http\Controllers\WalletController::class, 'handleGatewayCallback']);
+
+Route::post('/verify-payment', [WalletController::class, 'creditWallet'])->name('verify-payment');
+
 
 //doctor routes
 Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function(){

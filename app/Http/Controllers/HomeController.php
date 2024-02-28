@@ -10,6 +10,7 @@ use App\Models\ReservedAccount;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -63,7 +64,7 @@ class HomeController extends Controller
         return view('doctor', $data);
     }
 
-    public function patient()
+    public function patient(Request $request)
     {
         $user_id = auth()->user()->id;
         $data['recent'] = Booking::where('patient_id', $user_id)->orderBy('created_at', 'desc')->get();
@@ -78,6 +79,7 @@ class HomeController extends Controller
         } else {
             $data['accounts'] = [];
         }
+        $data['message'] = $request->query('message');
 
         return view('patient', $data);
     }

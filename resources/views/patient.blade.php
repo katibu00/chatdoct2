@@ -4,6 +4,11 @@
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl">
+        @if(isset($message))
+    <div class="alert alert-success" role="alert">
+        {{ $message }}
+    </div>
+@endif
         <div class="row g-5 g-xl-8 mb-5">
             <div class="col-xl-4">
                 <div class="card card-xl-stretch mb-5 mb-xl-8">
