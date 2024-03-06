@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\BrevoAPIKey;
 use App\Models\ReservedAccount;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Providers\RouteServiceProvider;
-use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -73,12 +74,6 @@ class RegisterController extends Controller
             ]);
         }
 
-        $year = date('y');
-        $month = Carbon::now()->format('m');
-        $users = User::all()->count() + 1;
-        $number = sprintf("%03d", $users);
-        $reg = $year . $month . $number;
-
         $validatedData = $validator->validated();
 
         $fullName = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
@@ -93,9 +88,10 @@ class RegisterController extends Controller
             'phone' => $validatedData['phone'],
             'email' => $validatedData['email'],
             'username' => $username,
-            'number' => $reg,
             'password' => Hash::make($validatedData['password']),
         ]);
+
+        $this->sendWelcomeEmail($fullName, $validatedData['email']);
 
         try {
             // Get the Monnify access token
@@ -242,7 +238,7 @@ class RegisterController extends Controller
     }
 
     public function doctorStore(Request $request)
-    { 
+    {
         $this->validate($request, [
             'first_name' => 'required|alpha',
             'last_name' => 'required|alpha',
@@ -262,7 +258,6 @@ class RegisterController extends Controller
             'certificate' => 'required|image|mimes:jpeg,png,jpg,gif|max:1500',
         ]);
 
-        
         // Create a new user instance
         $user = new User();
 
@@ -304,6 +299,116 @@ class RegisterController extends Controller
         $user->save();
 
         return redirect()->route('login')->with('success', 'Doctor registration successful! Please login below.');
+    }
+
+    private function sendWelcomeEmail($name, $email)
+    {
+
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $name;
+        $recipientEmail = $email;
+        $subject = 'Welcome to ChatDoc!';
+
+        $htmlContent = '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to ChatDoc!</title>
+        <style>
+            /* Add your custom styles here */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f7f7f7;
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .logo img {
+                max-width: 150px;
+                height: auto;
+            }
+            .social-media {
+                margin-top: 20px;
+            }
+            .social-media a {
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .message {
+                margin-top: 30px;
+            }
+            .message p {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                <img src="https://chatdoct.com/uploads/logo.jpg" alt="ChatDoc Logo">
+            </div>
+            <div class="social-media">
+                <a href="https://facebook.com/chatdoc" target="_blank">Facebook</a>
+                <a href="https://twitter.com/chatdoc" target="_blank">Twitter</a>
+                <a href="https://instagram.com/chatdoc" target="_blank">Instagram</a>
+            </div>
+            <div class="message">
+                <p>Hello ' . $recipientName . ',</p>
+                <p>Welcome to ChatDoc, where you can chat with qualified doctors in Nigeria and get medical assistance.</p>
+                <p>Feel free to reach out to us on social media or reply to this email if you have any questions.</p>
+                <p>Best regards,<br>Your ChatDoc Team</p>
+            </div>
+        </div>
+    </body>
+    </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Welcome email sent to ChatDoc!";
+        } else {
+            // Failed to send email
+            echo "Failed to send welcome email. Error: " . $response->status();
+        }
+
     }
 
 }

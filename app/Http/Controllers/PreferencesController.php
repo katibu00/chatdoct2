@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrevoAPIKey;
 use App\Models\Preferences;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -26,6 +27,36 @@ class PreferencesController extends Controller
     
         Toastr::success('Preferences successfully updated', 'Done');
         return redirect()->route('preferences.index');
+    }
+
+
+    public function brevoIndex()
+    {
+        $data['paystackKeys'] = BrevoAPIKey::find(1);
+        return view('admin.brevo_settings', $data);
+    }
+
+    public function brevoStore(Request $request)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'secret_key' => 'required',
+        ]);
+
+        // Check if the record already exists
+        $monnifyKeys = BrevoAPIKey::first();
+
+        if ($monnifyKeys) {
+            // Record already exists, update the existing record
+            $monnifyKeys->update($validatedData);
+        } else {
+            // Record does not exist, create a new record
+            BrevoAPIKey::create($validatedData);
+        }
+
+        // Redirect or show a success message
+        // For example:
+        return redirect()->route('brevo.api')->with('success', 'Brevo API settings saved successfully.');
     }
     
     

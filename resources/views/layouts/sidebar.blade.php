@@ -115,7 +115,7 @@ $route = Route::current()->getName();
                     </a>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{($route=='preferences.index')?'show':''}} {{($route=='monnify.api')?'show':''}} {{($route=='sms.api.index')?'show':''}}  {{($route=='paystack.api')?'show':''}}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{($route=='preferences.index')?'show':''}} {{($route=='monnify.api')?'show':''}} {{($route=='sms.api.index')?'show':''}} {{($route=='brevo.api')?'show':''}} {{($route=='paystack.api')?'show':''}}">
                     <span class="menu-link">
                             <span class="menu-bullet">
                                 <span class="fa fa-cog"></span>
@@ -154,6 +154,14 @@ $route = Route::current()->getName();
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Paystack API</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{($route=='brevo.api')?'active':''}}" href="{{ route('brevo.api') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Brevo API</span>
                             </a>
                         </div>
                 

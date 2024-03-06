@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\BrevoAPIKey;
 use App\Models\EscrowTransaction;
 use App\Models\Prescription;
 use App\Models\SMSSettings;
@@ -15,6 +16,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class PatientController extends Controller
 {
@@ -150,6 +152,8 @@ class PatientController extends Controller
         $patient->update();
         $patient->notify(new PatientBookingNotification($book));
         $doctor->notify(new DoctorBookingNotification($book));
+        $this->patientBookingConfirmationEmail($patient->first_name.' '.$patient->last_name, $patient->email, $doctor->first_name.' '.$doctor->last_name,$request->book_type, now());
+        $this->DoctorBookingNotificationEmail($doctor->first_name.' '.$doctor->last_name, $doctor->email, $patient->first_name.' '.$patient->last_name, $request->book_type, now());
 
         $doctorMessage = 'You have been booked by '.$patient->first_name.' '.$patient->last_name.' via '.$request->book_type;
         $patientMessage = 'You have booked Dr. '.$doctor->first_name.' '.$doctor->last_name.' via '.$request->book_type;
@@ -362,8 +366,6 @@ class PatientController extends Controller
         return view('patient.reservations', $data);
     }
 
-
-  
     private function sendSMS($to, $message)
     {
         $settings = SMSSettings::first();
@@ -413,6 +415,209 @@ class PatientController extends Controller
             'response' => $responseData
         ];
     }
+
+
+
+    private function patientBookingConfirmationEmail($name, $email, $doctorName, $bookingType, $bookingTime)
+    {
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $name;
+        $recipientEmail = $email;
+        $subject = 'Booking Confirmation';
+
+        // HTML content for the email
+        $htmlContent = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Booking Confirmation</title>
+            <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .logo img {
+                    max-width: 150px;
+                    height: auto;
+                }
+                .social-media {
+                    margin-top: 20px;
+                }
+                .social-media a {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+                .message {
+                    margin-top: 30px;
+                }
+                .message p {
+                    margin-bottom: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo">
+                    <img src="https://chatdoct.com/uploads/logo.jpg" alt="ChatDoc Logo">
+                </div>
+                <div class="message">
+                    <p>Hello ' . $recipientName . ',</p>
+                    <p>Your booking with ' . $doctorName . ' has been confirmed.</p>
+                    <p>Booking Type: ' . $bookingType . '</p>
+                    <p>Time: ' . $bookingTime . '</p>
+                    <p>Thank you for choosing ChatDoc!</p>
+                    <p>Best regards,<br>Your ChatDoc Team</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Booking confirmation email sent to $recipientEmail!";
+        } else {
+            // Failed to send email
+            echo "Failed to send booking confirmation email to $recipientEmail. Error: " . $response->status();
+        }
+    }
+
+
+
+    private function DoctorBookingNotificationEmail($doctorName, $doctorEmail, $patientName, $bookingType, $bookingTime)
+    {
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $doctorName;
+        $recipientEmail = $doctorEmail;
+        $subject = 'New Booking Notification';
+
+        // Modify the HTML content for booking notification to the doctor
+        $htmlContent = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>New Booking Notification</title>
+            <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .message {
+                    margin-top: 30px;
+                }
+                .message p {
+                    margin-bottom: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="message">
+                    <p>Hello Dr. ' . $recipientName . ',</p>
+                    <p>You have a new booking from patient ' . $patientName . '.</p>
+                    <p>Booking Type: ' . $bookingType . '</p>
+                    <p>Time: ' . $bookingTime . '</p>
+                    <p>Please review and confirm the booking as soon as possible.</p>
+                    <p>Best regards,<br>Your ChatDoc Team</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Booking notification email sent to Dr. $recipientName!";
+        } else {
+            // Failed to send email
+            echo "Failed to send booking notification email to Dr. $recipientName. Error: " . $response->status();
+        }
+    }
+
+
     
 
 
