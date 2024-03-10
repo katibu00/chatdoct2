@@ -8,7 +8,6 @@ use App\Models\EscrowTransaction;
 use App\Models\Prescription;
 use App\Models\SMSSettings;
 use App\Models\User;
-use App\Notifications\BookingNotification;
 use App\Notifications\DoctorBookingNotification;
 use App\Notifications\DoctorCancellationNotification;
 use App\Notifications\PatientBookingNotification;
@@ -159,8 +158,8 @@ class PatientController extends Controller
         $patientMessage = 'You have booked Dr. '.$doctor->first_name.' '.$doctor->last_name.' via '.$request->book_type;
 
 
-        $this->sendSMS($patient->phone,$patientMessage);
-        $this->sendSMS($doctor->phone,$doctorMessage);
+        // $this->sendSMS($patient->phone,$patientMessage);
+        // $this->sendSMS($doctor->phone,$doctorMessage);
         
         Toastr::success('Your Booking has been made sucessfully', 'Done');
         $data['users'] = User::where('role', 'doctor')->where('status', 1)->get();
@@ -482,8 +481,8 @@ class PatientController extends Controller
                     <p>Hello ' . $recipientName . ',</p>
                     <p>Your booking with ' . $doctorName . ' has been confirmed.</p>
                     <p>Booking Type: ' . $bookingType . '</p>
-                    <p>Time: ' . $bookingTime . '</p>
-                    <p>Thank you for choosing ChatDoc!</p>
+                    <p>Booked at: ' . $bookingTime . '</p>
+                    <p>Please not that your Doctor will Schedule a time for your consultation. Thank you for choosing ChatDoc!</p>
                     <p>Best regards,<br>Your ChatDoc Team</p>
                 </div>
             </div>
@@ -576,7 +575,7 @@ class PatientController extends Controller
                     <p>Hello Dr. ' . $recipientName . ',</p>
                     <p>You have a new booking from patient ' . $patientName . '.</p>
                     <p>Booking Type: ' . $bookingType . '</p>
-                    <p>Time: ' . $bookingTime . '</p>
+                    <p>Booked at: ' . $bookingTime . '</p>
                     <p>Please review and confirm the booking as soon as possible.</p>
                     <p>Best regards,<br>Your ChatDoc Team</p>
                 </div>

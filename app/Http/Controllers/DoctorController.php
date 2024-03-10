@@ -15,6 +15,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File as File;
+use App\Models\BrevoAPIKey;
 
 class DoctorController extends Controller
 {
@@ -170,113 +171,78 @@ class DoctorController extends Controller
         return view('doctor.reservations', $data);
     }
 
-    // public function markComplete($id)
-    // {
-   
-    //    $booking = Booking::where('id',$id)->first();
-
-    //    if(auth()->user()->role != 'admin')
-    //    {
-    //         if($booking->doctor_id != auth()->user()->id)
-    //         {
-    //         Toastr::error('Booking Not for you.', 'Error');
-    //         return redirect()->back();
-    //         }
-    //    }
-       
-    //    if($booking){
-    //     $booking->status = 2;
-    //     $booking->update();
-    //     $patient = User::find($booking->patient_id);
-    //     $doctor = User::find($booking->doctor_id);
-    //     $patient->notify(new PatientCompletionNotification($booking));
-
-    //     $escrow = EscrowTransaction::where('booking_id',$booking->id)->where('doctor_id',$booking->doctor_id)->where('patient_id',$booking->patient_id)->first();
-    //     $escrow->completed = true;
-    //     $escrow->save();
-
-    //     $doctor->balance  += $escrow->amount;
-    //     $doctor->total_earning  += $escrow->amount;
-    //     $doctor->update();
-
-    //     Toastr::success('Booking Marked Completed Successfully.', 'Done');
-    //     return redirect()->route('doctor.patients');
-
-    //    }
-
-    //    Toastr::error('Booking Not found.', 'Error');
-    //    return redirect()->back();
-    // }
-
 
     public function markComplete($id)
-{
-    $booking = Booking::where('id', $id)->first();
+    {
+        $booking = Booking::where('id', $id)->first();
 
-    if (!$booking) {
-        Toastr::error('Booking Not found.', 'Error');
-        return redirect()->back();
-    }
-
-    if (auth()->user()->role != 'admin') {
-        if ($booking->doctor_id != auth()->user()->id) {
-            Toastr::error('Booking Not for you.', 'Error');
+        if (!$booking) {
+            Toastr::error('Booking Not found.', 'Error');
             return redirect()->back();
         }
+
+        if (auth()->user()->role != 'admin') {
+            if ($booking->doctor_id != auth()->user()->id) {
+                Toastr::error('Booking Not for you.', 'Error');
+                return redirect()->back();
+            }
+        }
+
+        // Check if the booking is already marked as complete
+        if ($booking->status == 2) {
+            Toastr::warning('Booking is already marked as complete.', 'Warning');
+            return redirect()->back();
+        }
+
+        // Mark the booking as complete
+        $booking->status = 2;
+        $booking->update();
+
+        $patient = User::find($booking->patient_id);
+        $doctor = User::find($booking->doctor_id);
+        $patient->notify(new PatientCompletionNotification($booking));
+
+        $escrow = EscrowTransaction::where('booking_id', $booking->id)
+            ->where('doctor_id', $booking->doctor_id)
+            ->where('patient_id', $booking->patient_id)
+            ->first();
+
+        $escrow->completed = true;
+        $escrow->save();
+
+        $doctor->balance += $escrow->amount;
+        $doctor->total_earning += $escrow->amount;
+        $doctor->update();
+
+        $this->sendBookingCompletionEmailToPatient($patient->email, $patient->first_name.' '.$patient->last_name);
+
+        Toastr::success('Booking Marked Completed Successfully.', 'Done');
+        return redirect()->route('doctor.patients');
     }
-
-    // Check if the booking is already marked as complete
-    if ($booking->status == 2) {
-        Toastr::warning('Booking is already marked as complete.', 'Warning');
-        return redirect()->back();
-    }
-
-    // Mark the booking as complete
-    $booking->status = 2;
-    $booking->update();
-
-    $patient = User::find($booking->patient_id);
-    $doctor = User::find($booking->doctor_id);
-    $patient->notify(new PatientCompletionNotification($booking));
-
-    $escrow = EscrowTransaction::where('booking_id', $booking->id)
-        ->where('doctor_id', $booking->doctor_id)
-        ->where('patient_id', $booking->patient_id)
-        ->first();
-
-    $escrow->completed = true;
-    $escrow->save();
-
-    $doctor->balance += $escrow->amount;
-    $doctor->total_earning += $escrow->amount;
-    $doctor->update();
-
-    Toastr::success('Booking Marked Completed Successfully.', 'Done');
-    return redirect()->route('doctor.patients');
-}
 
     
     public function appointTime(Request $request)
     {
-        // dd($request->all());
-
         $booking = Booking::where('id',$request->get_id)->first();
+        $patient = User::find($booking->patient_id);
+        $doctor = User::find($booking->doctor_id);
 
         if($booking)
         {
             $booking->status = 1;
             $booking->time = $request->time;
             $booking->update();
-
-            $patient = User::find($booking->patient_id);
             $time = $request->time;
             $patient->notify(new PatientTimeNotification($booking, $time));
             Toastr::success('Time Appointed Successfully.', 'Done');
             return redirect()->route('doctor.patients');
         }
+
+        $this->sendScheduledConsultationEmail($patient->first_name.' '.$patient->last_name, $patient->email,$doctor->first_name.' '.$doctor->last_name,$request->time);
         Toastr::error('Booking Not found.', 'Error');
         return redirect()->back();
     }
+
     public function Chat()
     {
 
@@ -319,6 +285,8 @@ class DoctorController extends Controller
 
         $patient = User::find($book->patient_id);
         $patient->notify(new PatientPrescriptionNotification($book));
+
+        $this->sendPrescriptionNotificationToPatient($patient->email, $patient->first_name.' '.$patient->last_name);
 
 
         Toastr::success('Prescription Sent sucessfully', 'Done');
@@ -364,5 +332,344 @@ class DoctorController extends Controller
        Toastr::success('Your Withdrawal Request has been Submiteed Successfully');
        return redirect()->back();
     }
+
+
+
+    private function sendScheduledConsultationEmail($patientName, $patientEmail, $doctorName, $consultationTime)
+    {
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $patientName;
+        $recipientEmail = $patientEmail;
+        $subject = 'Scheduled Consultation';
+
+        // Modify the HTML content for scheduled consultation
+        $htmlContent = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Scheduled Consultation</title>
+            <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .logo img {
+                    max-width: 150px;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+                .message {
+                    margin-top: 30px;
+                }
+                .message p {
+                    margin-bottom: 20px;
+                }
+                .message p.title {
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .message p.details {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo">
+                    <img src="https://chatdoct.com/uploads/logo.jpg" alt="ChatDoc Logo">
+                </div>
+                <div class="message">
+                    <p class="title">Scheduled Consultation Details</p>
+                    <p>Hello ' . $recipientName . ',</p>
+                    <p>We are pleased to inform you that your consultation with Dr. ' . $doctorName . ' has been scheduled.</p>
+                    <p class="details">Consultation Date & Time: ' . $consultationTime . '</p>
+                    <p class="details">Location: Virtual Meeting (Details will be provided)</p>
+                    <p class="details">Please ensure that you are available at the scheduled time and have a stable internet connection.</p>
+                    <p>If you have any questions or need to reschedule, feel free to contact us.</p>
+                    <p>Best regards,<br>Your ChatDoc Team</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Scheduled consultation email sent to $recipientEmail!";
+        } else {
+            // Failed to send email
+            echo "Failed to send scheduled consultation email to $recipientEmail. Error: " . $response->status();
+        }
+    }
+
+
+    private function sendBookingCompletionEmailToPatient($patientEmail, $patientName)
+    {
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $patientName;
+        $recipientEmail = $patientEmail;
+        $subject = 'Booking Marked as Completed';
+
+        // Modify the HTML content for booking completion email to the patient
+        $htmlContent = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Booking Marked as Completed</title>
+            <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .logo img {
+                    max-width: 150px;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+                .message {
+                    margin-top: 30px;
+                }
+                .message p {
+                    margin-bottom: 20px;
+                }
+                .message p.title {
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .message p.details {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo">
+                    <img src="https://chatdoct.com/uploads/logo.jpg" alt="ChatDoc Logo">
+                </div>
+                <div class="message">
+                    <p class="title">Booking Marked as Completed</p>
+                    <p>Hello ' . $recipientName . ',</p>
+                    <p>We are writing to inform you that your booking has been marked as completed by the doctor.</p>
+                    <p>If you have any feedback or questions regarding your consultation, feel free to reach out to us.</p>
+                    <p>Best regards,<br>Your ChatDoc Team</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Booking completion email sent to $recipientEmail!";
+        } else {
+            // Failed to send email
+            echo "Failed to send booking completion email to $recipientEmail. Error: " . $response->status();
+        }
+    }
+
+    private function sendPrescriptionNotificationToPatient($patientEmail, $patientName)
+    {
+        $apiKey = BrevoAPIKey::first()->secret_key ?? '';
+
+        $endpoint = 'https://api.brevo.com/v3/smtp/email';
+
+        // Email data
+        $senderName = 'ChatDoc';
+        $senderEmail = 'support@chatdoct.com';
+        $recipientName = $patientName;
+        $recipientEmail = $patientEmail;
+        $subject = 'Prescription Updated';
+
+        // Modify the HTML content for prescription notification email to the patient
+        $htmlContent = '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Prescription Updated</title>
+            <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f7f7f7;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .logo img {
+                    max-width: 150px;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+                .message {
+                    margin-top: 30px;
+                }
+                .message p {
+                    margin-bottom: 20px;
+                }
+                .message p.title {
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .message p.details {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="logo">
+                    <img src="https://chatdoct.com/uploads/logo.jpg" alt="ChatDoc Logo">
+                </div>
+                <div class="message">
+                    <p class="title">Prescription Updated</p>
+                    <p>Hello ' . $recipientName . ',</p>
+                    <p>We are writing to inform you that your prescription has been updated by the doctor.</p>
+                    <p>Please review the prescription details in your account.</p>
+                    <p>If you have any questions or concerns, feel free to contact us.</p>
+                    <p>Best regards,<br>Your ChatDoc Team</p>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        // Prepare the data payload
+        $data = [
+            'sender' => [
+                'name' => $senderName,
+                'email' => $senderEmail,
+            ],
+            'to' => [
+                [
+                    'email' => $recipientEmail,
+                    'name' => $recipientName,
+                ],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $htmlContent,
+        ];
+
+        // Send the HTTP request
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+            'content-type' => 'application/json',
+        ])->post($endpoint, $data);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Email sent successfully
+            echo "Prescription notification email sent to $recipientEmail!";
+        } else {
+            // Failed to send email
+            echo "Failed to send prescription notification email to $recipientEmail. Error: " . $response->status();
+        }
+    }
+
+
 
 }
