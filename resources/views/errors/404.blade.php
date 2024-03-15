@@ -1,51 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-   <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Page Not Found</title>
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="/images/favicon.ico" />
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="/css/bootstrap.min.css">
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="/css/typography.css">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="/css/style.css">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="/css/responsive.css">
-   </head>
-   <body>
-        <!-- Wrapper Start -->
-        <div class="wrapper">
-            <div class="container-fluid p-0">
-                <div class="row no-gutters">
-                    <div class="col-sm-12 text-center">
-                        <div class="iq-error">
-                            <img src="/images/error/01.png" class="img-fluid iq-error-img" alt="">
-                            <h2 class="mb-0">Oops! This Page is Not Found.</h2>
-                            <p>The requested page dose not exist or the Link is broke.</p>
-                            <a class="btn btn-primary mt-3" href="{{route('admin.home')}}"><i class="ri-home-4-line"></i>Back to Home</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Wrapper END -->
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="/js/jquery.min.js"></script>
-      <script src="/js/popper.min.js"></script>
-      <script src="/js/bootstrap.min.js"></script>
-      <!-- Appear JavaScript -->
-      <script src="/js/jquery.appear.js"></script>
-      <!-- Countdown JavaScript -->
-      <script src="js/countdown.min.js"></script>
-      <!-- Counterup JavaScript -->
-      <script src="js/waypoints.min.js"></script>
-      <script src="js/jquery.counterup.min.js"></script>
-      <!-- Wow JavaScript -->
-      <script src="/js/wow.min.js"></script>
-   </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error - Page Not Found</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .error-container {
+            text-align: center;
+        }
+
+        .error-heading {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .error-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .btn-home {
+            padding: 10px 30px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container error-container">
+        <h1 class="error-heading">404 Error</h1>
+        <p class="error-message">Oops! The page you're looking for could not be found.</p>
+        <img src="/404.png" width="400" height="400" alt="404 Error Image" class="error-image">
+        <a href="/" class="btn btn-primary btn-home">Go to Homepage</a>
+    </div>
+
+</body>
+
 </html>

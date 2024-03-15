@@ -55,6 +55,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Add this code wherever you want to display the validation errors -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             <div class="row g-6 g-xl-9">
 
                 @forelse ($doctors as $key => $doctor)

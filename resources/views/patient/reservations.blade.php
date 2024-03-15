@@ -275,40 +275,6 @@
                                         @endif
                                     </div>
                                 </div>
-                                {{-- <div class="separator mb-4"></div>
-                                <div class="symbol-group symbol-hover mb-3">
-                                    <div class="" data-bs-toggle="tooltip" title="Fill out the pre-consultation">
-                                        <a class="btn btn-sm  btn-bg-info btn-active-color-info text-white doctor"
-                                            data-bs-toggle="modal" data-bs-target="#form"
-                                            data-id="{{ $doctor->id }}">Fill Form</a>
-                                    </div>
-                                    @if ($doctor->book_type == 'chat')
-                                        @if ($doctor->time !== null)
-                                            <div class="ml-1" data-bs-toggle="tooltip"
-                                                title="Open chat with the doctor">
-                                                <a href="{{ route('chats') }}"
-                                                    class="btn btn-sm  btn-bg-light btn-active-color-primary">Chat</a>
-                                            </div>
-                                        @endif
-                                    @endif
-                                    @if ($doctor->book_type == 'video')
-                                        <div class="ml-1" data-bs-toggle="tooltip"
-                                            title="View and copy the video conference link sent by the doctor">
-                                            <a class="btn btn-sm  btn-bg-primary mx-1 btn-active-color-secondary text-white doctor"
-                                                data-bs-toggle="modal" data-bs-target="#link{{ $key }}"
-                                                data-id="{{ $doctor->id }}">Link</a>
-                                        </div>
-                                    @endif
-                                    @if ($doctor->prescription == 1)
-                                        <div class="" data-bs-toggle="tooltip"
-                                            title="Download the prescription form issued by the doctor">
-                                            <a class="btn btn-sm  btn-bg-success  btn-active-color-secondary text-white doctor"
-                                                href="{{ route('download', $doctor->id) }}">Download</a>
-                                        </div>
-                                    @endif
-
-                                </div> --}}
-
                             </div>
                         </div>
                     </div>
@@ -344,10 +310,15 @@
                                             <div class="row mb-5">
                                                 <div class="col-md-12 fv-row">
                                                     <label class="required fs-5 fw-bold mb-2">Link</label>
-                                                    <textarea name="link"
-                                                        class="form-control form-control-lg form-control-solid" readonly>{{ $doctor->link == '' ? 'Link Not yet Sent.' : $doctor->link }}</textarea>
+                                                    @if($doctor->link == '')
+                                                        <div class="form-control form-control-lg form-control-solid">
+                                                            Link Not yet Sent.
+                                                        </div>
+                                                    @else
+                                                        <a href="{{ $doctor->link }}" target="_blank" class="form-control form-control-lg form-control-solid">{{ $doctor->link }}</a>
+                                                    @endif                                                                                                
                                                 </div>
-                                            </div>
+                                            </div>                                            
                     
                                         </div>
                                     </div>
@@ -640,8 +611,9 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('.doctor').click(function() {
+            $('.fill_form').click(function() {
                 const id = $(this).attr('data-id');
+               
 
                 $.ajax({
                     url: 'get-data',

@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File as File;
 use App\Models\BrevoAPIKey;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class DoctorController extends Controller
 {
@@ -171,7 +173,6 @@ class DoctorController extends Controller
         return view('doctor.reservations', $data);
     }
 
-
     public function markComplete($id)
     {
         $booking = Booking::where('id', $id)->first();
@@ -252,6 +253,15 @@ class DoctorController extends Controller
     public function link(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'link' => 'required|url|max:255',
+        ]);
+    
+        // If validation fails, return back with errors
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $link = Booking::findorFail($request->get_id);
         $link->link = $request->link;
         $link->update();
@@ -287,7 +297,6 @@ class DoctorController extends Controller
         $patient->notify(new PatientPrescriptionNotification($book));
 
         $this->sendPrescriptionNotificationToPatient($patient->email, $patient->first_name.' '.$patient->last_name);
-
 
         Toastr::success('Prescription Sent sucessfully', 'Done');
         return redirect()->back();
@@ -332,8 +341,6 @@ class DoctorController extends Controller
        Toastr::success('Your Withdrawal Request has been Submiteed Successfully');
        return redirect()->back();
     }
-
-
 
     private function sendScheduledConsultationEmail($patientName, $patientEmail, $doctorName, $consultationTime)
     {
