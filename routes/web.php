@@ -79,7 +79,7 @@ Route::get('/chats', function () {
 Route::post('/get-transfers', [MonnifyAPIController::class, 'getTransfers']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'registerStore']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);

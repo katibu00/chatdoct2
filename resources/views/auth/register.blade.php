@@ -79,7 +79,7 @@
 							</div>
 							<div class="text-center">
 								<button type="submit"  class="btn btn-lg btn-primary submit_btn">
-									<span class="indicator-label">Submit</span>
+									<span class="indicator-label">Register</span>
 								</button>
 							</div>
 						</form>
@@ -103,7 +103,8 @@
 		<script>var hostUrl = "assets/";</script>
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
-		
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 		<script>
 			$(document).ready(function () {
 				$(document).on("submit", "#register_form", function (e) {
@@ -127,41 +128,43 @@
 						data: formData,
 						contentType: false,
             		    processData: false,
-						success: function(response){
-                  
-							if(response.status == 400){
-									$('#error_list').html("");
-									$.each(response.errors, function (key, err){
-										$("#error_list").append("<li class='text-danger'>" + err + "</li>");
+						success: function(response) {
+							if (response.status === 200) {
+									// Display success message with SweetAlert
+									Swal.fire({
+										icon: 'success',
+										title: 'Registration successful',
+										text: 'Redirecting to login...',
+										timer: 2000, // 2 seconds delay
+										showConfirmButton: false
+									}).then(function() {
+										// Redirect to the login page after delay
+										window.location.href = '{{ route('login') }}';
 									});
-									$('.submit_btn').text("Submit");
-									$('.submit_btn').attr("disabled", false);
-									Command: toastr["error"]("Some Fields are required. Please check your input and try again.")
-									
-								}
-			
-								if(response.status == 200){
-									Command: toastr["success"](response.message)
-									
-									window.location.replace('{{ route('login') }}');
-
-								}
-								if(response.status == 500){
-									Command: toastr["error"](response.message)
-									$('.submit_btn').text("Submit");
-									$('.submit_btn').attr("disabled", false);
-
+								} else {
+									// Display error message with SweetAlert
+									Swal.fire({
+										icon: 'error',
+										title: 'Registration failed',
+										text: 'An error occurred. Please try again.'
+									});
 								}
 						},
-						error: function (xhr, ajaxOptions, thrownError) {
-							if (xhr.status === 419) {
-								Command: toastr["error"](
-									"Session expired. please login again."
-								);
-								
-								setTimeout(() => {
-									window.location.replace('{{ route('login') }}');
-								}, 2000);
+						error: function(xhr, status, error) {
+
+							$(".submit_btn").attr("disabled", false).text('Register');
+
+							var response = xhr.responseJSON;
+							if (response && response.errors) {
+								// Display validation errors
+								var errorMessages = Object.values(response.errors).flat();
+								errorMessages.forEach(function(errorMessage) {
+									toastr.error(errorMessage);
+								});
+							} else if (response && response.message) {
+								toastr.error(response.message);
+							} else {
+								toastr.error('An error occurred. Please try again.');
 							}
 						},
 					});

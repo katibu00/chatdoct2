@@ -128,6 +128,44 @@ class RegisterController extends Controller
         }
     }
 
+    public function registerStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|unique:users,phone',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $validatedData = $validator->validated();
+        $fullName = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
+        $firstName = explode(' ', $fullName)[0];
+        $randomString = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 4);
+        $username = $firstName . $randomString;
+        
+        $user = User::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'username' => $username,
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        $this->sendWelcomeEmail($fullName, $validatedData['email']);
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Registration successful',
+        ]);
+
+    }
+
     private function getAccessToken()
     {
         $monnifyKeys = DB::table('monnify_a_p_i_s')->first();
@@ -398,16 +436,7 @@ class RegisterController extends Controller
             'accept' => 'application/json',
             'api-key' => $apiKey,
             'content-type' => 'application/json',
-        ])->post($endpoint, $data);
-
-        // Check if the request was successful
-        if ($response->successful()) {
-            // Email sent successfully
-            echo "Welcome email sent to ChatDoc!";
-        } else {
-            // Failed to send email
-            echo "Failed to send welcome email. Error: " . $response->status();
-        }
+        ])->post($endpoint, $data);       
 
     }
 
