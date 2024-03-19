@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        $action_link = route('reset.password', ['token' => $token, 'email' => $request->email]);
+        $action_link = 'https://chatdoct.com' . route('reset.password', ['token' => $token, 'email' => $request->email]);
 
         $body = "Hello!<br><br>" .
         "We've received a request to reset the password for your <b>ChatDoc</b> account associated with the email address: " . $request->email .
