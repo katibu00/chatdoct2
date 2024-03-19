@@ -77,7 +77,7 @@
 							
 							<div class="text-center">
 								<button type="submit" id="submit_btn" class="btn btn-lg btn-primary fw-bolder">
-									<span class="indicator-label">Submit</span>
+									<span class="indicator-label">Reset Password</span>
 								</button>
 							</div>
 						</form>

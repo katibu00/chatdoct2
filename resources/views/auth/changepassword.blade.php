@@ -42,7 +42,7 @@
                         </div>
                         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
                             <button type="submit" id="submit_btn" class="btn btn-lg btn-primary fw-bolder me-4">
-                                <span class="indicator-label">Submit</span>
+                                <span class="indicator-label">Reset Password</span>
                             </button>
                             <a href="{{ route('homepage') }}" class="btn btn-lg btn-light-primary fw-bolder">Cancel</a>
                         </div>
@@ -63,7 +63,7 @@
         var hostUrl = "assets/";
     </script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
             $(document).on("submit", "#password_reset_form", function(e) {
@@ -100,52 +100,40 @@
                        
                         if (response.status == 200) {
                             $("#error_list").html("");
-                            Command: toastr["success"](response.message);
-                            toastr.options = {
-                                closeButton: false,
-                                debug: false,
-                                newestOnTop: false,
-                                progressBar: false,
-                                positionClass: "toast-top-right",
-                                preventDuplicates: false,
-                                onclick: null,
-                                showDuration: "300",
-                                hideDuration: "1000",
-                                timeOut: "5000",
-                                extendedTimeOut: "1000",
-                                showEasing: "swing",
-                                hideEasing: "linear",
-                                showMethod: "fadeIn",
-                                hideMethod: "fadeOut",
-                            };
+
+                            // Display success message using SweetAlert
+                            swal({
+                                title: "Success!",
+                                text: response.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "OK",
+                                        value: true,
+                                        visible: true,
+                                        className: "btn btn-success",
+                                        closeModal: true
+                                    }
+                                },
+                            }).then((value) => {
+                                // Redirect to login page after user clicks "OK"
+                                if (value) {
+                                    window.location.replace('{{ route('login') }}');
+                                }
+                            });
+
+                            // Reset input fields and button text
                             $("#email").val("");
                             $("#submit_btn").text("Submit");
                             $("#submit_btn").attr("disabled", false);
-
                         }
+
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         if (xhr.status === 419) {
                             Command: toastr["error"](
                                 "Session expired. please login again."
                             );
-                            toastr.options = {
-                                closeButton: false,
-                                debug: false,
-                                newestOnTop: false,
-                                progressBar: false,
-                                positionClass: "toast-top-right",
-                                preventDuplicates: false,
-                                onclick: null,
-                                showDuration: "300",
-                                hideDuration: "1000",
-                                timeOut: "5000",
-                                extendedTimeOut: "1000",
-                                showEasing: "swing",
-                                hideEasing: "linear",
-                                showMethod: "fadeIn",
-                                hideMethod: "fadeOut",
-                            };
 
                             setTimeout(() => {
                                 window.location.replace('{{ route('login') }}');
