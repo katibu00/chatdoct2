@@ -61,9 +61,9 @@ class DoctorController extends Controller
         $user->middle_name = $request->middle_name;
         $user->last_name = $request->last_name;
         $user->phone = $request->phone;
-        $user->chat_rate = $request->chat_rate;
-        $user->video_rate = $request->video_rate;
-        $user->phone_rate = $request->phone_rate;
+        $user->chat_rate = $request->chat_rate ?? 0;
+        $user->video_rate = $request->video_rate ?? 0;
+        $user->phone_rate = $request->phone_rate ?? 0;        
         $user->age = $request->age;
         $user->sex = $request->sex;
         $user->address = $request->address;
@@ -254,7 +254,7 @@ class DoctorController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'link' => 'required|url|max:255',
+            'link' => 'required|max:255',
         ]);
     
         // If validation fails, return back with errors
