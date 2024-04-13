@@ -315,7 +315,16 @@
                                                             Link Not yet Sent.
                                                         </div>
                                                     @else
-                                                        <a href="{{ $doctor->link }}" target="_blank" class="form-control form-control-lg form-control-solid">{{ $doctor->link }}</a>
+
+                                                    @php
+                                                        $link = $doctor->link;
+                                                        if (!str_starts_with($link, 'https://') && !str_starts_with($link, 'http://')) {
+                                                            $link = 'https://' . $link;
+                                                        }
+                                                    @endphp
+
+                                                    <a href="{{ $link }}" target="_blank" class="form-control form-control-lg form-control-solid">{{ $doctor->link }}</a>
+
                                                     @endif                                                                                                
                                                 </div>
                                             </div>                                            
