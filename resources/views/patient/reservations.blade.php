@@ -63,8 +63,7 @@
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
                             <div class="card-body pb-0">
-                            
-
+                        
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="symbol symbol-30px me-3">
                                         <img @if ($doctor['book'] && $doctor['book']['picture'])
@@ -228,6 +227,18 @@
                                         <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Preferred Language</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+
+                                                    <span
+                                                        class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->preferred_language }}</span>
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
                                                 <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Block</span>
                                                 <span class="svg-icon svg-icon-1 svg-icon-success">
 
@@ -276,7 +287,52 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="dropdown-divider my-2"></div>
+
+                            @if ($doctor['book'])
+                            <!-- Cancel Booking Button -->
+                            <button href="#" class="btn btn-sm btn-danger cancel_booking mb-2" data-bs-toggle="modal" data-bs-target="#cancel_booking_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                <i class="bi bi-calendar-x-fill me-2"></i> Cancel Booking
+                            </button>
+                    
+                            <!-- Adjust Time Button -->
+                            <button href="#" class="btn btn-sm btn-primary adjust_time mb-2" data-bs-toggle="modal" data-bs-target="#adjust_time_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                <i class="bi bi-clock-fill me-2"></i> Adjust Time
+                            </button>
+                    
+                            <!-- Change Booking Type Button -->
+                            <button href="#" class="btn btn-sm btn-warning change_booking mb-2" data-bs-toggle="modal" data-bs-target="#change_booking_modal" data-booking_id="{{ $doctor->id }}" data-doctor_name="Dr. {{ $doctor['book']['first_name'] . ' ' . $doctor['book']['middle_name'] . ' ' . $doctor['book']['last_name'] }}">
+                                <i class="bi bi-arrow-repeat me-2"></i> Change Booking Type
+                            </button>
+                                        
+                            <!-- Fill Form Button -->
+                            <button href="#" class="btn btn-sm btn-info fill_form mb-2" data-bs-toggle="modal" data-bs-target="#form" data-id="{{ $doctor->id }}">
+                                <i class="bi bi-file-earmark-text-fill me-2"></i> Fill Pre-consultation Form
+                            </button>
+                    
+                            <!-- Open Chat Button -->
+                            @if ($doctor->book_type == 'chat' && $doctor->time !== null)
+                                <a href="{{ route('chats') }}" class="btn btn-sm btn-success open_chat mb-2">
+                                    <i class="bi bi-chat-fill me-2"></i> Open Chat with the Doctor
+                                </a>
+                            @endif
+                    
+                            <!-- View and Copy Video Conference Link Button -->
+                            @if ($doctor->book_type == 'video')
+                                <button href="#" class="btn btn-sm btn-dark view_copy_link mb-2" data-bs-toggle="modal" data-bs-target="#link{{ $key }}" data-id="{{ $doctor->id }}">
+                                    <i class="bi bi-link-45deg me-2"></i> View and Copy Video Conference Link
+                                </button>
+                            @endif
+                    
+                            <!-- Download Prescription Button -->
+                            @if ($doctor->prescription == 1)
+                                <a href="{{ route('download', $doctor->id) }}" class="btn btn-sm btn-success mb-2 download_prescription">
+                                    <i class="bi bi-file-earmark-arrow-down-fill me-2"></i> Download Prescription
+                                </a>
+                            @endif
+                        @endif
                         </div>
+                        
                     </div>
 
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">

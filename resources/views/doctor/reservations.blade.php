@@ -271,6 +271,15 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Preferred Language</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <span class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->preferred_language }}</span>
+                                                </span>
+                                            </div>
+                                        </div>
 
                                         @if ($doctor->book_type == 'phone')
                                         <div

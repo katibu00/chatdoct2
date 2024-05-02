@@ -66,7 +66,7 @@
                             <div class="flex-grow-1 me-2">
                                 <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Active Bookings</a>
                             </div>
-                            <span class="fw-bolder text-danger py-1">{{$recent->count()}}</span>
+                            <span class="fw-bolder text-danger py-1">{{ $recent->count() }}</span>
                         </div>
                         <div class="d-flex align-items-center bg-light-info rounded p-5">
                             <span class="svg-icon svg-icon-info me-5">
@@ -81,7 +81,7 @@
                             <div class="flex-grow-1 me-2">
                                 <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">Completed Bookings</a>
                             </div>
-                            <span class="fw-bolder text-info py-1">-</span>
+                            <span class="fw-bolder text-info py-1">{{ $completed_count }}</span>
                         </div>
                     </div>
                 </div>
@@ -110,6 +110,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="card-body pt-2">
                         @forelse ($recent as $key => $booking)
@@ -134,6 +135,10 @@
                         <div class="alert alert-warning" role="alert">You have no recent bookings. When you, they will show up here for quick reference.</div></td>
                         @endforelse
                     </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('reservations') }}" class="btn btn-primary btn-sm">See All</a>
+                    </div>
+            
                 </div>
             </div>
 

@@ -67,7 +67,15 @@ class HomeController extends Controller
     public function patient(Request $request)
     {
         $user_id = auth()->user()->id;
-        $data['recent'] = Booking::where('patient_id', $user_id)->orderBy('created_at', 'desc')->get();
+        $data['recent'] = Booking::where('patient_id', $user_id)
+        ->orderBy('created_at', 'desc')
+        ->take(3)
+        ->get();
+    
+         $data['completed_count'] = Booking::where('patient_id', $user_id)
+        ->where('status', 2) 
+        ->count();
+        
         $data['users'] = User::where('role', 'doctor')->where('status', 1)->where('featured', 1)->get();
         $data['user'] = User::where('id', Auth::user()->id)->first();
         $data['payments'] = Payment::where('user_id', $user_id)->latest()->get()->take(4);

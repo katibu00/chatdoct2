@@ -493,11 +493,11 @@
                                     <p class="text-gray-700 fw-bold fs-6 mb-4">{!! @$user->about !!}</p>
                                     <div class="d-flex text-gray-700 fw-bold fs-7">
                                         @php
-                                            $datas = $user->languages; 
-                                            $data = explode(',', $datas); 
+                                            $doctorLanguages = $user->languages; 
+                                            $languages = explode(',', $doctorLanguages); 
                                         @endphp
-                                        @foreach ($data as $dat)
-                                        <span class="border border-2 rounded me-3 p-1 px-2">{{$dat}}</span>
+                                        @foreach ($languages as $language)
+                                        <span class="border border-2 rounded me-3 p-1 px-2">{{ $language }}</span>
                                        @endforeach
                                     </div>
                                 </div>
@@ -505,20 +505,20 @@
                                 <div class="d-flex flex-column">
                                     <div class="separator separator-dashed border-muted my-5"></div>
                                     <div class="d-flex flex-stack">
-                                        <form action="{{route('book')}}" method="post">
+                                        <form action="{{ route('book') }}" method="post">
                                             @csrf
-                                            <input type="hidden" name="doctor_id" value="{{$user->id}}">
+                                            <input type="hidden" name="doctor_id" value="{{ $user->id }}">
                                             <div class="row">
-                                                <div class="col-md-5 fv-row">
-                                                    <select name="book_type" class="form-select form-select-solid  mb-3" data-control="select2" data-hide-search="true" data-placeholder="Book Type"   required>
+                                                <div class="col-md-4 fv-row">
+                                                    <select name="book_type" class="form-select form-select-solid mb-3" data-control="select2" data-hide-search="true" data-placeholder="Book Type" required>
                                                         <option></option>
                                                         <option value="chat">Chat</option>
                                                         <option value="video">Video Call</option>
                                                         <option value="phone">Phone Call</option>
-                                                    </select>          
+                                                    </select>
                                                 </div>
-                                                <div class="col-md-5 fv-row">
-                                                    <select name="time_slot" id="time_slot" class="form-select form-select-solid mb-3"  data-control="select2" data-hide-search="true" data-placeholder="Time Slot..." >
+                                                <div class="col-md-4 fv-row">
+                                                    <select name="time_slot" id="time_slot" class="form-select form-select-solid mb-3" data-control="select2" data-hide-search="true" data-placeholder="Time Slot..." required>
                                                         <option></option>
                                                         <option value="Morning">Morning (6AM - 11:59PM)</option>
                                                         <option value="Noon">Noon (12PM - 5:59PM)</option>
@@ -526,11 +526,23 @@
                                                         <option value="Night">Night (12AM - 5:59AM)</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-2 fv-row">
-                                                    <button type="submit" class="btn btn- btn-primary">Continue</button>
+                                                <div class="col-md-4 fv-row">
+                                                    <select name="preferred_language" class="form-select form-select-solid mb-3" data-control="select2" data-hide-search="true" data-placeholder="Preferred Language" required>
+                                                        <option></option>
+                                                        @foreach ($languages as $language)
+                                                        <option value="{{ $language }}">{{ $language }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- New row for the "Continue" button -->
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <button type="submit" class="btn btn-primary">Continue</button>
                                                 </div>
                                             </div>
                                         </form>
+                                        
                                     </div>
                                 </div>
                             </div>

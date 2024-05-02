@@ -99,10 +99,13 @@ class PatientController extends Controller
             }
         }
 
-        $check = Booking::where('doctor_id', $request->doctor_id)->where('patient_id', $patient_id)->where('status', 1)->first();
+        $check = Booking::where('doctor_id', $request->doctor_id)
+        ->where('patient_id', $patient_id)
+        ->whereIn('status', [0, 1])
+        ->first();
+    
         if ($check) {
-
-            Toastr::error('You already have book this doctor', 'Not Allowed');
+            Toastr::error('You already have booked this doctor', 'Not Allowed');
             return redirect()->back();
         }
 
@@ -111,6 +114,7 @@ class PatientController extends Controller
         $book->doctor_id = $request->doctor_id;
         $book->time_slot = $request->time_slot;
         $book->book_type = $request->book_type;
+        $book->preferred_language = $request->preferred_language;
         $book->status = 0;
         $book->save();
 
