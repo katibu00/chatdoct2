@@ -36,7 +36,8 @@
                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="false"
                                         data-placeholder="Select option" data-allow-clear="true"
-                                        data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter" name="status">
+                                        data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter"
+                                        name="status">
                                         <option value="all">All</option>
                                         <option value="1">Initiated</option>
                                         <option value="0">Uninitiated</option>
@@ -58,25 +59,25 @@
 
             <!-- Add this code wherever you want to display the validation errors -->
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             <div class="row g-6 g-xl-9">
 
-                @forelse ($doctors as $key => $doctor)
+                {{-- @forelse ($doctors as $key => $doctor)
                     <div class="col-md-6 col-xl-4">
                         <div class="card d-n4one" id="kt_widget_5">
                             <div class="card-body pb-0"> 
 
                                 <div class="d-flex align-items-center mb-5">
                                     <div class="symbol symbol-30px me-3">
-                                        <img @if ( @$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif alt=""  />
+                                        <img @if (@$doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ @$doctor->patient->picture }}" @endif alt=""  />
                                     </div>
                                     <div class="d-flex flex-column">
                                         <a href="#" class="ttext-gray-800 text-hover-primary fs-8 fw-bolder">
@@ -192,7 +193,7 @@
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
                                                 <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
-                                                    @if($doctor->status == 0)
+                                                    @if ($doctor->status == 0)
                                                     <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting Time Appointment</span>
                                                     @elseif($doctor->status == 1)
                                                     <span class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
@@ -203,8 +204,8 @@
                                             </div>
                                         </div>
                       
-                                      @if($doctor->status == 1)
-                                        @if(@$doctor->time)
+                                      @if ($doctor->status == 1)
+                                        @if (@$doctor->time)
                                             <div
                                             class="border border-gray-300 border-dashed rounded min-w-125px py-5  me-3 mb-3">
                                             <div class="d-flex align-items-center mb-">
@@ -301,8 +302,223 @@
                         </div>
                     </div>
 
+                @empty
+                    <div class="alert alert-warning" role="alert">You don't have any patients yet. When you do, they will be listed here.</div>
+                @endforelse --}}
+
+
+                @forelse ($doctors as $key => $doctor)
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card d-n4one" id="kt_widget_5">
+                            <div class="card-body pb-0">
+                                <div class="d-flex align-items-center mb-5">
+                                    <div class="symbol symbol-30px me-3">
+                                        <img @if ($doctor->patient->picture == 'default.png') src="/uploads/default.png" @else src="/uploads/avatar/{{ $doctor->patient->picture }}" @endif
+                                            alt="" />
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <a href="#" class="ttext-gray-800 text-hover-primary fs-8 fw-bolder">
+                                            {{ $doctor->patient->first_name }}
+                                            {{ $doctor->patient->middle_name }}
+                                            {{ $doctor->patient->last_name }}</a>
+                                        <span class="text-gray-400 fs-9 fw-bold">Booked
+                                            {{ $doctor->created_at->diffForHumans() }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-wrap mb-5">
+                                    <div class="row">
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time Slot</span>
+                                                <span
+                                                    class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->time_slot }}</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Pre-consultation
+                                                    Form</span>
+                                                @if ($doctor->pre_consultation == 1)
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20" height="20"
+                                                                rx="10" fill="black" />
+                                                            <path
+                                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20" height="20"
+                                                                rx="10" fill="black" />
+                                                            <rect x="7" y="15.3137" width="12" height="2"
+                                                                rx="1" transform="rotate(-45 7 15.3137)"
+                                                                fill="black" />
+                                                            <rect x="8.41422" y="7" width="12" height="2"
+                                                                rx="1" transform="rotate(45 8.41422 7)"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Status</span>
+                                                @if ($doctor->status == 0)
+                                                    <span class="badge badge-danger fw-bolder me-auto px-4 py-3">Awaiting
+                                                        Time Appointment</span>
+                                                @elseif($doctor->status == 1)
+                                                    <span
+                                                        class="badge badge-success fw-bolder me-auto px-4 py-3">Active</span>
+                                                @elseif($doctor->status == 2)
+                                                    <span
+                                                        class="badge badge-info fw-bolder me-auto px-4 py-3">Completed</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        @if ($doctor->status == 1 && $doctor->time)
+                                            <div
+                                                class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                                <div class="d-flex align-items-center mb-">
+                                                    <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Exact
+                                                        Time</span>
+                                                    <span
+                                                        class="badge badge-light-info fw-bolder me-auto px-4 py-3">{{ \Carbon\Carbon::createFromFormat('H:i:s', $doctor->time)->format('h:i A') }}</span>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span
+                                                    class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Prescription</span>
+                                                @if ($doctor->prescription == 1)
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <path
+                                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="svg-icon svg-icon-1 svg-icon-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.3" x="2" y="2" width="20"
+                                                                height="20" rx="10" fill="black" />
+                                                            <rect x="7" y="15.3137" width="12" height="2"
+                                                                rx="1" transform="rotate(-45 7 15.3137)"
+                                                                fill="black" />
+                                                            <rect x="8.41422" y="7" width="12" height="2"
+                                                                rx="1" transform="rotate(45 8.41422 7)"
+                                                                fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Booking
+                                                    Type</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                    @if ($doctor->book_type == 'chat')
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Chat</span>
+                                                    @elseif ($doctor->book_type == 'phone')
+                                                        <span class="badge badge-light fw-bolder me-auto px-4 py-3">Phone
+                                                            Call</span>
+                                                    @else
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">Video</span>
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                            <div class="d-flex align-items-center mb-">
+                                                <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Preferred
+                                                    Language</span>
+                                                <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                    <span
+                                                        class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->preferred_language }}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @if ($doctor->book_type == 'phone')
+                                            <div
+                                                class="border border-gray-300 border-dashed rounded min-w-125px py-5 me-3 mb-3">
+                                                <div class="d-flex align-items-center mb-">
+                                                    <span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Contact
+                                                        Number</span>
+                                                    <span class="svg-icon svg-icon-1 svg-icon-success">
+                                                        <span
+                                                            class="badge badge-light fw-bolder me-auto px-4 py-3">{{ $doctor->patient->phone }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex flex-column">
+                                    <a href="#" class="btn btn-sm btn-secondary mb-2 w-100" data-bs-toggle="modal"
+                                        data-bs-target="#form{{ $key }}" data-id="{{ $doctor->id }}">
+                                        <i class="bi bi-file-earmark-text"></i> Pre-consultation Form
+                                    </a>
+                                    @if ($doctor->book_type == 'chat')
+                                        <a href="{{ route('doctor.chat') }}" class="btn btn-sm btn-secondary mb-2 w-100"
+                                            style="pointer-events: {{ $doctor->status == 1 ? '' : 'none' }}">
+                                            <i class="bi bi-chat"></i> Go to Chat
+                                        </a>
+                                    @else
+                                        <a href="#" class="btn btn-sm btn-secondary mb-2 w-100"
+                                            data-bs-toggle="modal" data-bs-target="#link{{ $key }}"
+                                            data-id="{{ $doctor->id }}">
+                                            <i class="bi bi-envelope"></i> Send Link
+                                        </a>
+                                    @endif
+                                    <a href="#" class="btn btn-sm btn-secondary mb-2 w-100 appoint_time"
+                                        data-bs-toggle="modal" data-bs-target="#appoint_time"
+                                        data-id="{{ $doctor->id }}"
+                                        data-name="{{ $doctor->patient->first_name . ' ' . $doctor->patient->middle_name . ' ' . $doctor->patient->last_name }}">
+                                        <i class="bi bi-clock-history"></i> Appoint Time
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-secondary mb-2 w-100 subs"
+                                        data-bs-toggle="modal" data-bs-target="#subscription"
+                                        data-id="{{ $doctor->id }}"
+                                        data-name="{{ $doctor->patient->first_name . ' ' . $doctor->patient->middle_name . ' ' . $doctor->patient->last_name }}">
+                                        <i class="bi bi-file-earmark-check"></i> Send Prescription
+                                    </a>
+                                    <a href="tel:{{ $doctor->patient->phone }}"
+                                        class="btn btn-sm btn-secondary mb-2 w-100">
+                                        <i class="bi bi-telephone-outbound"></i> Call Patient
+                                    </a>
+                                    <a href="{{ route('doctor.patients.complete', $doctor->id) }}"
+                                        class="btn btn-sm btn-secondary mb-2 w-100">
+                                        <i class="bi bi-check2"></i> Mark Completed
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="modal fade" id="form{{ $key }}" tabindex="-1" aria-hidden="true">
-                      
                         <div class="modal-dialog mw-650px">
                             <div class="modal-content">
                                 <div class="modal-header pb-0 border-0 justify-content-end">
@@ -310,16 +526,15 @@
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                    height="2" rx="1" transform="rotate(-45 6 17.3137)"
-                                                    fill="black" />
-                                                <rect x="7.41422" y="6" width="16" height="2"
-                                                    rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                    transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
                                     </div>
                                 </div>
-                               
+
                                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                                     <div class="text-center mb-13">
                                         <h1 class="mb-3">Pre-consultation Form</h1>
@@ -329,7 +544,7 @@
                                             {{ @$doctor['patient']['last_name'] }}
                                         </div>
                                     </div>
-                                   
+
                                     <div class="mb-15">
                                         <div class="mh-375px scroll-y me-n7 pe-7">
 
@@ -343,7 +558,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                 <!--begin::Details-->
@@ -383,7 +598,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                                 <div class="d-flex align-items-center">
@@ -398,225 +613,154 @@
                                                                     {{ $doctor->sex }}
                                                                 @endif
                                                             </span></a>
-                                                      
                                                     </div>
                                                 </div>
-                                                <!--end::Details-->
                                             </div>
-                                          
+
                                             <div
                                                 class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                <!--begin::Details-->
                                                 <div class="d-flex align-items-center">
-                                                    <!--begin::Details-->
                                                     <div class="ms-6">
-                                                        <!--begin::Name-->
-                                                        <a class="d-flex align-items-center fs-5 fw-bolder ">Complain:&nbsp;
-                                                            &nbsp;
-
+                                                        <a class="d-flex align-items-center fs-5 fw-bolder ">Complain:&nbsp;&nbsp;
                                                             <span class="text-dark text-hover-primary">
                                                                 {{ $doctor->complain }}</span></a>
-                                                        <!--end::Name-->
-
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::Details-->
                                             </div>
-                                            <!--end::User-->
                                             @if ($doctor->temperature != null)
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
-                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Temperature
-                                                                :&nbsp; &nbsp;
-
-                                                                <span class="text-dark text-hover-primary">
+                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Temperature:&nbsp;
+                                                                &nbsp; <span class="text-dark text-hover-primary">
                                                                     {{ $doctor->temperature }}&deg;C</span></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endif
                                             @if ($doctor->pulse != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
                                                             <a class="d-flex align-items-center fs-5 fw-bolder ">Pulse
-                                                                Rate:&nbsp; &nbsp;
-
-                                                                <span class="text-dark text-hover-primary">
+                                                                Rate:&nbsp; &nbsp; <span
+                                                                    class="text-dark text-hover-primary">
                                                                     {{ $doctor->pulse }}B/min</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->bp != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
                                                             <a class="d-flex align-items-center fs-5 fw-bolder ">Blood
-                                                                Pressure:&nbsp; &nbsp;
-
-                                                                <span class="text-dark text-hover-primary">
+                                                                Pressure:&nbsp; &nbsp; <span
+                                                                    class="text-dark text-hover-primary">
                                                                     {{ $doctor->bp }}mmHg</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->respiratory != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
                                                             <a class="d-flex align-items-center fs-5 fw-bolder ">Respiratory
                                                                 Rate:&nbsp; &nbsp;
-
                                                                 <span class="text-dark text-hover-primary">
                                                                     {{ $doctor->respiratory }}C/min</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->sugar != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
                                                             <a class="d-flex align-items-center fs-5 fw-bolder ">Blood
-                                                                Sugar:&nbsp; &nbsp;
-
-                                                                <span class="text-dark text-hover-primary">
+                                                                Sugar:&nbsp; &nbsp; <span
+                                                                    class="text-dark text-hover-primary">
                                                                     {{ $doctor->sugar }}mmol/L</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->weight != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
-                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Weight:&nbsp;
-                                                                &nbsp;
-
+                                                            <a class="d-flex align-items-center fs-5 fw-bolder ">Weight:&nbsp;&nbsp;
                                                                 <span class="text-dark text-hover-primary">
                                                                     {{ $doctor->weight }}Kg</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
                                             @if ($doctor->history != null)
-                                                <!--begin::User-->
                                                 <div
                                                     class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
-                                                    <!--begin::Details-->
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Details-->
                                                         <div class="ms-6">
-                                                            <!--begin::Name-->
                                                             <a class="d-flex align-items-center fs-5 fw-bolder ">Medical
-                                                                History:&nbsp; &nbsp;
-
-                                                                <span class="text-dark text-hover-primary">
+                                                                History:&nbsp; &nbsp; <span
+                                                                    class="text-dark text-hover-primary">
                                                                     {{ $doctor->history }}</span></a>
-                                                            <!--end::Name-->
-
                                                         </div>
-                                                        <!--end::Details-->
                                                     </div>
-                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::User-->
                                             @endif
 
 
-
-
-
+                                            @if ($doctor->attachment1)
+                                            <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ms-6">
+                                                        <a href="{{ asset('/' . $doctor->attachment1) }}" target="_blank">
+                                                            <img src="{{ asset('/' . $doctor->attachment1) }}" alt="Attachment 1" class="img-thumbnail" style="max-width: 200px;" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                
+                                        @if ($doctor->attachment2)
+                                            <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ms-6">
+                                                        <a href="{{ asset('/' . $doctor->attachment2) }}" target="_blank">
+                                                            <img src="{{ asset('/' . $doctor->attachment2) }}" alt="Attachment 2" class="img-thumbnail" style="max-width: 200px;" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
 
 
                                         </div>
-                                        <!--end::List-->
                                     </div>
-                                    <!--end::Users-->
-                                    <!--begin::Notice-->
                                     <div class="d-flex justify-content-between">
-                                        <!--begin::Label-->
                                         <div class="fw-bold">
                                             <label class="fs-6">Carefully Review all Information</label>
                                             <div class="fs-7 text-muted">Review the pre-consultation form before chatting
                                                 with the patient</div>
                                         </div>
-                                        <!--end::Label-->
-                                        <!--begin::Switch-->
                                         <label class="form-check form-switch form-check-custom form-check-solid">
-                                            {{-- <input class="form-check-input" type="checkbox" value="" checked="checked" />
-                                    <span class="form-check-label fw-bold text-muted">Allowed</span> --}}
                                         </label>
-                                        <!--end::Switch-->
                                     </div>
-                                    <!--end::Notice-->
                                 </div>
-                                <!--end::Modal body-->
                             </div>
-                            <!--end::Modal content-->
                         </div>
-                        <!--end::Modal dialog-->
                     </div>
-                   
+
                     <div class="modal fade" id="link{{ $key }}" tabindex="-1" aria-hidden="true">
-                      
+
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <div class="modal-content">
                                 <form class="form" action="{{ route('link') }}" id="kt_modal_new_address_form"
@@ -630,11 +774,11 @@
                                             <span class="svg-icon svg-icon-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                                        height="2" rx="1" transform="rotate(-45 6 17.3137)"
+                                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                        rx="1" transform="rotate(-45 6 17.3137)"
                                                         fill="black" />
-                                                    <rect x="7.41422" y="6" width="16" height="2"
-                                                        rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                        transform="rotate(45 7.41422 6)" fill="black" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -664,27 +808,25 @@
                                             <span class="indicator-label">Submit</span>
                                         </button>
                                     </div>
-                                    
+
                                 </form>
                                 <!--end::Form-->
                             </div>
                         </div>
                     </div>
-                @empty
-                    <div class="alert alert-warning" role="alert">You don't have any patients yet. When you do, they will be listed here.</div>
-                @endforelse
 
+                @empty
+                    <div class="alert alert-warning" role="alert">You don't have any patients yet. When you do, they
+                        will be listed here.</div>
+                @endforelse
             </div>
         </div>
-    
+
         <div class="modal fade" id="appoint_time" tabindex="-1" aria-hidden="true">
-          
+
             <div class="modal-dialog modal-dialog-centered mw-650px">
-                <!--begin::Modal content-->
                 <div class="modal-content">
-                    <!--begin::Form-->
-                    <form class="form" action="{{ route('doctor.patients.time') }}" id=""
-                        method="post">
+                    <form class="form" action="{{ route('doctor.patients.time') }}" id="" method="post">
                         @csrf
                         <div class="modal-header" id="">
                             <h2>Appoint Time to <span class="pname"></span></h2>
@@ -692,14 +834,12 @@
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                            height="2" rx="1" transform="rotate(-45 6 17.3137)"
-                                            fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2"
-                                            rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                             </div>
                         </div>
                         <div class="modal-body py-10 px-lg-17">
@@ -712,11 +852,8 @@
                                 <div class="row mb-5 add_item">
                                     <div class="col-md-12 fv-row my-2">
                                         <label class="required fs-5 fw-bold mb-2">Time</label>
-                                        <input type="time" class="form-control form-control-solid"
-                                            placeholder="Medicine" name="time" required>
-                                        <!--end::Input-->
+                                        <input type="time" class="form-control form-control-solid" placeholder="Medicine" name="time" required>
                                     </div>
-                                    <!--end::Col-->
                                 </div>
                             </div>
                         </div>
@@ -725,11 +862,10 @@
                             <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                             </button>
-                            <!--end::Button-->
                         </div>
-                        
+
                     </form>
-    
+
                 </div>
             </div>
         </div>
@@ -748,19 +884,15 @@
                                 <span class="svg-icon svg-icon-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16"
-                                            height="2" rx="1" transform="rotate(-45 6 17.3137)"
-                                            fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2"
-                                            rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                            transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
                             </div>
-                            <!--end::Close-->
                         </div>
                         <div class="modal-body py-10 px-lg-17">
-                            <!--begin::Scroll-->
                             <div class="scroll-y me-n7 pe-7" id="kt_modal_new_address_scroll" data-kt-scroll="true"
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
@@ -786,7 +918,7 @@
                                 <span class="indicator-label">Submit</span>
                             </button>
                         </div>
-                        
+
                     </form>
                     <!--end::Form-->
 
@@ -813,7 +945,7 @@
                 </div>
             </div>
         </div>
-       
+
 
     </div>
     <!--end::Post-->
@@ -846,7 +978,7 @@
 
                 $('#get_id').val(id);
                 $('#pname').html(name)
-             
+
             });
         });
     </script>
@@ -859,9 +991,9 @@
 
                 $('#get_id_time').val(id);
                 $('.pname').html(name)
-             
+
             });
         });
     </script>
-  
+
 @endsection

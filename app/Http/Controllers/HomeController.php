@@ -94,17 +94,14 @@ class HomeController extends Controller
 
     public function admin()
     {
-        // Previous 30 days date for user registrations
         $start_date_users = Carbon::now()->subDays(30);
 
-        // Count user registrations within the last 30 days
         $userRegistrations = User::where('created_at', '>=', $start_date_users)
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('d M');
             });
 
-        // Extract date labels and user counts
         $userRegistrationLabels = $userRegistrations->keys();
         $userRegistrationCounts = $userRegistrations->values()->map->count();
 

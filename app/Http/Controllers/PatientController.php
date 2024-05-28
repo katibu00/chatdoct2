@@ -182,8 +182,25 @@ class PatientController extends Controller
         return Booking::with('patient')->findOrFail($request->id);
     }
 
+
     public function PreFormSave(Request $request)
     {
+        $validated = $request->validate([
+            'person' => 'nullable|string',
+            'name' => 'nullable|string|max:255',
+            'age' => 'nullable|integer',
+            'sex' => 'nullable|string|max:10',
+            'complain' => 'nullable|string',
+            'temperature' => 'nullable|numeric',
+            'pulse' => 'nullable|numeric',
+            'bp' => 'nullable|string|max:20',
+            'respiratory' => 'nullable|numeric',
+            'sugar' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'history' => 'nullable|string',
+            'attachment1' => 'nullable|file|mimes:jpg,jpeg,png|max:1048', 
+            'attachment2' => 'nullable|file|mimes:jpg,jpeg,png|max:1048', 
+        ]);
 
         $book = Booking::findOrFail($request->get_id);
         $book->pre_consultation = 1;
@@ -199,6 +216,21 @@ class PatientController extends Controller
         $book->sugar = $request->sugar;
         $book->history = $request->history;
         $book->weight = $request->weight;
+
+        if ($request->hasFile('attachment1')) {
+            $attachment1 = $request->file('attachment1');
+            $attachment1Path = 'uploads/' . time() . '_attachment1_' . $attachment1->getClientOriginalName();
+            $attachment1->move(public_path('uploads'), $attachment1Path);
+            $book->attachment1 = $attachment1Path;
+        }
+
+        if ($request->hasFile('attachment2')) {
+            $attachment2 = $request->file('attachment2');
+            $attachment2Path = 'uploads/' . time() . '_attachment2_' . $attachment2->getClientOriginalName();
+            $attachment2->move(public_path('uploads'), $attachment2Path);
+            $book->attachment2 = $attachment2Path;
+        }
+
         $book->update();
 
         Toastr::success('Pre-consultation Form filled successfully', 'Done');
@@ -418,7 +450,6 @@ class PatientController extends Controller
             'response' => $responseData
         ];
     }
-
 
 
     private function patientBookingConfirmationEmail($name, $email, $doctorName, $bookingType, $bookingTime)

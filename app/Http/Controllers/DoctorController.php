@@ -150,7 +150,7 @@ class DoctorController extends Controller
     public function MyPatients()
     {
 
-        $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->whereIn('status',[0,1])->orderBy('id','desc')->get();
+        $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->whereIn('status',[0,1,2])->orderBy('id','desc')->get();
         return view('doctor.reservations', $data);
     }
     public function sortPatients(Request $request)
@@ -234,12 +234,12 @@ class DoctorController extends Controller
             $booking->time = $request->time;
             $booking->update();
             $time = $request->time;
-            $patient->notify(new PatientTimeNotification($booking, $time));
+            $patient->notify(new PatientTimeNotification($booking, $time));  
+            $this->sendScheduledConsultationEmail($patient->first_name.' '.$patient->last_name, $patient->email,$doctor->first_name.' '.$doctor->last_name,$request->time);
             Toastr::success('Time Appointed Successfully.', 'Done');
             return redirect()->route('doctor.patients');
         }
 
-        $this->sendScheduledConsultationEmail($patient->first_name.' '.$patient->last_name, $patient->email,$doctor->first_name.' '.$doctor->last_name,$request->time);
         Toastr::error('Booking Not found.', 'Error');
         return redirect()->back();
     }

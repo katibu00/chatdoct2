@@ -10,6 +10,16 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <div id="kt_content_container" class="container-xxl">
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                     <button type="button" class="btn btn-primary me-3 mb-3" data-kt-menu-trigger="click"
@@ -404,22 +414,19 @@
             </div>
         </div>
 
+
         <div class="modal fade" id="form" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
-                    <form class="form" action="{{ route('reservations') }}" id="kt_modal_new_address_form"
-                        method="post">
+                    <form class="form" action="{{ route('reservations') }}" id="kt_modal_new_address_form" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-header" id="kt_modal_new_address_header">
                             <h2>Pre-Consultation Form</h2>
                             <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                 <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
-                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
                                     </svg>
                                 </span>
                             </div>
@@ -429,54 +436,9 @@
                                 data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
                                 data-kt-scroll-dependencies="#kt_modal_new_address_header"
                                 data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
-                                <div class="mb-15 fv-row">
-                                    <div class="d-flex flex-stack">
-                                        <div class="fw-bold me-5">
-                                            <label class="fs-6">Patient</label>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <label class="form-check form-check-custom form-check-solid me-10">
-                                                <input class="h-20px w-20px mx-2" type="radio"
-                                                    onclick="javascript:personCheck();" name="person" value="self"
-                                                    id="myself" checked="checked" />
-                                                <span class="form-check-label fw-bold">Myself</span>
-                                            </label>
-                                            <label class="form-check form-check-custom form-check-solid">
-                                                <input class="h-20px w-20px ml-1" type="radio"
-                                                    onclick="javascript:personCheck();" name="person" value="someone"
-                                                    id="someone" />
-                                                <span class="form-check-label fw-bold mx-2">Someone</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-5" id="issomeone1" style="display: none;">
-                                    <div class="col-md-12 fv-row">
-                                        <label class="required fs-5 fw-bold mb-2">Person Name</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="name" id="name" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-5" id="issomeone2" style="display: none;">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-5 fw-bold mb-2">Person Age</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="age" id="age" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="required fs-5 fw-bold mb-2">Person Sex</label>
-                                        <select class="form-select form-select-solid" data-control="select2"
-                                            data-hide-search="true" id="se" data-placeholder="Select gender"
-                                            name="sex">
-                                            <option value=""></option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                
+                                <!-- Existing form fields -->
+        
                                 <div class="row mb-5">
                                     <div class="col-md-12 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Complains</label>
@@ -484,45 +446,55 @@
                                         <input type="hidden" name="get_id" id="get_id" />
                                     </div>
                                 </div>
-
+        
                                 <div class="row mb-5">
                                     <label class="fs-5 fw-bold mb-2">Vital Signs (if available)</label>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Body Temperature (&deg;C)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="temperature" id="temperature" />
+                                        <input type="number" step="0.01" class="form-control form-control-solid" placeholder="" name="temperature" id="temperature" />
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Pulse rate (B/min)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="pulse" id="pulse" />
+                                        <input type="number" step="0.01" class="form-control form-control-solid" placeholder="" name="pulse" id="pulse" />
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Blood Pressure (mmHg)</label>
-                                        <input type="text" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="bp" id="bp" />
+                                        <input type="text" step="0.01" class="form-control form-control-solid" placeholder="" name="bp" id="bp" />
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Respiratory rate (C/min)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="respiratory" id="respiratory" />
+                                        <input type="number" step="0.01" class="form-control form-control-solid" placeholder="" name="respiratory" id="respiratory" />
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Blood Sugar (mmol/L)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="sugar" id="sugar" />
+                                        <input type="number" step="0.01" class="form-control form-control-solid" placeholder="" name="sugar" id="sugar" />
                                     </div>
                                     <div class="col-md-4 fv-row">
                                         <label class="fw-bold mb-2">Weight (Kg)</label>
-                                        <input type="number" step="0.01" class="form-control form-control-solid"
-                                            placeholder="" name="weight" id="weight" />
+                                        <input type="number" step="0.01" class="form-control form-control-solid" placeholder="" name="weight" id="weight" />
                                     </div>
                                 </div>
-
+        
                                 <div class="row mb-5">
                                     <div class="col-md-12 fv-row">
                                         <label class="required fs-5 fw-bold mb-2">Medical History</label>
                                         <textarea name="history" id="history" class="form-control form-control-lg form-control-solid"></textarea>
+                                    </div>
+                                </div>
+        
+                                <!-- File Upload Section -->
+                                <div class="row mb-5">
+                                    <div class="col-md-6 fv-row">
+                                        <label class="fs-5 fw-bold mb-2">Attachment 1</label>
+                                        <input type="file" class="form-control form-control-solid" name="attachment1" id="attachment1" accept="image/*" onchange="previewFile(this, 'attachment1Preview', 'removeAttachment1');" />
+                                        <img id="attachment1Preview" src="" alt="Attachment 1 Preview" class="img-thumbnail mt-2" style="display: none; max-width: 200px;" />
+                                        <button type="button" id="removeAttachment1" class="btn btn-sm btn-danger mt-2" style="display: none;" onclick="removeFile('attachment1', 'attachment1Preview', 'removeAttachment1');">Remove</button>
+                                    </div>
+                                    <div class="col-md-6 fv-row">
+                                        <label class="fs-5 fw-bold mb-2">Attachment 2</label>
+                                        <input type="file" class="form-control form-control-solid" name="attachment2" id="attachment2" accept="image/*" onchange="previewFile(this, 'attachment2Preview', 'removeAttachment2');" />
+                                        <img id="attachment2Preview" src="" alt="Attachment 2 Preview" class="img-thumbnail mt-2" style="display: none; max-width: 200px;" />
+                                        <button type="button" id="removeAttachment2" class="btn btn-sm btn-danger mt-2" style="display: none;" onclick="removeFile('attachment2', 'attachment2Preview', 'removeAttachment2');">Remove</button>
                                     </div>
                                 </div>
                             </div>
@@ -537,7 +509,31 @@
                 </div>
             </div>
         </div>
-        <!--end::Modal - New Faculty-->
+        
+        <script>
+            function previewFile(input, previewId, removeBtnId) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.getElementById(previewId);
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        document.getElementById(removeBtnId).style.display = 'inline-block';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        
+            function removeFile(inputId, previewId, removeBtnId) {
+                document.getElementById(inputId).value = '';
+                const preview = document.getElementById(previewId);
+                preview.src = '';
+                preview.style.display = 'none';
+                document.getElementById(removeBtnId).style.display = 'none';
+            }
+        </script>
+        
 
         <!--begin::change booking type Modal -->
         <div class="modal fade" id="change_booking_modal" tabindex="-1" aria-hidden="true">
@@ -675,49 +671,62 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
-            $('.fill_form').click(function() {
-                const id = $(this).attr('data-id');
-               
+      $(document).ready(function() {
+    $('.fill_form').click(function() {
+        const id = $(this).attr('data-id');
 
-                $.ajax({
-                    url: 'get-data',
-                    type: 'GET',
-                    data: {
-                        "id": id
-                    },
-                    success: function(data) {
+        $.ajax({
+            url: 'get-data',
+            type: 'GET',
+            data: { "id": id },
+            success: function(data) {
+                if (data.person === 'self') {
+                    $('#myself').prop('checked', true);
+                    $('#someone').prop('checked', false);
+                    $('#issomeone1').hide();
+                    $('#issomeone2').hide();
+                } else if (data.person === 'someone') {
+                    $('#someone').prop('checked', true);
+                    $('#issomeone1').show();
+                    $('#issomeone2').show();
+                }
 
-                        if (data.person === 'self') {
-                            $('#myself').attr('checked', true);
-                            $('#someone').attr('checked', false);
-                            document.getElementById('issomeone1').style.display = 'none';
-                            document.getElementById('issomeone2').style.display = 'none';
-                        }
-                        if (data.person === 'someone') {
-                            $('#someone').attr('checked', true);
-                            document.getElementById('issomeone1').style.display = '';
-                            document.getElementById('issomeone2').style.display = '';
-                        }
-                        $('#sex option[value="Male"]').attr("selected", "selected");
+                $('#sex option[value="' + data.sex + '"]').prop("selected", true);
 
-                        $('#get_id').val(data.id);
-                        $('#name').val(data.name);
-                        $('#age').val(data.age);
-                        $('#sex').val(data.sex);
-                        $('#complain').val(data.complain);
-                        $('#temperature').val(data.temperature);
-                        $('#pulse').val(data.pulse);
-                        $('#bp').val(data.bp);
-                        $('#respiratory').val(data.respiratory);
-                        $('#sugar').val(data.sugar);
-                        $('#weight').val(data.weight);
-                        $('#history').val(data.history);
+                $('#get_id').val(data.id);
+                $('#name').val(data.name);
+                $('#age').val(data.age);
+                $('#sex').val(data.sex);
+                $('#complain').val(data.complain);
+                $('#temperature').val(data.temperature);
+                $('#pulse').val(data.pulse);
+                $('#bp').val(data.bp);
+                $('#respiratory').val(data.respiratory);
+                $('#sugar').val(data.sugar);
+                $('#weight').val(data.weight);
+                $('#history').val(data.history);
 
-                    }
-                })
-            });
+                // Handle existing attachments
+                if (data.attachment1) {
+                    $('#attachment1Preview').attr('src', '/' + data.attachment1).show();
+                    $('#removeAttachment1').hide();
+                } else {
+                    $('#attachment1Preview').hide();
+                    $('#removeAttachment1').hide();
+                }
+
+                if (data.attachment2) {
+                    $('#attachment2Preview').attr('src', '/' + data.attachment2).show();
+                    $('#removeAttachment2').hide();
+                } else {
+                    $('#attachment2Preview').hide();
+                    $('#removeAttachment2').hide();
+                }
+            }
         });
+    });
+});
+
     </script>
 
     <script>
