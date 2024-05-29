@@ -1,5 +1,3 @@
-
-
 <footer class="footer-section">
     <div class="container">
         <div class="footer-content">
@@ -12,6 +10,8 @@
                     <li><a href="{{ route('services') }}">Services</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}">Terms of Use</a></li>
                 </ul>
             </div>
             <div class="footer-social">

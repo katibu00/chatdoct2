@@ -68,9 +68,14 @@ Route::get('/our-services', [PagesController::class, 'services'])->name('service
 
 Route::get('/speciality', [PagesController::class, 'speciality'])->name('speciality');
 
-Route::get('/terms', function () {
+Route::get('/privacy-policy', function () {
+    return view('front.privacy_policy');
+})->name('privacy');
+
+Route::get('/terms-of-use', function () {
     return view('front.terms');
 })->name('terms');
+
 
 Route::get('/chats', function () {
     return view('test');
@@ -175,10 +180,11 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth']], function () {
     Route::get('/profile/settings', [App\Http\Controllers\DoctorController::class, 'SettingsIndex'])->name('doctors.profile.settings');
     Route::post('/profile/settings', [App\Http\Controllers\DoctorController::class, 'SettingsStore']);
     Route::get('/patients', [App\Http\Controllers\DoctorController::class, 'MyPatients'])->name('doctor.patients');
-    Route::post('/patients', [App\Http\Controllers\DoctorController::class, 'sortPatients'])->name('doctor.patients');
     Route::get('/patients/mark_complete/{id}', [App\Http\Controllers\DoctorController::class, 'markComplete'])->name('doctor.patients.complete');
     Route::post('/patients/appoint_time', [App\Http\Controllers\DoctorController::class, 'appointTime'])->name('doctor.patients.time');
     Route::get('/chat/patients', [App\Http\Controllers\DoctorController::class, 'Chat'])->name('doctor.chat');
+
+    Route::get('/sort-patients', [App\Http\Controllers\DoctorController::class, 'sortPatients'])->name('doctor.sortPatients');
 
     Route::post('/link', [App\Http\Controllers\DoctorController::class, 'link'])->name('link');
     Route::post('/prescription', [App\Http\Controllers\DoctorController::class, 'prescription'])->name('prescription');

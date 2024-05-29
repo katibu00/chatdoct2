@@ -155,23 +155,33 @@ class DoctorController extends Controller
     }
     public function sortPatients(Request $request)
     {
-
-       if($request->status == 'all')
-       {
-           $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->get();
-        }else
-        {
-            $data['doctors'] = Booking::with(['patient','book'])->where('doctor_id', auth()->user()->id)->where('status', $request->status)->get();
+        $status = $request->query('status', 'all');
+    
+        $statusMapping = [
+            'all' => 'all',
+            'initiated' => 1,
+            'uninitiated' => 0,
+            'completed' => 2
+        ];
+    
+        $numericStatus = $statusMapping[$status] ?? 'all';
+    
+        if ($numericStatus == 'all') {
+            $data['doctors'] = Booking::with(['patient', 'book'])->where('doctor_id', auth()->user()->id)->get();
+        } else {
+            $data['doctors'] = Booking::with(['patient', 'book'])->where('doctor_id', auth()->user()->id)->where('status', $numericStatus)->get();
         }
-
-        if( $data['doctors']->count() < 1)
-        {
-            Toastr::warning('No data Found.', 'Not Found');
+    
+        if ($data['doctors']->count() < 1) {
+            Toastr::warning('No data found.', 'Not Found');
             return redirect()->back();
         }
-
+    
         return view('doctor.reservations', $data);
     }
+    
+    
+    
 
     public function markComplete($id)
     {
