@@ -173,7 +173,7 @@ class PatientController extends Controller
     public function MyReservations()
     {
 
-        $data['doctors'] = Booking::where('patient_id', Auth::user()->id)->whereIn('status',[0,1])->orderBy('created_at', 'desc')->get();
+        $data['doctors'] = Booking::where('patient_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('patient.reservations', $data);
     }
 
@@ -384,21 +384,32 @@ class PatientController extends Controller
     public function sortBookings(Request $request)
     {
         $user_id = auth()->user()->id;
-       if($request->status == 'all')
-       {
-           $data['doctors'] = Booking::with(['patient','book'])->where('patient_id', $user_id)->get();
-        }else
-        {
-            $data['doctors'] = Booking::with(['patient','book'])->where('patient_id', $user_id)->where('status', $request->status)->get();
+        
+        $statusMapping = [
+            'initiated' => 1,
+            'uninitiated' => 0,
+            'completed' => 2,
+            'cancelled' => 3,
+            'all' => 'all'
+        ];
+        
+        $status = $statusMapping[$request->status] ?? 'all';
+
+        if ($status === 'all') {
+            $doctors = Booking::with(['patient','book'])->where('patient_id', $user_id)->get();
+        } else {
+            $doctors = Booking::with(['patient','book'])
+                              ->where('patient_id', $user_id)
+                              ->where('status', $status)
+                              ->get();
         }
 
-        if( $data['doctors']->count() < 1)
-        {
+        if ($doctors->count() < 1) {
             Toastr::warning('No data Found.', 'Not Found');
             return redirect()->back();
         }
 
-        return view('patient.reservations', $data);
+        return view('patient.reservations', ['doctors' => $doctors]);
     }
 
     private function sendSMS($to, $message)

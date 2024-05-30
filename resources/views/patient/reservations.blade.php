@@ -40,8 +40,7 @@
                             <div class="fs-4 text-dark fw-bolder">Filter Options</div>
                         </div>
                         <div class="separator border-gray-200"></div>
-                        <form action="{{ route('doctors.index') }}" method="post">
-                            @csrf
+                        <form action="{{ route('patient.sortBookings') }}" method="get">
                             <div class="px-7 py-5">
                                 <div class="mb-10">
                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
@@ -49,11 +48,11 @@
                                         data-placeholder="Select option" data-allow-clear="true"
                                         data-kt-customer-table-filter="Status" data-dropdown-parent="#kt-toolbar-filter"
                                         name="status">
-                                        <option value="all">All</option>
-                                        <option value="1">Initiated</option>
-                                        <option value="0">Uninitiated</option>
-                                        <option value="2">Completed</option>
-                                        <option value="3">Cancelled</option>
+                                        <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All</option>
+                                        <option value="initiated" {{ request('status') == 'initiated' ? 'selected' : '' }}>Initiated</option>
+                                        <option value="uninitiated" {{ request('status') == 'uninitiated' ? 'selected' : '' }}>Uninitiated</option>
+                                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -63,7 +62,7 @@
                                         data-kt-customer-table-filter="filter">Apply</button>
                                 </div>
                             </div>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>
