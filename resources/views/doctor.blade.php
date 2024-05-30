@@ -186,7 +186,7 @@
                                     
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Request Withdrawal</a>
+                                            <a href="{{ route('doctors.wallet') }}" class="menu-link px-3">Request Withdrawal</a>
                                         </div>
                                     </div>
                                 </div>
