@@ -512,14 +512,14 @@
                                             alt=""/>
                                         </div>
                                         <div class="d-flex justify-content-start flex-column">
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $patient->patient->first_name.' '.$patient->patient->middle_name.' '.$patient->patient->last_name }}</a>
-                                            <a href="#" class="text-muted text-hover-primary fw-bold text-muted d-block fs-7">
+                                            <a href="{{ route('doctor.patients') }}" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $patient->patient->first_name.' '.$patient->patient->middle_name.' '.$patient->patient->last_name }}</a>
+                                            <a href="{{ route('doctor.patients') }}" class="text-muted text-hover-primary fw-bold text-muted d-block fs-7">
                                             <span class="text-dark">Phone</span>: {{ $patient['patient']['phone'] }}</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $patient->book_type }}</a>
+                                    <a href="{{ route('doctor.patients') }}" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ $patient->book_type }}</a>
                                 </td>
                                 <td class="text-muted fw-bold">{!! $patient->pre_consultation == 1 ? ' <span class="badge badge-light-success">Pre-Consultation Filled</span>': ' <span class="badge badge-light-danger">Pre-Consultation Not Filled</span>'!!}</td>
                                 <td>
